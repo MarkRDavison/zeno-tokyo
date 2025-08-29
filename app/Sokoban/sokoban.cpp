@@ -1,20 +1,21 @@
 #include <SFML/Graphics.hpp>
 #include <tokyo/Core/Log.hpp>
 #include <tokyo/Game/InputActionManager.hpp>
+#include <tokyo/Game/Resource/TextureService.hpp>
 
 // https://www.reddit.com/r/gamedesign/s/2KBao2605y
+// http://sokobano.de/wiki/index.php?title=How_to_play_Sokoban
 
 int main()
 {
-    tokyo::Log::Info("Info\n");
-    tokyo::Log::Warning("Warning\n");
-    tokyo::Log::Error("Error\n");
-    tokyo::Log::Assert(true, "Assert pass\n");
+    tokyo::Log::Info("http://sokobano.de/wiki/index.php?title=How_to_play_Sokoban\n");
+    tokyo::Log::Info("https://www.reddit.com/r/gamedesign/s/2KBao2605y\n");
 
-    auto window = sf::RenderWindow(sf::VideoMode({ 1280, 720 }), "CMake SFML Project");
-    window.setFramerateLimit(144);
+    auto window = sf::RenderWindow(sf::VideoMode({ 1280, 720 }), "Tokyo Sokoban");
+    window.setVerticalSyncEnabled(true);
 
     tokyo::InputActionManager inputActionManager;
+    tokyo::TextureService textureService;
     
     inputActionManager.RegisterInputActionType(
     { 
@@ -30,6 +31,10 @@ int main()
         .actionType = tokyo::ActionType::KEY 
     });
 
+    const std::string resourceRoot = "F:/Workspace/Github/zeno-tokyo/app/Sokoban/data";
+
+    textureService.loadTexture("spritesheet", resourceRoot + "/spritesheets/sokoban_spritesheet@2.png");
+
     auto running = true;
 
     while (running)
@@ -44,15 +49,7 @@ int main()
 
         // update
         {
-            if (inputActionManager.IsActionInvoked("LCLICK"))
-            {
-                std::cout << "LCLICK Invoked!" << std::endl;
-            }
 
-            if (inputActionManager.IsActionInvoked("SPACE"))
-            {
-                std::cout << "SPACE Invoked!" << std::endl;
-            }
         }
 
         inputActionManager.UpdateInputCache();
@@ -61,14 +58,7 @@ int main()
 
         // render
         {
-            sf::CircleShape c(64.0f);
-            c.setFillColor(sf::Color::Magenta);
-            c.setOrigin({ 32.0f, 32.0f });
 
-            auto state = sf::RenderStates::Default;
-            state.transform.translate(sf::Vector2f(window.getSize()) / 2.0f);
-
-            window.draw(c, state);
         }
 
         window.display();
