@@ -41,7 +41,7 @@ namespace tokyo
 	{
 	public:
 		XmlDocument(); // TODO: Limit what is exposed on this class
-		XmlDocument(XmlDocument& _doc); // TODO: Copy/move, assign/move operator
+		XmlDocument(const XmlDocument& _doc); // TODO: Copy/move, assign/move operator
 		~XmlDocument();
 
 		const XmlNode* select(const std::string& _selection) const;

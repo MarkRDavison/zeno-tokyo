@@ -18,12 +18,10 @@ namespace tokyo
 	JsonDocument::JsonDocument()
 	{
 	}
-	JsonDocument::JsonDocument(JsonDocument& _document)
+	JsonDocument::JsonDocument(const JsonDocument& _document)
 	{
 		this->m_Root = _document.m_Root;
 		this->m_Text = std::move(_document.m_Text);
-
-		_document.m_Root = nullptr;
 	}
 	JsonDocument::~JsonDocument()
 	{
@@ -150,56 +148,58 @@ namespace tokyo
 		switch (_node.type)
 		{
 		case JsonNode::Type::Object:
-		{
-			output += _input + std::string(_level * _indentation, ' ');
-
-			if (!_node.name.empty())
 			{
-				output += "\"" + _node.name + "\": ";
+				output += _input + std::string(_level * _indentation, ' ');
+
+				if (!_node.name.empty())
+				{
+					output += "\"" + _node.name + "\": ";
+				}
+
+				output += "{\n";
+
+				for (auto child : _node.children)
+				{
+					output += recursiveDump(_indentation, _level + 1, *child, "");
+				}
+
+				output = output + std::string(_level * _indentation, ' ') + "},\n";
 			}
-
-			output += "{\n";
-
-			for (auto child : _node.children)
-			{
-				output += recursiveDump(_indentation, _level + 1, *child, "");
-			}
-
-			output = output + std::string(_level * _indentation, ' ') + "},\n";
-		}
-		break;
+			break;
 		case JsonNode::Type::ValueString:
 		case JsonNode::Type::ValueInteger:
 		case JsonNode::Type::ValueNumber:
 		case JsonNode::Type::ValueBoolean:
-		{
-			output += _input + std::string(_level * _indentation, ' ');
+			{
+				output += _input + std::string(_level * _indentation, ' ');
 
-			auto surround = _node.type == JsonNode::Type::ValueString ? "\"" : "";
+				auto surround = _node.type == JsonNode::Type::ValueString ? "\"" : "";
 
-			output += "\"" + _node.name + "\": " + surround + _node.content + surround + ",\n";
+				output += "\"" + _node.name + "\": " + surround + _node.content + surround + ",\n";
 
-		}
-		break;
+			}
+			break;
 		case JsonNode::Type::Array:
-		{
-			output += _input + std::string(_level * _indentation, ' ');
-
-			if (!_node.name.empty())
 			{
-				output += "\"" + _node.name + "\": ";
+				output += _input + std::string(_level * _indentation, ' ');
+
+				if (!_node.name.empty())
+				{
+					output += "\"" + _node.name + "\": ";
+				}
+
+				output += "[\n";
+
+				for (auto child : _node.children)
+				{
+					output += recursiveDump(_indentation, _level + 1, *child, "");
+				}
+
+				output = output + std::string(_level * _indentation, ' ') + "]\n";
 			}
-
-			output += "[\n";
-
-			for (auto child : _node.children)
-			{
-				output += recursiveDump(_indentation, _level + 1, *child, "");
-			}
-
-			output = output + std::string(_level * _indentation, ' ') + "]\n";
-		}
-		break;
+			break;
+			default:
+			break;
 		}
 
 		return output;

@@ -58,7 +58,7 @@ namespace tokyo
 	{
 	public:
 		JsonDocument();
-		JsonDocument(JsonDocument& _document);
+		JsonDocument(const JsonDocument& _document);
 		~JsonDocument();
 
 		void readFromText(const std::string& _text);

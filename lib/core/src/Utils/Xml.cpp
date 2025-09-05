@@ -41,11 +41,10 @@ namespace tokyo
 	XmlDocument::XmlDocument()
 	{
 	}
-	XmlDocument::XmlDocument(XmlDocument& _doc)
+	XmlDocument::XmlDocument(const XmlDocument& _doc)
 	{
 		this->m_Node = _doc.m_Node;
 		this->m_Text = _doc.m_Text;
-		_doc.m_Node = nullptr;
 	}
 	XmlDocument::~XmlDocument()
 	{
