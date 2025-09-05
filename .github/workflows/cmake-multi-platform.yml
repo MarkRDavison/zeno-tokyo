@@ -1,6 +1,6 @@
 # This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
-name: CMake on multiple platforms
+name: Build and Test
 
 on:
   push:
@@ -57,17 +57,12 @@ jobs:
     - name: Install dependencies (Windows)
       if: runner.os == 'Windows' && matrix.name
       run: Write-Host "Install Dependencies"
+
     - name: Install dependencies (Linux)
       if: runner.os == 'Linux'
-      run: >
-        sudo apt-get install 
-        libx11-dev 
-        libxrandr-dev 
-        libxcursor-dev 
-        libxi-dev 
-        libgl1-mesa-dev
-        libglu1-mesa-dev
-        freeglut3-dev
+      run: |
+        sudo apt-get update
+        sudo apt-get install libx11-dev libxrandr-dev libxcursor-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
