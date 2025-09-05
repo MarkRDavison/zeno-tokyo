@@ -1,5 +1,6 @@
 SET(MODULE_LIBS
-
+	lua_library
+	sol2::sol2
 )
 
 SET(INCLUDE_DIRS

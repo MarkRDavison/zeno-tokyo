@@ -1,6 +1,5 @@
 #pragma once
 
-#include <tokyo/Game/Camera.hpp>
 #include <tokyo/Game/Entity/EntityHolder.hpp>
 #include <tokyo/Game/Entity/SystemHolder.hpp>
 
@@ -9,11 +8,6 @@ namespace tokyo
 	class Scene
 	{
 	public:
-		Scene(Camera* camera) : camera(camera)
-		{
-
-		}
-
 		void UpdateScene(float delta)
 		{
 			if (!active)
@@ -28,16 +22,12 @@ namespace tokyo
 			}
 
 			Update(delta);
-
-			camera->Update(delta);
 		}
 
 		bool IsActive() const { return this->active; }
 		void SetActive(bool active) { this->active = active; }
 
 		std::vector<Entity*> QueryAll() { return entities.QueryAll(); }
-
-		const Camera* GetCamera() const { return camera; }
 
 	protected:
 		virtual void Update(float delta) = 0;
@@ -46,8 +36,6 @@ namespace tokyo
 	protected:
 		bool started{ false };
 		bool active{ true };
-
-		Camera* camera;
 
 		SystemHolder systems;
 
