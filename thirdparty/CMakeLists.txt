@@ -21,3 +21,6 @@ FetchContent_Declare(
   GIT_TAG        2.4.1)
 
 FetchContent_MakeAvailable(FakeIt)
+
+
+# https://www.reddit.com/r/cmake/comments/13ljuzq/how_to_have_fetchcontent_declare_use_a_src_dir/
