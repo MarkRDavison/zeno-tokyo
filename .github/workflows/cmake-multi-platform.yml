@@ -55,10 +55,10 @@ jobs:
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
     - name: Install dependencies (Windows)
-      if: runner.os == "Windows" && matrix.name
+      if: runner.os == 'Windows' && matrix.name
       run: Write-Host "Install Dependencies"
     - name: Install dependencies (Linux)
-      if: runner.os == "Linux"
+      if: runner.os == 'Linux'
       run: sudo apt-get install x11
 
     - name: Configure CMake
