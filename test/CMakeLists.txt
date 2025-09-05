@@ -7,6 +7,8 @@ function(testsubmodule MODULE_NAME MODULE_LIBS)
 	SET_PROPERTY(TARGET ${TestMain} PROPERTY CXX_STANDARD ${TOKYO_CXX_STANDARD})
 	SET_PROPERTY(TARGET ${TestMain} PROPERTY CXX_STANDARD_REQUIRED ON)
 
+	TARGET_LINK_LIBRARIES(${TestMain} PRIVATE FakeIt::FakeIt-catch)
+
 	foreach(liblib IN LISTS MODULE_LIBS)
 		TARGET_LINK_LIBRARIES(${TestMain} PRIVATE ${liblib})
 	endforeach()
@@ -17,3 +19,4 @@ function(testsubmodule MODULE_NAME MODULE_LIBS)
 endfunction()
 
 ADD_SUBDIRECTORY(core)
+ADD_SUBDIRECTORY(game)

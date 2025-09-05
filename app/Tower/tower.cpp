@@ -14,22 +14,9 @@ int main()
     auto window = sf::RenderWindow(sf::VideoMode({ 1280, 720 }), "CMake SFML Project");
     window.setFramerateLimit(144);
 
-    tokyo::InputActionManager inputActionManager;
+    tokyo::InputManager inputManager(window);
+    tokyo::InputActionManager inputActionManager(inputManager);
     
-    inputActionManager.RegisterInputActionType(
-    { 
-        .name = "LCLICK", 
-        .mouseButton = sf::Mouse::Button::Left, 
-        .actionType = tokyo::ActionType::MOUSE_BUTTON 
-    });
-    
-    inputActionManager.RegisterInputActionType(
-    { 
-        .name = "SPACE", 
-        .key = sf::Keyboard::Key::Space,
-        .actionType = tokyo::ActionType::KEY 
-    });
-
     auto running = true;
 
     while (running)
@@ -44,18 +31,18 @@ int main()
 
         // update
         {
-            if (inputActionManager.IsActionInvoked("LCLICK"))
-            {
-                std::cout << "LCLICK Invoked!" << std::endl;
-            }
-
-            if (inputActionManager.IsActionInvoked("SPACE"))
-            {
-                std::cout << "SPACE Invoked!" << std::endl;
-            }
+            //if (inputActionManager.IsActionInvoked("LCLICK"))
+            //{
+            //    std::cout << "LCLICK Invoked!" << std::endl;
+            //}
+            //
+            //if (inputActionManager.IsActionInvoked("SPACE"))
+            //{
+            //    std::cout << "SPACE Invoked!" << std::endl;
+            //}
         }
 
-        inputActionManager.UpdateInputCache();
+        inputActionManager.updateCachedInputs();
 
         window.clear(sf::Color::Cyan);
 

@@ -2,58 +2,126 @@
 
 namespace tokyo
 {
-	void InputActionManager::UpdateInputCache()
+
+	InputActionManager::InputActionManager(IInputManager& _inputManager) :
+		m_InputManager(_inputManager)
 	{
-		for (auto& [key, down] : _cachedKeys)
+
+	}
+
+	void InputActionManager::registerAction(const std::string& _key, const InputAction& _action)
+	{
+		registeredActions[_key] = _action;
+		if (_action.primaryActivationType == InputAction::InputActivationType::KeyHold ||
+			_action.primaryActivationType == InputAction::InputActivationType::KeyPress)
 		{
-			down = sf::Keyboard::isKeyPressed(key);
+			cachedKeys.emplace(_action.primaryKey, false);
+		}
+		else if (
+			_action.primaryActivationType == InputAction::InputActivationType::MouseButtonHold ||
+			_action.primaryActivationType == InputAction::InputActivationType::MouseButtonPress)
+		{
+			cachedButtons.emplace(_action.primaryButton, false);
 		}
 
-		for (auto& [button, down] : _cachedButtons)
+		if (_action.secondaryActivationType == InputAction::InputActivationType::KeyHold ||
+			_action.secondaryActivationType == InputAction::InputActivationType::KeyPress)
 		{
-			down = sf::Mouse::isButtonPressed(button);
+			cachedKeys.emplace(_action.secondaryKey, false);
+		}
+		else if (
+			_action.secondaryActivationType == InputAction::InputActivationType::MouseButtonHold ||
+			_action.secondaryActivationType == InputAction::InputActivationType::MouseButtonPress)
+		{
+			cachedButtons.emplace(_action.secondaryButton, false);
+		}
+	}
+	void InputActionManager::updateCachedInputs()
+	{
+		for (auto& [button, value] : cachedButtons)
+		{
+			value = m_InputManager.isButtonDown(button);
+		}
+		for (auto& [key, value] : cachedKeys)
+		{
+			value = m_InputManager.isKeyDown(key);
 		}
 	}
 
-	void InputActionManager::RegisterInputActionType(const InputActionType& action)
+	bool InputActionManager::isActionInvoked(const std::string& _key) const
 	{
-		_actions[action.name] = action;
-
-		if (action.actionType == ActionType::KEY)
+		const auto& iter = registeredActions.find(_key);
+		if (iter == registeredActions.end())
 		{
-			_cachedKeys[action.key] = false;
+			return false;
 		}
-
-		if (action.actionType == ActionType::MOUSE_BUTTON)
-		{
-			_cachedButtons[action.mouseButton] = false;
-		}
+		return isActionInvoked((*iter).second);
 	}
 
-	bool InputActionManager::IsActionInvoked(const std::string& name) const
+	bool InputActionManager::isActionInvoked(const InputAction& _action) const
 	{
-		const auto actionIter = _actions.find(name);
-
-		if (actionIter != _actions.end())
+		if (_action.primaryActivationType == InputAction::InputActivationType::KeyHold ||
+			_action.primaryActivationType == InputAction::InputActivationType::KeyPress)
 		{
-			const auto& action = (*actionIter).second;
-
-			switch (action.actionType)
+			if (m_InputManager.isKeyDown(_action.primaryKey) &&
+				(!_action.modifierControl || m_InputManager.isKeyDown(sf::Keyboard::Key::LControl) || m_InputManager.isKeyDown(sf::Keyboard::Key::RControl)) &&
+				(!_action.modifierShift || m_InputManager.isKeyDown(sf::Keyboard::Key::LShift) || m_InputManager.isKeyDown(sf::Keyboard::Key::RShift)) &&
+				(!_action.modifierAlt || m_InputManager.isKeyDown(sf::Keyboard::Key::LAlt) || m_InputManager.isKeyDown(sf::Keyboard::Key::RAlt)))
 			{
-				case ActionType::KEY:
+				if (_action.primaryActivationType == InputAction::InputActivationType::KeyPress)
 				{
-					return sf::Keyboard::isKeyPressed(action.key) && !_cachedKeys.at(action.key);
+					return !cachedKeys.at(_action.primaryKey);
 				}
-				break;
-				case ActionType::MOUSE_BUTTON:
+				return true;
+			}
+		}
+		if (_action.secondaryActivationType == InputAction::InputActivationType::KeyHold ||
+			_action.secondaryActivationType == InputAction::InputActivationType::KeyPress)
+		{
+			if (m_InputManager.isKeyDown(_action.secondaryKey) &&
+				(!_action.modifierControl || m_InputManager.isKeyDown(sf::Keyboard::Key::LControl) || m_InputManager.isKeyDown(sf::Keyboard::Key::RControl)) &&
+				(!_action.modifierShift || m_InputManager.isKeyDown(sf::Keyboard::Key::LShift) || m_InputManager.isKeyDown(sf::Keyboard::Key::RShift)) &&
+				(!_action.modifierAlt || m_InputManager.isKeyDown(sf::Keyboard::Key::LAlt) || m_InputManager.isKeyDown(sf::Keyboard::Key::RAlt)))
+			{
+				if (_action.secondaryActivationType == InputAction::InputActivationType::KeyPress)
 				{
-					return sf::Mouse::isButtonPressed(action.mouseButton) && !_cachedButtons.at(action.mouseButton);
+					return !cachedKeys.at(_action.secondaryKey);
 				}
-				break;
+				return true;
+			}
+		}
+
+		if (_action.primaryActivationType == InputAction::InputActivationType::MouseButtonHold ||
+			_action.primaryActivationType == InputAction::InputActivationType::MouseButtonPress)
+		{
+			if (m_InputManager.isButtonDown(_action.primaryButton) &&
+				(!_action.modifierControl || m_InputManager.isKeyDown(sf::Keyboard::Key::LControl) || m_InputManager.isKeyDown(sf::Keyboard::Key::RControl)) &&
+				(!_action.modifierShift || m_InputManager.isKeyDown(sf::Keyboard::Key::LShift) || m_InputManager.isKeyDown(sf::Keyboard::Key::RShift)) &&
+				(!_action.modifierAlt || m_InputManager.isKeyDown(sf::Keyboard::Key::LAlt) || m_InputManager.isKeyDown(sf::Keyboard::Key::RAlt)))
+			{
+				if (_action.primaryActivationType == InputAction::InputActivationType::MouseButtonPress)
+				{
+					return !cachedButtons.at(_action.primaryButton);
+				}
+				return true;
+			}
+		}
+		if (_action.secondaryActivationType == InputAction::InputActivationType::MouseButtonHold ||
+			_action.secondaryActivationType == InputAction::InputActivationType::MouseButtonPress)
+		{
+			if (m_InputManager.isButtonDown(_action.secondaryButton) &&
+				(!_action.modifierControl || m_InputManager.isKeyDown(sf::Keyboard::Key::LControl) || m_InputManager.isKeyDown(sf::Keyboard::Key::RControl)) &&
+				(!_action.modifierShift || m_InputManager.isKeyDown(sf::Keyboard::Key::LShift) || m_InputManager.isKeyDown(sf::Keyboard::Key::RShift)) &&
+				(!_action.modifierAlt || m_InputManager.isKeyDown(sf::Keyboard::Key::LAlt) || m_InputManager.isKeyDown(sf::Keyboard::Key::RAlt)))
+			{
+				if (_action.secondaryActivationType == InputAction::InputActivationType::MouseButtonPress)
+				{
+					return !cachedButtons.at(_action.secondaryButton);
+				}
+				return true;
 			}
 		}
 
 		return false;
 	}
-
 }

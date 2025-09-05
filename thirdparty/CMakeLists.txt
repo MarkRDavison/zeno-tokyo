@@ -14,3 +14,10 @@ FetchContent_Declare(
   GIT_TAG        v3.10.0)
 
 FetchContent_MakeAvailable(Catch2)
+
+FetchContent_Declare(
+  FakeIt
+  GIT_REPOSITORY https://github.com/eranpeer/FakeIt.git
+  GIT_TAG        2.4.1)
+
+FetchContent_MakeAvailable(FakeIt)
