@@ -30,7 +30,9 @@ namespace tokyo
 
 	Entity* EntityHolder::CreateEntity()
 	{
-		return objects.emplace_back(std::make_unique<Entity>()).get();
+		objects.emplace_back(std::make_unique<Entity>());
+
+		return objects.back().get();
 	}
 
 	void EntityHolder::Add(std::unique_ptr<Entity>&& object)

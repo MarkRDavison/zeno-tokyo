@@ -1,6 +1,8 @@
 #include <tokyo/Game/Entity/Entity.hpp>
 #include <tokyo/Core/Utils/String.hpp>
 
+#include <algorithm>
+
 namespace tokyo
 {
 
@@ -14,7 +16,7 @@ namespace tokyo
 	}
 	bool Entity::HasTag(const std::string& tag) const
 	{
-		return tags.contains(tokyo::String::fnv1a_32(tag));
+		return tags.count(tokyo::String::fnv1a_32(tag)) > 0;
 	}
 
 	void Entity::Update()
@@ -52,7 +54,9 @@ namespace tokyo
 		if (!component) return nullptr;
 
 		component->SetEntity(this);
-		return components.emplace_back(std::move(component)).get();
+		components.emplace_back(std::move(component));
+
+		return components.back().get();
 	}
 
 	void Entity::RemoveComponent(Component* component)

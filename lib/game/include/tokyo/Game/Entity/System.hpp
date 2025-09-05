@@ -48,7 +48,7 @@ namespace tokyo
 
 			for (auto e : entities->QueryByTag(tag))
 			{
-				if (e->HasComponents<Args...>())
+				if (e->template HasComponents<Args...>())
 				{
 					es.push_back(e);
 				}
