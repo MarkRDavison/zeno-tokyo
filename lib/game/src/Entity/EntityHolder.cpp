@@ -1,4 +1,5 @@
 #include <tokyo/Game/Entity/EntityHolder.hpp>
+#include <algorithm>
 
 namespace tokyo
 {

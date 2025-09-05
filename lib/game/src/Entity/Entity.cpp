@@ -1,6 +1,5 @@
 #include <tokyo/Game/Entity/Entity.hpp>
 #include <tokyo/Core/Utils/String.hpp>
-
 #include <algorithm>
 
 namespace tokyo

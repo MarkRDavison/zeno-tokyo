@@ -54,10 +54,6 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-    - name: Install dependencies (Windows)
-      if: runner.os == 'Windows' && matrix.name
-      run: Write-Host "Install Dependencies"
-
     - name: Install dependencies (Linux)
       if: runner.os == 'Linux'
       run: |
