@@ -39,7 +39,7 @@ namespace drl
 		{
 			// TODO: Load from file system inspection/config
 			{
-				"/data/Fonts/arial.ttf",
+				"/data/Fonts/arial.ttf", 
 				"DEBUG"
 			}
 		};
