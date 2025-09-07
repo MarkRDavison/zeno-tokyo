@@ -1,0 +1,20 @@
+#pragma once
+
+#include <tokyo/Game/Application.hpp>
+#include <tokyo/Driller/Constants.hpp>
+#include <tokyo/Driller/ManagerPackage.hpp>
+#include <tokyo/Driller/ServicePackage.hpp>
+
+namespace drl
+{
+	class Orchestration
+	{
+		Orchestration() = delete;
+	public:
+
+		static void InitialiseConfiguration(tokyo::Application& _app, ManagerPackage& _managers);
+		static bool InitialiseTextures(ManagerPackage& _managers);
+		static bool InitialiseFonts(ManagerPackage& _managers);
+		static bool InitialiseInput(ManagerPackage& _managers);
+	};
+}

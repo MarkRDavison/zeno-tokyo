@@ -4,6 +4,7 @@
 #include <tokyo/Driller/Constants.hpp>
 #include <tokyo/Driller/ManagerPackage.hpp>
 #include <tokyo/Driller/ServicePackage.hpp>
+#include <tokyo/Driller/Orchestration.hpp>
 
 int main(int _argc, char** _argv)
 {
@@ -28,16 +29,15 @@ int main(int _argc, char** _argv)
 
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        managers.configManager.loadConfiguration("/data/Scripts/config.lua");
-        auto& state = managers.luaManager.getState(tokyo::LuaManager::DefaultStateScope);
-        state.set_function("exit", &tokyo::Application::stop, &app);
+
+        drl::Orchestration::InitialiseConfiguration(app, managers);
     }
     splashScene.m_Percentage += 20.0f;
     app.renderSplash();
 
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        if (!managers.textureManager.loadTexture("./data/Textures/tile_sprite_sheet.png", drl::Constants::TileSpriteSheetTextureName))
+        if (!drl::Orchestration::InitialiseTextures(managers))
         {
             return EXIT_FAILURE;
         }
@@ -47,7 +47,7 @@ int main(int _argc, char** _argv)
 
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        if (!managers.fontManager.loadFont("/data/Fonts/arial.ttf", "DEBUG"))
+        if (!drl::Orchestration::InitialiseFonts(managers))
         {
             return EXIT_FAILURE;
         }
@@ -82,20 +82,7 @@ int main(int _argc, char** _argv)
         return EXIT_FAILURE;
     }
 
-    {
-        {
-            tokyo::InputAction action;
-            action.primaryActivationType = tokyo::InputAction::InputActivationType::MouseButtonPress;
-            action.primaryButton = sf::Mouse::Button::Left;
-            managers.inputActionManager.registerAction(drl::Constants::ClickActionName, action);
-        }
-        {
-            tokyo::InputAction action;
-            action.primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress;
-            action.primaryKey = sf::Keyboard::Key::Escape;
-            managers.inputActionManager.registerAction(drl::Constants::CancelActionName, action);
-        }
-    }
+    drl::Orchestration::InitialiseInput(managers);
 
     app.start();
 

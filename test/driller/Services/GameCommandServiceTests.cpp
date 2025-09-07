@@ -36,7 +36,6 @@ namespace drl
 			const long long StartTick = 65123ll;
 			Package package(StartTick);
 
-
 			REQUIRE(StartTick == package.service.getCurrentTick());
 		}
 
