@@ -40,6 +40,8 @@ namespace tokyo
 			std::function<TestEntity(const TestPrototype&)> createInstanceCallback;
 		};
 
+		using TestPrototypeServiceBase = tokyo::PrototypeService<TestPrototype, TestEntity, int>;
+
 		TEST_CASE("isPrototypeRegistered returns false when no prototypes registered", "[PrototypeService]")
 		{
 			tokyo::IdentificationService<int> idService;
@@ -126,10 +128,8 @@ namespace tokyo
 					return {};
 				};
 
-			tokyo::PrototypeService<TestPrototype, TestEntity, int>& serv = prototypeService;
-
-			serv.createInstance(prototypeId);
-
+			prototypeService.TestPrototypeServiceBase::createInstance(prototypeId);
+			
 			REQUIRE(callbackInvoked);
 		}
 	}
