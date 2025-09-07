@@ -21,3 +21,4 @@ endfunction()
 
 ADD_SUBDIRECTORY(core)
 ADD_SUBDIRECTORY(game)
+ADD_SUBDIRECTORY(driller)

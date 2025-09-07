@@ -1,9 +1,9 @@
 #include <tokyo/Core/Log.hpp>
 #include <tokyo/Game/Application.hpp>
-#include "Scenes/SplashScene.hpp"
-#include "Constants.hpp"
-#include "ManagerPackage.hpp"
-#include "ServicePackage.hpp"
+#include <tokyo/Driller/Scenes/SplashScene.hpp>
+#include <tokyo/Driller/Constants.hpp>
+#include <tokyo/Driller/ManagerPackage.hpp>
+#include <tokyo/Driller/ServicePackage.hpp>
 
 int main(int _argc, char** _argv)
 {

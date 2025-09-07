@@ -1,4 +1,4 @@
-#include "SplashScene.hpp"
+#include <tokyo/Driller/Scenes/SplashScene.hpp>
 #include <SFML/Graphics.hpp>
 
 namespace drl
