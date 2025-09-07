@@ -1,11 +1,16 @@
 #include <tokyo/Game/Application.hpp>
+#include <iostream>
 
 namespace tokyo
 {
 
-    bool Application::initialise(const sf::Vector2u& _resolution, const std::string& _name)
+    void Application::setName(const std::string& _name)
     {
         m_Name = _name;
+    }
+    bool Application::initialise(const sf::Vector2u& _resolution, const std::string& _name)
+    {
+        setName(_name);
         return initialise(sf::VideoMode(_resolution));
     }
     bool Application::initialise(const sf::VideoMode& _videoMode)

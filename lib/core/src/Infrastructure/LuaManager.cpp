@@ -1,4 +1,6 @@
 #include <tokyo/Core/Infrastructure/LuaManager.hpp>
+#include <tokyo/Core/Infrastructure/FileManager.hpp>
+#include <iostream>
 
 namespace tokyo
 {
@@ -8,9 +10,12 @@ namespace tokyo
 		return -1;
 	}
 
-	LuaManager::LuaManager(void) : 
+	LuaManager::LuaManager(
+		const FileManager& _fileManager
+	) :
 		_initialiseRan(false),
-		_cleanupRan(false)
+		_cleanupRan(false),
+		m_FileManager(_fileManager)
 	{
 	}
 
@@ -58,12 +63,14 @@ namespace tokyo
 
 	void LuaManager::runScriptFile(const std::string& _scriptPath)
 	{
-		runScriptFile(_scriptPath, DefaultStateScope);
+		const auto& path = m_FileManager.resolvePath(_scriptPath); // TODO: MACRO???
+		runScriptFile(path, DefaultStateScope);
 	}
 
 	void LuaManager::runScriptFile(const std::string& _scriptPath, const std::string& _scope)
 	{
-		getState(_scope).script_file(_scriptPath);
+		const auto& path = m_FileManager.resolvePath(_scriptPath); // TODO: MACRO???
+		getState(_scope).script_file(path);
 	}
 
 	void LuaManager::runScript(const std::string& _script)

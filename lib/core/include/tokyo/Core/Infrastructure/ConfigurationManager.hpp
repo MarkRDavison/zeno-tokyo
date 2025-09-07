@@ -1,12 +1,13 @@
 #pragma once
 
 #include <string>
+#include <tokyo/Core/Utils/NonCopyable.hpp>
 
 namespace tokyo
 {
 	class LuaManager;
 
-	class IConfigurationManager
+	class IConfigurationManager : NonCopyable
 	{
 	public:
 		virtual ~IConfigurationManager(void) = 0;
@@ -22,7 +23,7 @@ namespace tokyo
 	{
 	public:
 		static constexpr const char ConfigStateScope[] = "Config";
-		static constexpr const char DefaultTitle[] = "Tokyo Driller";
+		static constexpr const char DefaultTitle[] = "Tokyo Application";
 
 		static const constexpr unsigned int DefaultResolutionX = 1280;
 		static const constexpr unsigned int DefaultResolutionY = 720;

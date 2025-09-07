@@ -1,11 +1,13 @@
 #include <catch2/catch_test_macros.hpp>
 #include <tokyo/Core/Infrastructure/LuaManager.hpp>
+#include <tokyo/Core/Infrastructure/FileManager.hpp>
 
 namespace tokyo
 {
     TEST_CASE("Can create and destroy manager", "[Infrastructure][LuaManager][Scripting]")
     {
-        LuaManager manager;
+        FileManager file;
+        LuaManager manager(file);
 
         manager.initialise();
 
@@ -14,7 +16,8 @@ namespace tokyo
 
     TEST_CASE("Can use basic lua logic", "[Infrastructure][LuaManager][Scripting]")
     {
-        LuaManager manager;
+        FileManager file;
+        LuaManager manager(file);
 
         manager.initialise();
 

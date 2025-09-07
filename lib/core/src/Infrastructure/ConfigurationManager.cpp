@@ -1,5 +1,6 @@
 #include <tokyo/Core/Infrastructure/ConfigurationManager.hpp>
 #include <tokyo/Core/Infrastructure/LuaManager.hpp>
+#include <iostream>
 
 namespace tokyo
 {

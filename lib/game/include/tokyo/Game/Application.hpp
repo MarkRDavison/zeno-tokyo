@@ -15,6 +15,7 @@ namespace tokyo
         Application& operator=(const Application& _other) = delete;
         Application& operator=(Application&& _other) noexcept = delete;
 
+        void setName(const std::string& _name);
         bool initialise(const sf::Vector2u& _resolution, const std::string& _name);
         bool initialise(const sf::VideoMode& _videoMode);
         void start();

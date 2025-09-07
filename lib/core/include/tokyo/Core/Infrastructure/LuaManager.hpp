@@ -1,17 +1,20 @@
 #pragma once
 
 #include <unordered_map>
+#include <tokyo/Core/Utils/NonCopyable.hpp>
 #include <sol/sol.hpp>
 
 namespace tokyo
 {
-	class LuaManager
+	class FileManager;
+
+	class LuaManager : NonCopyable
 	{
 	public:
 
 		static constexpr const char DefaultStateScope[] = "Default";
 
-		LuaManager(void);
+		LuaManager(const FileManager& _fileManager);
 		virtual ~LuaManager(void);
 
 		virtual void initialise();
@@ -31,6 +34,8 @@ namespace tokyo
 	private:
 		bool _initialiseRan;
 		bool _cleanupRan;
+
+		const FileManager& m_FileManager;
 
 		sol::state _defaultScopeState;
 		std::unordered_map<std::string, sol::state> _states;
