@@ -15,7 +15,6 @@ namespace drl
         const sf::Vector2f size(target.getSize());
 
         info.transform.translate(size / 2.0f);
-        // info.projection = sf::Mat4x4::Orthographic3D(-size.x / 2.0f, +size.x / 2.0f, +size.y / 2.0f, -size.y / 2.0f, -1.0f, +1.0f);
 
         sf::CircleShape c(96.0f);
         c.setOrigin({ c.getRadius(), c.getRadius()});

@@ -15,7 +15,8 @@ function(testsubmodule MODULE_NAME MODULE_LIBS)
 
 	include(CTest)
 	include("${PROJECT_SOURCE_DIR}/cmake/ParseAndAddCatchTests.cmake")
-	ParseAndAddCatchTests(${TestMain})
+	#ParseAndAddCatchTests(${TestMain})
+	catch_discover_tests(${TestMain})
 endfunction()
 
 ADD_SUBDIRECTORY(core)

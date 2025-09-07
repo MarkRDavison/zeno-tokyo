@@ -22,7 +22,9 @@ int main(int _argc, char** _argv)
     // TODO: way to set this from cmake based on build type and source directory...
     managers.fileManager.registerDirectory("F:/Workspace/Github/zeno-tokyo/app/Driller");
 
-    drl::ServicePackage services(managers);
+    drl::GameData gameData;
+
+    drl::ServicePackage services(managers, gameData);
 
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
