@@ -19,6 +19,7 @@ int main(int _argc, char** _argv)
 
     drl::ManagerPackage managers(app.getWindow());
 
+    // TODO: way to set this from cmake based on build type and source directory...
     managers.fileManager.registerDirectory("F:/Workspace/Github/zeno-tokyo/app/Driller");
 
     drl::ServicePackage services(managers);

@@ -8,6 +8,8 @@ namespace drl
 	{
 	public:
 		void Update(float delta) override;
+		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
 
 		float m_Percentage{ 0.0f };
 	};
