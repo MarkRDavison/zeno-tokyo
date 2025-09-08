@@ -16,5 +16,6 @@ namespace drl
 		static bool InitialiseTextures(ManagerPackage& _managers);
 		static bool InitialiseFonts(ManagerPackage& _managers);
 		static void InitialiseInput(ManagerPackage& _managers);
+		static void InitialiseGame(tokyo::Application& _app, drl::GameData& _gameData, ManagerPackage& _managers, ServicePackage& _services);
 	};
 }

@@ -63,8 +63,7 @@ namespace tokyo
 
 	void LuaManager::runScriptFile(const std::string& _scriptPath)
 	{
-		const auto& path = m_FileManager.resolvePath(_scriptPath); // TODO: MACRO???
-		runScriptFile(path, DefaultStateScope);
+		runScriptFile(_scriptPath, DefaultStateScope);
 	}
 
 	void LuaManager::runScriptFile(const std::string& _scriptPath, const std::string& _scope)

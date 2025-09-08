@@ -11,9 +11,19 @@ namespace drl
 	GameCommandService::GameCommandService(
 		long long _tick
 	) : 
-		m_CurrentTick(_tick)
+		m_CurrentTick(_tick),
+		m_IsRecordingCommands(false)
 	{
 
+	}
+
+	void GameCommandService::recordCommands()
+	{
+		m_IsRecordingCommands = true;
+	}
+	bool GameCommandService::isRecordingCommands() const
+	{
+		return m_IsRecordingCommands;
 	}
 
 	void GameCommandService::tick(void)
@@ -28,6 +38,11 @@ namespace drl
 
 	bool GameCommandService::executeGameCommand(const GameCommand& _command)
 	{
+		if (m_IsRecordingCommands)
+		{
+			std::cout << "TODO: Record this command!!!!!! - " << (int)_command.type << std::endl;
+		}
+
 		switch (_command.type)
 		{
 		case GameCommand::EventType::DigShaft:

@@ -24,6 +24,9 @@ namespace drl
 		GameCommandService(long long _tick);
 		~GameCommandService(void) override = default;
 
+		void recordCommands();
+		bool isRecordingCommands() const;
+
 		void tick(void) override;
 
 		long long getCurrentTick(void) const override;
@@ -34,6 +37,6 @@ namespace drl
 
 	private:
 		long long m_CurrentTick;
-
+		bool m_IsRecordingCommands;
 	};
 }

@@ -30,13 +30,14 @@ int main(int _argc, char** _argv)
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
 
-        drl::Orchestration::InitialiseConfiguration(app, managers);
+        drl::Orchestration::InitialiseConfiguration(app, managers, services);
     }
     splashScene.m_Percentage += 20.0f;
     app.renderSplash();
 
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
+
         if (!drl::Orchestration::InitialiseTextures(managers))
         {
             return EXIT_FAILURE;
@@ -47,6 +48,7 @@ int main(int _argc, char** _argv)
 
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
+
         if (!drl::Orchestration::InitialiseFonts(managers))
         {
             return EXIT_FAILURE;
@@ -84,7 +86,13 @@ int main(int _argc, char** _argv)
 
     drl::Orchestration::InitialiseInput(managers);
 
+    // managers.luaManager.runScriptFile("/data/Scripts/Base/initializeCommands.lua");
+
+    drl::Orchestration::InitialiseGame(app, gameData, managers, services);
+
     app.start();
+
+    // TODO: Scene lifecycle
 
     return EXIT_SUCCESS;
 }

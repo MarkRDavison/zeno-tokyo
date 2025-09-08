@@ -177,7 +177,7 @@ namespace tokyo
     {
         if (m_Scene != nullptr)
         {
-            m_Scene->Update(_delta);
+            m_Scene->update(_delta);
         }
     }
     void Application::render(sf::RenderTarget& _target, float _alpha)

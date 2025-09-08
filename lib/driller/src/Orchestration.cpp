@@ -1,14 +1,47 @@
 #include <tokyo/Driller/Orchestration.hpp>
+#include <tokyo/Driller/Scenes/GameScene.hpp>
+#include <tokyo/Driller/Scripting/EntityUserData.hpp>
+#include <tokyo/Driller/Scripting/CoreUserData.hpp>
+#include <tokyo/Driller/Scripting/PrototypeParser.hpp>
 
 namespace drl
 {
-	void Orchestration::InitialiseConfiguration(tokyo::Application& _app, ManagerPackage& _managers)
+	void Orchestration::InitialiseConfiguration(tokyo::Application& _app, ManagerPackage& _managers, ServicePackage& _services)
 	{
 		_managers.configManager.loadConfiguration("/data/Scripts/config.lua");
 
 		auto& state = _managers.luaManager.getState(tokyo::LuaManager::DefaultStateScope);
 
 		state.set_function("exit", &tokyo::Application::stop, &_app);
+
+		drl::CoreUserData::generateInfrastructureUserData(state);
+		drl::EntityUserData::generateEntitiesUserData(state);
+
+		_managers.luaManager.runScriptFile("/data/Scripts/Base/prototypes.lua");
+		{
+			drl::PrototypeParser prototypeParser;
+			const auto& parsedPrototypes = prototypeParser.parse(state);
+			for (const auto& jp : parsedPrototypes.jobPrototypes)
+			{
+				_services.jobPrototypeService.registerPrototype(jp.name, jp);
+				_services.identificationService.registerName(jp.name);
+			}
+			for (const auto& wp : parsedPrototypes.workerPrototypes)
+			{
+				_services.workerPrototypeService.registerPrototype(wp.name, wp);
+				_services.identificationService.registerName(wp.name);
+			}
+			for (const auto& sp : parsedPrototypes.shuttlePrototypes)
+			{
+				_services.shuttlePrototypeService.registerPrototype(sp.name, sp);
+				_services.identificationService.registerName(sp.name);
+			}
+			for (const auto& bp : parsedPrototypes.buildingPrototypes)
+			{
+				_services.buildingPrototypeService.registerPrototype(bp.name, bp);
+				_services.identificationService.registerName(bp.name);
+			}
+		}
 	}
 	
 	bool Orchestration::InitialiseTextures(ManagerPackage& _managers)
@@ -57,6 +90,7 @@ namespace drl
 	
 	void Orchestration::InitialiseInput(ManagerPackage& _managers)
 	{
+		// TODO: Need control mapping system and store mappings as config with default set
 		{
 			tokyo::InputAction action;
 			action.primaryActivationType = tokyo::InputAction::InputActivationType::MouseButtonPress;
@@ -69,5 +103,20 @@ namespace drl
 			action.primaryKey = sf::Keyboard::Key::Escape;
 			_managers.inputActionManager.registerAction(drl::Constants::CancelActionName, action);
 		}
+	}
+
+	void Orchestration::InitialiseGame(tokyo::Application& _app, drl::GameData& _gameData, ManagerPackage& _managers, ServicePackage& _services)
+	{
+		auto scene = new drl::GameScene(
+			_gameData,
+			_managers.inputManager,
+			_managers.inputActionManager,
+			_managers.configManager);
+		
+		scene->start();
+		_app.setScene(scene);
+		// TODO
+		//app.setAppSpeedMultiplier(4.0f); 
+
 	}
 }

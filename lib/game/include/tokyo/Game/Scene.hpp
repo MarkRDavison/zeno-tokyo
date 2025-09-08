@@ -8,8 +8,8 @@ namespace tokyo
 	class Scene : public sf::Drawable
 	{
 	public:
-		virtual void Update(float delta) = 0;
-		virtual void Start() {}
+		virtual void update(float delta) = 0;
+		virtual void start() {}
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
 	protected:

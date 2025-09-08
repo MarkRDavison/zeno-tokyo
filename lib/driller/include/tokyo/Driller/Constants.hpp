@@ -2,6 +2,8 @@
 
 namespace drl
 {
+	// TODO: Lua doesn't like unsigned integers, so have to use signed as the result of string hashes
+	using IdType = long long;
 
 	class Constants
 	{
