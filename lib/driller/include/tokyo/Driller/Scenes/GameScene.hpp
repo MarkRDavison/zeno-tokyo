@@ -3,8 +3,9 @@
 #include <tokyo/Driller/Entities/Data/GameData.hpp>
 #include <tokyo/Driller/Core/Game.hpp>
 #include <tokyo/Driller/Core/GameRenderer.hpp>
-#include <tokyo/Game/InputActionManager.hpp>
+#include <tokyo/Driller/Services/GameCommandService.hpp>
 #include <tokyo/Core/Infrastructure/ConfigurationManager.hpp>
+#include <tokyo/Game/InputActionManager.hpp>
 #include <tokyo/Game/Scene.hpp>
 
 namespace drl
@@ -16,7 +17,11 @@ namespace drl
 			GameData& _gameData,
 			tokyo::IInputManager& _inputManager,
 			tokyo::IInputActionManager& _inputActionManager,
-			tokyo::ConfigurationManager& _configurationManager);
+			tokyo::ConfigurationManager& _configurationManager,
+			tokyo::TextureManager& _textureManager,
+			GameCommandService& _gameCommandService);
+		~GameScene();
+
 		void start() override;
 
 		void update(float _delta) override;
@@ -28,6 +33,8 @@ namespace drl
 		tokyo::IInputManager& m_InputManager;
 		tokyo::IInputActionManager& m_InputActionManager;
 		tokyo::ConfigurationManager& m_ConfigurationManager;
+		tokyo::TextureManager& m_TextureManager;
+		GameCommandService& m_GameCommandService;
 
 		Game* m_Game{ nullptr };
 		GameRenderer* m_GameRenderer{ nullptr };

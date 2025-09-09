@@ -3,6 +3,7 @@
 #include <tokyo/Driller/Scripting/EntityUserData.hpp>
 #include <tokyo/Driller/Scripting/CoreUserData.hpp>
 #include <tokyo/Driller/Scripting/PrototypeParser.hpp>
+#include <tokyo/Driller/Scripting/ResourceParser.hpp>
 
 namespace drl
 {
@@ -40,6 +41,17 @@ namespace drl
 			{
 				_services.buildingPrototypeService.registerPrototype(bp.name, bp);
 				_services.identificationService.registerName(bp.name);
+			}
+		}
+
+		_managers.luaManager.runScriptFile("/data/Scripts/Base/resources.lua");
+		{
+			drl::ResourceParser resourceParser;
+			const auto& parsedResources = resourceParser.parse(state);
+			for (const auto& r : parsedResources)
+			{
+				_services.resourceService.setResourceMaximum(r.resource.id, r.max);
+				_services.resourceService.setResource(r.resource.id, r.resource.amount);
 			}
 		}
 	}
@@ -111,7 +123,9 @@ namespace drl
 			_gameData,
 			_managers.inputManager,
 			_managers.inputActionManager,
-			_managers.configManager);
+			_managers.configManager,
+			_managers.textureManager,
+			_services.gameCommandService);
 		
 		scene->start();
 		_app.setScene(scene);

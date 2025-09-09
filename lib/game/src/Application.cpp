@@ -186,7 +186,7 @@ namespace tokyo
 
         if (m_Scene != nullptr) 
         {
-            _target.draw(*m_Scene);
+            m_Scene->draw(_target, sf::RenderStates::Default);
         }
 
         m_Window.display();

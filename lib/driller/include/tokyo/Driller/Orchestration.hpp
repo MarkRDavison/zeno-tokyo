@@ -12,7 +12,7 @@ namespace drl
 		Orchestration() = delete;
 	public:
 
-		static void InitialiseConfiguration(tokyo::Application& _app, ManagerPackage& _managers);
+		static void InitialiseConfiguration(tokyo::Application& _app, ManagerPackage& _managers, ServicePackage& _services);
 		static bool InitialiseTextures(ManagerPackage& _managers);
 		static bool InitialiseFonts(ManagerPackage& _managers);
 		static void InitialiseInput(ManagerPackage& _managers);

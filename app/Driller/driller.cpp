@@ -24,11 +24,16 @@ int main(int _argc, char** _argv)
     managers.fileManager.registerDirectory("F:/Workspace/Github/zeno-tokyo/app/Driller");
 
     drl::GameData gameData;
+    // TODO: REPLACE with dig shaft command and terrain alteration service
+    gameData.terrain.rows.emplace_back();
+    gameData.terrain.shaftLevel++;
+    gameData.terrain.rows.emplace_back();
+    gameData.terrain.shaftLevel++;
 
     drl::ServicePackage services(managers, gameData);
 
     {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
 
         drl::Orchestration::InitialiseConfiguration(app, managers, services);
     }
@@ -36,7 +41,7 @@ int main(int _argc, char** _argv)
     app.renderSplash();
 
     {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
 
         if (!drl::Orchestration::InitialiseTextures(managers))
         {
@@ -47,7 +52,7 @@ int main(int _argc, char** _argv)
     app.renderSplash();
 
     {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
 
         if (!drl::Orchestration::InitialiseFonts(managers))
         {
@@ -58,13 +63,13 @@ int main(int _argc, char** _argv)
     app.renderSplash();
 
     {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     splashScene.m_Percentage += 20.0f;
     app.renderSplash();
 
     {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     splashScene.m_Percentage += 20.0f;
     app.renderSplash();
@@ -72,7 +77,7 @@ int main(int _argc, char** _argv)
     app.setName(managers.configManager.getTitle());
 
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+        //std::this_thread::sleep_for(std::chrono::milliseconds(250));
     }
     if (!app.splashFinished(sf::VideoMode(
         { 
