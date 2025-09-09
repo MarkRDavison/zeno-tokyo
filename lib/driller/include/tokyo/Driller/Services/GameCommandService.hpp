@@ -1,6 +1,7 @@
 #pragma once
 
 #include <tokyo/Driller/Core/GameCommand.hpp>
+#include <tokyo/Driller/Services/TerrainAlterationService.hpp>
 
 namespace drl
 {
@@ -20,8 +21,13 @@ namespace drl
 	class GameCommandService : public IGameCommandService
 	{
 	public:
-		GameCommandService();
-		GameCommandService(long long _tick);
+		GameCommandService(
+			ITerrainAlterationService& _terrainAlterationService
+		);
+		GameCommandService(
+			ITerrainAlterationService& _terrainAlterationService,
+			long long _tick
+		);
 		~GameCommandService(void) override = default;
 
 		void recordCommands();
@@ -38,5 +44,7 @@ namespace drl
 	private:
 		long long m_CurrentTick;
 		bool m_IsRecordingCommands;
+
+		ITerrainAlterationService& m_TerrainAlterationService;
 	};
 }

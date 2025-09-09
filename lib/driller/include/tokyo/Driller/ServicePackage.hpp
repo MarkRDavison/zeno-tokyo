@@ -20,19 +20,18 @@ namespace drl
 			ManagerPackage& _managers, 
 			GameData& _gameData
 		) :
-			gameCommandService(),
 			resourceService(),
 			identificationService(),
 			terrainAlterationService(_gameData.terrain),
 			buildingPrototypeService(identificationService),
 			jobPrototypeService(identificationService),
 			shuttlePrototypeService(identificationService),
-			workerPrototypeService(identificationService)
+			workerPrototypeService(identificationService),
+			gameCommandService(terrainAlterationService)
 		{
 
 		}
 
-		GameCommandService gameCommandService;
 		tokyo::ResourceService resourceService;
 		tokyo::IdentificationService<IdType> identificationService;
 
@@ -42,5 +41,7 @@ namespace drl
 		JobPrototypeService jobPrototypeService;
 		ShuttlePrototypeService shuttlePrototypeService;
 		WorkerPrototypeService workerPrototypeService;
+
+		GameCommandService gameCommandService;
 	};
 }

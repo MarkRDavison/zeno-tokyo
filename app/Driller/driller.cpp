@@ -24,11 +24,6 @@ int main(int _argc, char** _argv)
     managers.fileManager.registerDirectory("F:/Workspace/Github/zeno-tokyo/app/Driller");
 
     drl::GameData gameData;
-    // TODO: REPLACE with dig shaft command and terrain alteration service
-    gameData.terrain.rows.emplace_back();
-    gameData.terrain.shaftLevel++;
-    gameData.terrain.rows.emplace_back();
-    gameData.terrain.shaftLevel++;
 
     drl::ServicePackage services(managers, gameData);
 
@@ -92,8 +87,6 @@ int main(int _argc, char** _argv)
     }
 
     drl::Orchestration::InitialiseInput(managers);
-
-    // managers.luaManager.runScriptFile("/data/Scripts/Base/initializeCommands.lua");
 
     drl::Orchestration::InitialiseGame(app, gameData, managers, services);
 

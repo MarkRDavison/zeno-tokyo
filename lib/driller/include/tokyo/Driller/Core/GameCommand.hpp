@@ -17,7 +17,7 @@ namespace drl
 			DigShaft,
 
 			Undefined
-		} commandContext{ CommandContext::Undefined };
+		} commandContext{ CommandContext::Undefined }; // TODO: Way to inherit context scope?
 
 		enum class CommandSource
 		{
@@ -38,9 +38,9 @@ namespace drl
 			DigShaftEvent digShaft;
 		};
 
-		explicit GameCommand(const DigShaftEvent& _digShaft, CommandSource _commandSource) :
-			commandContext(CommandContext::DigShaft),
-			commandSource(_commandSource),
+		explicit GameCommand(const DigShaftEvent& _digShaft, CommandContext context, CommandSource source) :
+			commandContext(context),
+			commandSource(source),
 			type(EventType::DigShaft),
 			digShaft(_digShaft)
 		{

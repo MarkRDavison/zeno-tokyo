@@ -14,6 +14,7 @@ namespace drl
 		auto& state = _managers.luaManager.getState(tokyo::LuaManager::DefaultStateScope);
 
 		state.set_function("exit", &tokyo::Application::stop, &_app);
+		state.set_function("cmd", &drl::GameCommandService::executeGameCommand, &_services.gameCommandService);
 
 		drl::CoreUserData::generateInfrastructureUserData(state);
 		drl::EntityUserData::generateEntitiesUserData(state);
@@ -119,6 +120,8 @@ namespace drl
 
 	void Orchestration::InitialiseGame(tokyo::Application& _app, drl::GameData& _gameData, ManagerPackage& _managers, ServicePackage& _services)
 	{
+		_managers.luaManager.runScriptFile("/data/Scripts/Base/initializeCommands.lua");
+
 		auto scene = new drl::GameScene(
 			_gameData,
 			_managers.inputManager,

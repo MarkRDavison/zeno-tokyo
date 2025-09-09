@@ -14,11 +14,14 @@ namespace drl
 			Package(long long _startTick
 			) :
 				service(
+					terrainAlterationServiceMock.get(),
 					_startTick
 				)
 			{
 
 			}
+
+			fakeit::Mock<ITerrainAlterationService> terrainAlterationServiceMock;
 
 			drl::GameCommandService service;
 

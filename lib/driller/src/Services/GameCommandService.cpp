@@ -4,15 +4,22 @@
 
 namespace drl
 {
-	GameCommandService::GameCommandService() : GameCommandService(0ll)
+	GameCommandService::GameCommandService(
+		ITerrainAlterationService& _terrainAlterationService
+	) : GameCommandService(
+		_terrainAlterationService,
+		0ll
+	)
 	{
 
 	}
 	GameCommandService::GameCommandService(
+		ITerrainAlterationService& _terrainAlterationService,
 		long long _tick
 	) : 
 		m_CurrentTick(_tick),
-		m_IsRecordingCommands(false)
+		m_IsRecordingCommands(false),
+		m_TerrainAlterationService(_terrainAlterationService)
 	{
 
 	}
@@ -55,6 +62,6 @@ namespace drl
 
 	bool GameCommandService::handleDigShaft(GameCommand::CommandContext _context, GameCommand::DigShaftEvent _event)
 	{
-		throw std::exception("Not Implemented.");
+		return m_TerrainAlterationService.digShaft(_event.level);
 	}
 }
