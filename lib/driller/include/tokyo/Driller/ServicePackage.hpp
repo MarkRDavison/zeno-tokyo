@@ -9,6 +9,7 @@
 #include <tokyo/Driller/Services/Job/JobPrototypeService.hpp>
 #include <tokyo/Driller/Services/Shuttle/ShuttlePrototypeService.hpp>
 #include <tokyo/Driller/Services/Worker/WorkerPrototypeService.hpp>
+#include <tokyo/Driller/Services/TerrainAlterationService.hpp>
 
 namespace drl
 {
@@ -22,6 +23,7 @@ namespace drl
 			gameCommandService(),
 			resourceService(),
 			identificationService(),
+			terrainAlterationService(_gameData.terrain),
 			buildingPrototypeService(identificationService),
 			jobPrototypeService(identificationService),
 			shuttlePrototypeService(identificationService),
@@ -33,6 +35,8 @@ namespace drl
 		GameCommandService gameCommandService;
 		tokyo::ResourceService resourceService;
 		tokyo::IdentificationService<IdType> identificationService;
+
+		TerrainAlterationService terrainAlterationService;
 
 		BuildingPrototypeService buildingPrototypeService;
 		JobPrototypeService jobPrototypeService;
