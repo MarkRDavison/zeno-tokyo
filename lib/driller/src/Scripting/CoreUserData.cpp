@@ -10,7 +10,7 @@ namespace drl
 		_state.new_usertype<sf::Vector2i>(
 			"vec2i",
 			sol::constructors<
-			sf::Vector2i(int, int)
+				sf::Vector2i(int, int)
 			>(),
 			"x", &sf::Vector2i::x,
 			"y", &sf::Vector2i::y,
@@ -21,7 +21,7 @@ namespace drl
 		_state.new_usertype<sf::Vector2f>(
 			"vec2f",
 			sol::constructors<
-			sf::Vector2f(float, float)
+				sf::Vector2f(float, float)
 			>(),
 			"x", &sf::Vector2f::x,
 			"y", &sf::Vector2f::y,
@@ -30,14 +30,15 @@ namespace drl
 		);
 
 		_state.new_enum<drl::GameCommand::CommandContext>(
-			"CommandContext",
+			"GameCommandContext",
 			{
 				{"DigShaft", drl::GameCommand::CommandContext::DigShaft},
+				{"DigTile", drl::GameCommand::CommandContext::DigTile},
 				{"Undefined", drl::GameCommand::CommandContext::Undefined},
 			});
 
 		_state.new_enum<drl::GameCommand::CommandSource>(
-			"CommandSource",
+			"GameCommandSource",
 			{
 				{"Setup", drl::GameCommand::CommandSource::Setup},
 				{"Player", drl::GameCommand::CommandSource::Player},
@@ -52,10 +53,20 @@ namespace drl
 			"level", &drl::GameCommand::DigShaftEvent::level
 		);
 
+		_state.new_usertype<drl::GameCommand::DigTileEvent>(
+			"DigTileEvent",
+			sol::constructors<
+				drl::GameCommand::DigTileEvent(int, int)
+			>(),
+			"level", &drl::GameCommand::DigTileEvent::level,
+			"column", &drl::GameCommand::DigTileEvent::column
+		);
+
 		_state.new_usertype<drl::GameCommand>(
 			"GameCommand",
 			sol::constructors<
-				drl::GameCommand(drl::GameCommand::DigShaftEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
+				drl::GameCommand(drl::GameCommand::DigShaftEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(drl::GameCommand::DigTileEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
 			>(),
 			"type", &drl::GameCommand::type
 		);

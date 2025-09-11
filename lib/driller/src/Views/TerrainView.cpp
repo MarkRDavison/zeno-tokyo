@@ -39,12 +39,12 @@ namespace drl
 
 				for (int j = 1; j <= static_cast<int>(row.leftTiles.size()); ++j) 
 				{
-					appendCell(terrainLeft, row.leftTiles[j - 1].dugOut ? DugOutTerrain : DefaultTerrain, { -j, i }, textureSize);
+					appendCell(terrainLeft, row.leftTiles[j - 1].dugOut ? DugOutTerrain : DefaultTerrain, { -j, -i }, textureSize);
 				}
 
 				for (int k = 1; k <= static_cast<int>(row.rightTiles.size()); ++k) 
 				{
-					appendCell(terrainRight, row.rightTiles[k - 1].dugOut ? DugOutTerrain : DefaultTerrain, { +k, i }, textureSize);
+					appendCell(terrainRight, row.rightTiles[k - 1].dugOut ? DugOutTerrain : DefaultTerrain, { +k, -i }, textureSize);
 				}
 			}
 

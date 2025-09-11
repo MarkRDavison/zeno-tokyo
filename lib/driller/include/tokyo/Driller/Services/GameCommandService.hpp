@@ -40,6 +40,7 @@ namespace drl
 		bool executeGameCommand(const GameCommand& _command) override;
 
 		bool handleDigShaft(GameCommand::CommandContext _context, GameCommand::DigShaftEvent _event);
+		bool handleDigTile(GameCommand::CommandContext _context, GameCommand::DigTileEvent _event);
 
 	private:
 		long long m_CurrentTick;
