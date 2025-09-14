@@ -15,6 +15,7 @@ namespace drl
 			) :
 				service(
 					terrainAlterationServiceMock.get(),
+					workerCreationServiceMock.get(),
 					_startTick
 				)
 			{
@@ -22,6 +23,7 @@ namespace drl
 			}
 
 			fakeit::Mock<ITerrainAlterationService> terrainAlterationServiceMock;
+			fakeit::Mock<IWorkerCreationService> workerCreationServiceMock;
 
 			drl::GameCommandService service;
 

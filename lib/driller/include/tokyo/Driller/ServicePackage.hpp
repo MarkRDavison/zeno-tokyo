@@ -27,7 +27,8 @@ namespace drl
 			jobPrototypeService(identificationService),
 			shuttlePrototypeService(identificationService),
 			workerPrototypeService(identificationService),
-			gameCommandService(terrainAlterationService)
+			workerCreationService(_gameData.worker, workerPrototypeService),
+			gameCommandService(terrainAlterationService, workerCreationService)
 		{
 
 		}
@@ -41,6 +42,8 @@ namespace drl
 		JobPrototypeService jobPrototypeService;
 		ShuttlePrototypeService shuttlePrototypeService;
 		WorkerPrototypeService workerPrototypeService;
+
+		WorkerCreationService workerCreationService;
 
 		GameCommandService gameCommandService;
 	};

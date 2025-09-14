@@ -34,6 +34,7 @@ namespace drl
 			{
 				{"DigShaft", drl::GameCommand::CommandContext::DigShaft},
 				{"DigTile", drl::GameCommand::CommandContext::DigTile},
+				{"CreateWorker", drl::GameCommand::CommandContext::CreateWorker},
 				{"Undefined", drl::GameCommand::CommandContext::Undefined},
 			});
 
@@ -62,11 +63,21 @@ namespace drl
 			"column", &drl::GameCommand::DigTileEvent::column
 		);
 
+		_state.new_usertype<drl::GameCommand::CreateWorkerEvent>(
+			"CreateWorkerEvent",
+			sol::constructors<
+				drl::GameCommand::CreateWorkerEvent(const std::string&, sf::Vector2f)
+			>(),
+			"prototypeId", &drl::GameCommand::CreateWorkerEvent::prototypeId,
+			"coordinates", &drl::GameCommand::CreateWorkerEvent::coordinates
+		);
+
 		_state.new_usertype<drl::GameCommand>(
 			"GameCommand",
 			sol::constructors<
 				drl::GameCommand(drl::GameCommand::DigShaftEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
-				drl::GameCommand(drl::GameCommand::DigTileEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
+				drl::GameCommand(drl::GameCommand::DigTileEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(drl::GameCommand::CreateWorkerEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
 			>(),
 			"type", &drl::GameCommand::type
 		);

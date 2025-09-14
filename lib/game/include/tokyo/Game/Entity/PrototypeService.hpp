@@ -20,7 +20,7 @@ namespace tokyo
 		virtual const TPrototype& getPrototype(TPrototypeId _prototypeId) const = 0;
 
 		virtual TInstance createInstance(const std::string& _prototypeName) const = 0;
-		virtual TInstance createInstance(TPrototypeId _prototypeId) const = 0;
+		virtual TInstance createInstanceById(TPrototypeId _prototypeId) const = 0;
 
 		virtual bool isPrototypeRegistered(const std::string& _prototypeName) const = 0;
 		virtual bool isPrototypeRegistered(TPrototypeId _prototypeId) const = 0;
@@ -77,9 +77,9 @@ namespace tokyo
 
 		TInstance createInstance(const std::string& _prototypeName) const override
 		{
-			return createInstance(getPrototypeId(_prototypeName));
+			return createInstanceById(getPrototypeId(_prototypeName));
 		}
-		TInstance createInstance(TPrototypeId _prototypeId) const override
+		TInstance createInstanceById(TPrototypeId _prototypeId) const override
 		{
 			return createInstance(getPrototype(_prototypeId));
 		}

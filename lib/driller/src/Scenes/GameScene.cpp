@@ -9,14 +9,16 @@ namespace drl
 		tokyo::IInputActionManager& _inputActionManager,
 		tokyo::ConfigurationManager& _configurationManager,
 		tokyo::TextureManager& _textureManager,
-		GameCommandService& _gameCommandService
+		GameCommandService& _gameCommandService,
+		const WorkerPrototypeService& _workerPrototypeService
 	) :
 		m_GameData(_gameData),
 		m_InputManager(_inputManager),
 		m_InputActionManager(_inputActionManager),
 		m_ConfigurationManager(_configurationManager),
 		m_TextureManager(_textureManager),
-		m_GameCommandService(_gameCommandService)
+		m_GameCommandService(_gameCommandService),
+		m_WorkerPrototypeService(_workerPrototypeService)
 	{
 
 	}
@@ -43,7 +45,8 @@ namespace drl
 
 		m_GameRenderer = new GameRenderer(
 			m_GameData,
-			m_TextureManager
+			m_TextureManager,
+			m_WorkerPrototypeService
 		);
 
 		started = true;

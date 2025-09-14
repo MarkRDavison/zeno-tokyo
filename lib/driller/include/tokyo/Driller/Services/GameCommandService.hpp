@@ -2,6 +2,7 @@
 
 #include <tokyo/Driller/Core/GameCommand.hpp>
 #include <tokyo/Driller/Services/TerrainAlterationService.hpp>
+#include <tokyo/Driller/Services/Worker/WorkerCreationService.hpp>
 
 namespace drl
 {
@@ -22,10 +23,12 @@ namespace drl
 	{
 	public:
 		GameCommandService(
-			ITerrainAlterationService& _terrainAlterationService
+			ITerrainAlterationService& _terrainAlterationService,
+			IWorkerCreationService& _workerCreationService
 		);
 		GameCommandService(
 			ITerrainAlterationService& _terrainAlterationService,
+			IWorkerCreationService& _workerCreationService,
 			long long _tick
 		);
 		~GameCommandService(void) override = default;
@@ -41,11 +44,13 @@ namespace drl
 
 		bool handleDigShaft(GameCommand::CommandContext _context, GameCommand::DigShaftEvent _event);
 		bool handleDigTile(GameCommand::CommandContext _context, GameCommand::DigTileEvent _event);
+		bool handleCreateWorker(GameCommand::CommandContext _context, GameCommand::CreateWorkerEvent _event);
 
 	private:
 		long long m_CurrentTick;
 		bool m_IsRecordingCommands;
 
 		ITerrainAlterationService& m_TerrainAlterationService;
+		IWorkerCreationService& m_WorkerCreationService;
 	};
 }

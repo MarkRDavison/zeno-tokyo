@@ -128,7 +128,8 @@ namespace drl
 			_managers.inputActionManager,
 			_managers.configManager,
 			_managers.textureManager,
-			_services.gameCommandService);
+			_services.gameCommandService,
+			_services.workerPrototypeService);
 		
 		scene->start();
 		_app.setScene(scene);

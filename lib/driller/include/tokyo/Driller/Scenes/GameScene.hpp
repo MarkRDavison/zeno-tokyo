@@ -19,7 +19,8 @@ namespace drl
 			tokyo::IInputActionManager& _inputActionManager,
 			tokyo::ConfigurationManager& _configurationManager,
 			tokyo::TextureManager& _textureManager,
-			GameCommandService& _gameCommandService);
+			GameCommandService& _gameCommandService,
+			const WorkerPrototypeService& _workerPrototypeService);
 		~GameScene();
 
 		void start() override;
@@ -35,6 +36,7 @@ namespace drl
 		tokyo::ConfigurationManager& m_ConfigurationManager;
 		tokyo::TextureManager& m_TextureManager;
 		GameCommandService& m_GameCommandService;
+		const WorkerPrototypeService& m_WorkerPrototypeService;
 
 		Game* m_Game{ nullptr };
 		GameRenderer* m_GameRenderer{ nullptr };

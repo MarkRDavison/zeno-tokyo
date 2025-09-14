@@ -7,11 +7,14 @@ namespace drl
 
 	GameRenderer::GameRenderer(
 		GameData& _gameData,
-		tokyo::TextureManager& _textureManager
+		tokyo::TextureManager& _textureManager,
+		const WorkerPrototypeService& _workerPrototypeService
 	) :
 		m_TextureManager(_textureManager),
 		m_GameData(_gameData),
-		m_TerrainView(m_GameData.terrain, m_TextureManager)
+		m_WorkerPrototypeService(_workerPrototypeService),
+		m_TerrainView(_gameData.terrain, _textureManager),
+		m_WorkerView(_gameData.worker, _workerPrototypeService, _textureManager)
 	{
 
 	}
@@ -19,6 +22,7 @@ namespace drl
 	void GameRenderer::update(float _delta)
 	{
 		m_TerrainView.update(_delta);
+		m_WorkerView.update(_delta);
 	}
 
 	void GameRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -53,6 +57,7 @@ namespace drl
 		}
 
 		target.draw(m_TerrainView, states);
+		target.draw(m_WorkerView, states);
 	}
 
 }

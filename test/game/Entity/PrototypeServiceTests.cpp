@@ -128,7 +128,7 @@ namespace tokyo
 					return {};
 				};
 
-			prototypeService.TestPrototypeServiceBase::createInstance(prototypeId);
+			prototypeService.TestPrototypeServiceBase::createInstanceById(prototypeId);
 			
 			REQUIRE(callbackInvoked);
 		}
