@@ -6,6 +6,7 @@
 
 namespace drl
 {
+	using IShuttlePrototypeService = tokyo::IPrototypeService<ShuttlePrototype, ShuttleInstance, ShuttlePrototypeId>;
 
 	class ShuttlePrototypeService : public tokyo::PrototypeService<ShuttlePrototype, ShuttleInstance, ShuttlePrototypeId>
 	{

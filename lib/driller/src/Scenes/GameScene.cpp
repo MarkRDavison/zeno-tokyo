@@ -10,7 +10,9 @@ namespace drl
 		tokyo::ConfigurationManager& _configurationManager,
 		tokyo::TextureManager& _textureManager,
 		GameCommandService& _gameCommandService,
-		const WorkerPrototypeService& _workerPrototypeService
+		const WorkerPrototypeService& _workerPrototypeService,
+		IWorkerMovementService& _workerMovementService,
+		IWorkerJobUpdateService& _workerJobUpdateService
 	) :
 		m_GameData(_gameData),
 		m_InputManager(_inputManager),
@@ -18,7 +20,9 @@ namespace drl
 		m_ConfigurationManager(_configurationManager),
 		m_TextureManager(_textureManager),
 		m_GameCommandService(_gameCommandService),
-		m_WorkerPrototypeService(_workerPrototypeService)
+		m_WorkerPrototypeService(_workerPrototypeService),
+		m_WorkerMovementService(_workerMovementService),
+		m_WorkerJobUpdateService(_workerJobUpdateService)
 	{
 
 	}
@@ -40,7 +44,9 @@ namespace drl
 		m_Game = new Game(
 			m_GameData,
 			m_InputManager,
-			m_InputActionManager
+			m_InputActionManager,
+			m_WorkerMovementService,
+			m_WorkerJobUpdateService
 		);
 
 		m_GameRenderer = new GameRenderer(

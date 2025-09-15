@@ -271,6 +271,11 @@ namespace drl
 	}
 	bool TerrainAlterationService::canTileBeReached(int _level, int _column) const
 	{
+		if (_level < 0)
+		{
+			return true;
+		}
+
 		if (!doesLevelExist(_level))
 		{
 			return false;

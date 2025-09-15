@@ -6,6 +6,7 @@
 
 namespace drl
 {
+	using IJobPrototypeService = tokyo::IPrototypeService<JobPrototype, JobInstance, JobPrototypeId>;
 
 	class JobPrototypeService : public tokyo::PrototypeService<JobPrototype, JobInstance, JobPrototypeId>
 	{

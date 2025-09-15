@@ -7,8 +7,10 @@
 #include <tokyo/Game/Entity/IdentityService.hpp>
 #include <tokyo/Driller/Services/Building/BuildingPrototypeService.hpp>
 #include <tokyo/Driller/Services/Job/JobPrototypeService.hpp>
+#include <tokyo/Driller/Services/Worker/WorkerJobUpdateService.hpp>
 #include <tokyo/Driller/Services/Shuttle/ShuttlePrototypeService.hpp>
 #include <tokyo/Driller/Services/Worker/WorkerPrototypeService.hpp>
+#include <tokyo/Driller/Services/Worker/WorkerMovementService.hpp>
 #include <tokyo/Driller/Services/TerrainAlterationService.hpp>
 
 namespace drl
@@ -28,6 +30,8 @@ namespace drl
 			shuttlePrototypeService(identificationService),
 			workerPrototypeService(identificationService),
 			workerCreationService(_gameData.worker, workerPrototypeService),
+			workerMovementService(_gameData.worker, _gameData.job, terrainAlterationService),
+			workerJobUpdateService(_gameData.worker, _gameData.job, terrainAlterationService, jobPrototypeService),
 			gameCommandService(terrainAlterationService, workerCreationService)
 		{
 
@@ -39,11 +43,15 @@ namespace drl
 		TerrainAlterationService terrainAlterationService;
 
 		BuildingPrototypeService buildingPrototypeService;
-		JobPrototypeService jobPrototypeService;
-		ShuttlePrototypeService shuttlePrototypeService;
-		WorkerPrototypeService workerPrototypeService;
 
+		JobPrototypeService jobPrototypeService;
+
+		ShuttlePrototypeService shuttlePrototypeService;
+
+		WorkerPrototypeService workerPrototypeService;
+		WorkerMovementService workerMovementService;
 		WorkerCreationService workerCreationService;
+		WorkerJobUpdateService workerJobUpdateService;
 
 		GameCommandService gameCommandService;
 	};

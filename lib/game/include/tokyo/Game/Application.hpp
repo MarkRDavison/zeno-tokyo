@@ -31,6 +31,7 @@ namespace tokyo
         sf::RenderWindow& getWindow();
         const sf::RenderWindow& getWindow() const;
 
+        void setAppSpeedMultiplier(float _multiplier);
 
     private:
         void update(float _delta);
@@ -45,5 +46,6 @@ namespace tokyo
         sf::RenderWindow m_Window;
         Scene* m_Scene{ nullptr };
         std::string m_Name;
+        float m_Multiplier{ 1.0f };
     };
 }

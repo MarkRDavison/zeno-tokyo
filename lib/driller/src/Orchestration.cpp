@@ -129,12 +129,13 @@ namespace drl
 			_managers.configManager,
 			_managers.textureManager,
 			_services.gameCommandService,
-			_services.workerPrototypeService);
+			_services.workerPrototypeService,
+			_services.workerMovementService,
+			_services.workerJobUpdateService);
 		
 		scene->start();
 		_app.setScene(scene);
-		// TODO
-		//app.setAppSpeedMultiplier(4.0f); 
+		_app.setAppSpeedMultiplier(4.0f); 
 
 	}
 }

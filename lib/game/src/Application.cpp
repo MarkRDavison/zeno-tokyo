@@ -91,7 +91,7 @@ namespace tokyo
                 }
 
                 // Update
-                update(delta);
+                update(delta * m_Multiplier);
                 ups++;
 
                 accumulator -= delta;
@@ -171,6 +171,12 @@ namespace tokyo
     const sf::RenderWindow& Application::getWindow() const
     {
         return m_Window;
+    }
+
+
+    void Application::setAppSpeedMultiplier(float _multiplier) 
+    {
+        m_Multiplier = _multiplier;
     }
 
     void Application::update(float _delta)
