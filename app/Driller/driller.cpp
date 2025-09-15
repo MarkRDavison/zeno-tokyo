@@ -6,6 +6,8 @@
 #include <tokyo/Driller/ServicePackage.hpp>
 #include <tokyo/Driller/Orchestration.hpp>
 
+#include <thread>
+
 int main(int _argc, char** _argv)
 {
     tokyo::Application app;

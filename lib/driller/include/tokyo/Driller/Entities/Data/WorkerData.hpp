@@ -3,6 +3,7 @@
 #include <tokyo/Driller/Entities/Worker.hpp>
 #include <unordered_map>
 #include <stdexcept>
+#include <algorithm>
 #include <vector>
 
 namespace drl

@@ -45,3 +45,4 @@ build/
 out
 *.spv
 *.meshbin
+/.idea

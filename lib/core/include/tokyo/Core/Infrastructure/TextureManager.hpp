@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include <unordered_map>
 #include <tokyo/Core/Infrastructure/FileManager.hpp>
 #include <tokyo/Core/Utils/NonCopyable.hpp>
