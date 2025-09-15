@@ -131,7 +131,9 @@ namespace drl
 			_services.gameCommandService,
 			_services.workerPrototypeService,
 			_services.workerMovementService,
-			_services.workerJobUpdateService);
+			_services.workerJobUpdateService,
+			_services.shuttleScheduleService,
+			_services.jobAllocationService);
 		
 		scene->start();
 		_app.setScene(scene);

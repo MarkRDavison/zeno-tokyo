@@ -22,7 +22,9 @@ namespace drl
 			GameCommandService& _gameCommandService,
 			const WorkerPrototypeService& _workerPrototypeService,
 			IWorkerMovementService& _workerMovementService,
-			IWorkerJobUpdateService& _workerJobUpdateService);
+			IWorkerJobUpdateService& _workerJobUpdateService,
+			IShuttleScheduleService& _shuttleScheduleService,
+			IJobAllocationService& _jobAllocationService);
 		~GameScene();
 
 		void start() override;
@@ -41,6 +43,8 @@ namespace drl
 		const WorkerPrototypeService& m_WorkerPrototypeService;
 		IWorkerMovementService& m_WorkerMovementService;
 		IWorkerJobUpdateService& m_WorkerJobUpdateService;
+		IShuttleScheduleService& m_ShuttleScheduleService;
+		IJobAllocationService& m_JobAllocationService;
 
 		Game* m_Game{ nullptr };
 		GameRenderer* m_GameRenderer{ nullptr };

@@ -10,14 +10,14 @@ namespace drl
 	class IWorkerJobUpdateService
 	{
 	public:
-		virtual ~IWorkerJobUpdateService(void) = 0;
+		virtual ~IWorkerJobUpdateService() = 0;
 
 		virtual void update(float _delta) = 0;
 	};
 
-	inline IWorkerJobUpdateService::~IWorkerJobUpdateService(void) = default;
+	inline IWorkerJobUpdateService::~IWorkerJobUpdateService() = default;
 
-	class WorkerJobUpdateService : public IWorkerJobUpdateService
+	class WorkerJobUpdateService final : public IWorkerJobUpdateService
 	{
 	public:
 		WorkerJobUpdateService(
@@ -26,11 +26,11 @@ namespace drl
 			ITerrainAlterationService& _terrainAlterationService,
 			const IJobPrototypeService& _jobPrototypeService
 		);
-		~WorkerJobUpdateService(void) override = default;
+		~WorkerJobUpdateService() override = default;
 
 		void update(float _delta) override;
-		void updateWorkerJob(float _delta, WorkerInstance& _worker, JobInstance& _job);
-		void removeCompletedJobs();
+		void updateWorkerJob(float _delta, WorkerInstance& _worker, JobInstance& _job) const;
+		void removeCompletedJobs() const;
 
 	private:
 		WorkerData& m_WorkerData;

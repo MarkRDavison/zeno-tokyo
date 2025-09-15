@@ -12,7 +12,9 @@ namespace drl
 		GameCommandService& _gameCommandService,
 		const WorkerPrototypeService& _workerPrototypeService,
 		IWorkerMovementService& _workerMovementService,
-		IWorkerJobUpdateService& _workerJobUpdateService
+		IWorkerJobUpdateService& _workerJobUpdateService,
+		IShuttleScheduleService& _shuttleScheduleService,
+		IJobAllocationService& _jobAllocationService
 	) :
 		m_GameData(_gameData),
 		m_InputManager(_inputManager),
@@ -22,7 +24,9 @@ namespace drl
 		m_GameCommandService(_gameCommandService),
 		m_WorkerPrototypeService(_workerPrototypeService),
 		m_WorkerMovementService(_workerMovementService),
-		m_WorkerJobUpdateService(_workerJobUpdateService)
+		m_WorkerJobUpdateService(_workerJobUpdateService),
+		m_ShuttleScheduleService(_shuttleScheduleService),
+		m_JobAllocationService(_jobAllocationService)
 	{
 
 	}
@@ -45,6 +49,8 @@ namespace drl
 			m_GameData,
 			m_InputManager,
 			m_InputActionManager,
+			m_ShuttleScheduleService,
+			m_JobAllocationService,
 			m_WorkerMovementService,
 			m_WorkerJobUpdateService
 		);

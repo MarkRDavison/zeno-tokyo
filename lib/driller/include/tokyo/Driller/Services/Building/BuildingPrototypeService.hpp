@@ -6,6 +6,7 @@
 
 namespace drl
 {
+	using IBuildingPrototypeService = tokyo::IPrototypeService<BuildingPrototype, BuildingInstance, BuildingPrototypeId>;
 
 	class BuildingPrototypeService : public tokyo::PrototypeService<BuildingPrototype, BuildingInstance, BuildingPrototypeId>
 	{

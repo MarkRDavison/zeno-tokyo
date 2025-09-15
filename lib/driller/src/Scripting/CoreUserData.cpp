@@ -35,6 +35,9 @@ namespace drl
 				{"DigShaft", drl::GameCommand::CommandContext::DigShaft},
 				{"DigTile", drl::GameCommand::CommandContext::DigTile},
 				{"CreateWorker", drl::GameCommand::CommandContext::CreateWorker},
+				{"CreatingShuttle", drl::GameCommand::CommandContext::CreatingShuttle},
+				{"CreatingWorker", drl::GameCommand::CommandContext::CreatingWorker},
+				{"CreatingJob", drl::GameCommand::CommandContext::CreatingJob},
 				{"Undefined", drl::GameCommand::CommandContext::Undefined},
 			});
 
@@ -57,10 +60,29 @@ namespace drl
 		_state.new_usertype<drl::GameCommand::DigTileEvent>(
 			"DigTileEvent",
 			sol::constructors<
-				drl::GameCommand::DigTileEvent(int, int)
+			drl::GameCommand::DigTileEvent(int, int)
 			>(),
 			"level", &drl::GameCommand::DigTileEvent::level,
 			"column", &drl::GameCommand::DigTileEvent::column
+		);
+
+		_state.new_usertype<drl::GameCommand::PlaceBuildingEvent>(
+			"PlaceBuildingEvent",
+			sol::constructors<
+				drl::GameCommand::PlaceBuildingEvent(std::string, int, int),
+				drl::GameCommand::PlaceBuildingEvent(IdType, int, int)
+			>(),
+			"prototypeId", &drl::GameCommand::PlaceBuildingEvent::prototypeId,
+			"level", &drl::GameCommand::PlaceBuildingEvent::level,
+			"column", &drl::GameCommand::PlaceBuildingEvent::column
+		);
+
+		_state.new_usertype<drl::GameCommand::CreateShuttleEvent>(
+			"CreateShuttleEvent",
+			sol::constructors<
+				drl::GameCommand::CreateShuttleEvent(std::string)
+			>(),
+			"prototypeId", &drl::GameCommand::CreateShuttleEvent::prototypeId
 		);
 
 		_state.new_usertype<drl::GameCommand::CreateWorkerEvent>(
@@ -72,12 +94,25 @@ namespace drl
 			"coordinates", &drl::GameCommand::CreateWorkerEvent::coordinates
 		);
 
+		_state.new_usertype<drl::GameCommand::CreateJobEvent>(
+			"CreateJobEvent",
+			sol::constructors<
+				drl::GameCommand::CreateJobEvent(std::string,std::string, sf::Vector2i)
+			>(),
+			"prototypeId", &drl::GameCommand::CreateJobEvent::prototypeId,
+			"additionalPrototypeId", &drl::GameCommand::CreateJobEvent::additionalPrototypeId,
+			"coordinates", &drl::GameCommand::CreateJobEvent::coordinates
+		);
+
 		_state.new_usertype<drl::GameCommand>(
 			"GameCommand",
 			sol::constructors<
 				drl::GameCommand(drl::GameCommand::DigShaftEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
 				drl::GameCommand(drl::GameCommand::DigTileEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
-				drl::GameCommand(drl::GameCommand::CreateWorkerEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
+				drl::GameCommand(drl::GameCommand::PlaceBuildingEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(drl::GameCommand::CreateShuttleEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(drl::GameCommand::CreateWorkerEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(drl::GameCommand::CreateJobEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
 			>(),
 			"type", &drl::GameCommand::type
 		);
