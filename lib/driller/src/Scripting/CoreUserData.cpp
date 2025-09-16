@@ -38,6 +38,7 @@ namespace drl
 				{"CreatingWorker", drl::GameCommand::CommandContext::CreatingWorker},
 				{"CreatingJob", drl::GameCommand::CommandContext::CreatingJob},
 				{"PlacingBuilding", drl::GameCommand::CommandContext::PlacingBuilding},
+				{"AddResource", drl::GameCommand::CommandContext::AddResource},
 				{"Undefined", drl::GameCommand::CommandContext::Undefined},
 			});
 
@@ -103,6 +104,14 @@ namespace drl
 			"coordinates", &drl::GameCommand::CreateJobEvent::coordinates
 		);
 
+		_state.new_usertype<drl::GameCommand::AddResourceEvent>(
+			"AddResourceEvent",
+			sol::constructors<
+				drl::GameCommand::AddResourceEvent(tokyo::Resource)
+			>(),
+			"resource", &drl::GameCommand::AddResourceEvent::resource
+		);
+
 		_state.new_usertype<drl::GameCommand>(
 			"GameCommand",
 			sol::constructors<
@@ -111,7 +120,8 @@ namespace drl
 				drl::GameCommand(const drl::GameCommand::PlaceBuildingEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
 				drl::GameCommand(const drl::GameCommand::CreateShuttleEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
 				drl::GameCommand(const drl::GameCommand::CreateWorkerEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
-				drl::GameCommand(const drl::GameCommand::CreateJobEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
+				drl::GameCommand(const drl::GameCommand::CreateJobEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(const drl::GameCommand::AddResourceEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
 			>(),
 			"type", &drl::GameCommand::type
 		);

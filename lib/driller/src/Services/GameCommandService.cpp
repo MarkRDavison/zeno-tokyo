@@ -8,12 +8,14 @@ namespace drl
 		ITerrainAlterationService& _terrainAlterationService,
 		IWorkerCreationService& _workerCreationService,
 		IShuttleCreationService& _shuttleCreationService,
-		IBuildingPlacementService& _buildingPlacementService
+		IBuildingPlacementService& _buildingPlacementService,
+		tokyo::IResourceService& _resourceService
 	) : GameCommandService(
 		_terrainAlterationService,
 		_workerCreationService,
 		_shuttleCreationService,
 		_buildingPlacementService,
+		_resourceService,
 		0ll
 	)
 	{
@@ -24,6 +26,7 @@ namespace drl
 		IWorkerCreationService& _workerCreationService,
 		IShuttleCreationService& _shuttleCreationService,
 		IBuildingPlacementService& _buildingPlacementService,
+		tokyo::IResourceService& _resourceService,
 		long long _tick
 	) : 
 		m_CurrentTick(_tick),
@@ -31,7 +34,8 @@ namespace drl
 		m_TerrainAlterationService(_terrainAlterationService),
 		m_WorkerCreationService(_workerCreationService),
 		m_ShuttleCreationService(_shuttleCreationService),
-		m_BuildingPlacementService(_buildingPlacementService)
+		m_BuildingPlacementService(_buildingPlacementService),
+		m_ResourceService(_resourceService)
 	{
 
 	}
@@ -74,6 +78,8 @@ namespace drl
 			return handleCreateWorker(_command.commandContext, _command.createWorker);
 		case GameCommand::EventType::CreateShuttle:
 			return handleCreateShuttle(_command.commandContext, _command.createShuttle);
+		case GameCommand::EventType::AddResource:
+			return handleAddResource(_command.commandContext, _command.addResource);
 		default:
 			std::cerr << "Unhandled command type " << (int)_command.type << std::endl;
 			return false;
@@ -99,5 +105,10 @@ namespace drl
 	bool GameCommandService::handleCreateShuttle(GameCommand::CommandContext _context, GameCommand::CreateShuttleEvent _event)
 	{
 		return m_ShuttleCreationService.createShuttle(_event.prototypeId);
+	}
+	bool GameCommandService::handleAddResource(GameCommand::CommandContext _context, GameCommand::AddResourceEvent _event)
+	{
+		m_ResourceService.updateResource(_event.resource.id, _event.resource.amount);
+		return true;
 	}
 }

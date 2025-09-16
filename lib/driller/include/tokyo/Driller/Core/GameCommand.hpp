@@ -3,6 +3,7 @@
 #include <tokyo/Driller/Constants.hpp>
 #include <tokyo/Core/Utils/String.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <tokyo/Game/Resource/Resource.hpp>
 
 namespace drl
 {
@@ -80,6 +81,16 @@ namespace drl
 			sf::Vector2i coordinates;
 		};
 
+		struct AddResourceEvent
+		{
+			AddResourceEvent() {}
+			AddResourceEvent(const tokyo::Resource& _resource) :
+				resource(_resource)
+			{
+			}
+			tokyo::Resource resource;
+		};
+
 		enum class CommandContext
 		{
 			DiggingShaft,
@@ -88,6 +99,7 @@ namespace drl
 			CreatingShuttle,
 			CreatingJob,
 			PlacingBuilding,
+			AddResource,
 
 			Undefined
 		} commandContext{ CommandContext::Undefined }; // TODO: Way to inherit context scope?
@@ -107,6 +119,7 @@ namespace drl
 			CreatingWorker,
 			CreateJob,
 			PlacingBuilding,
+			AddResource,
 
 			Count
 		} type;
@@ -119,6 +132,7 @@ namespace drl
 			CreateWorkerEvent createWorker;
 			CreateJobEvent createJob;
 			PlaceBuildingEvent placeBuilding;
+			AddResourceEvent addResource;
 		};
 
 		GameCommand(const DigShaftEvent& _digShaft, CommandContext context, CommandSource source) :
@@ -171,6 +185,15 @@ namespace drl
 			commandSource(source),
 			type(EventType::CreatingWorker),
 			createWorker(_event)
+		{
+
+		}
+
+		GameCommand(const AddResourceEvent& _event, CommandContext context, CommandSource source) :
+			commandContext(context),
+			commandSource(source),
+			type(EventType::AddResource),
+			addResource(_event)
 		{
 
 		}

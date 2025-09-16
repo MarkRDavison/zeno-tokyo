@@ -72,7 +72,7 @@ prototypes = {
             work = 4.0,
             onComplete = 
                 function (jobInstance)
-                    cmd(GameCommand.new(AddResourceEvent.new(Resource.new("Resource_Ore", jobInstance.tile.y + 1))))
+                    cmd(GameCommand.new(AddResourceEvent.new(Resource.new("Resource_Ore", jobInstance.tile.y + 1)), GameCommandContext.AddResource, GameCommandSource.System))
                 end
         },
         {

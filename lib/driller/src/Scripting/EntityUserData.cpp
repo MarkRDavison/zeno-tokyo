@@ -1,4 +1,5 @@
 #include <tokyo/Driller/Scripting/EntityUserData.hpp>
+#include <tokyo/Driller/Entities/Job.hpp>
 #include <tokyo/Game/Resource/Resource.hpp>
 #include <sol/sol.hpp>
 
@@ -26,6 +27,18 @@ namespace drl
             >(),
             "resource", &tokyo::LevelResource::resource,
             "max", &tokyo::LevelResource::max
+        );
+
+        _state.new_usertype<drl::JobInstance>(
+            "JobInstance",
+            "Id", sol::readonly(&drl::JobInstance::Id),
+            "prototypeId", &drl::JobInstance::prototypeId,
+            "additionalPrototypeId", &drl::JobInstance::additionalPrototypeId,
+            "allocatedWorkerId", &drl::JobInstance::allocatedWorkerId,
+            "tile", &drl::JobInstance::tile,
+            "offset", &drl::JobInstance::offset,
+            "requiresRemoval", &drl::JobInstance::requiresRemoval,
+            "work", &drl::JobInstance::work
         );
 	}
 }
