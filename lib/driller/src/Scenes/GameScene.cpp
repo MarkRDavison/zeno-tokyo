@@ -10,8 +10,9 @@ namespace drl
 		tokyo::ConfigurationManager& _configurationManager,
 		tokyo::TextureManager& _textureManager,
 		GameCommandService& _gameCommandService,
-		const WorkerPrototypeService& _workerPrototypeService,
-		const ShuttlePrototypeService& _shuttlePrototypeService,
+		const IWorkerPrototypeService& _workerPrototypeService,
+		const IShuttlePrototypeService& _shuttlePrototypeService,
+		const IBuildingPrototypeService& _buildingPrototypeService,
 		IWorkerMovementService& _workerMovementService,
 		IWorkerJobUpdateService& _workerJobUpdateService,
 		IShuttleScheduleService& _shuttleScheduleService,
@@ -25,6 +26,7 @@ namespace drl
 		m_GameCommandService(_gameCommandService),
 		m_WorkerPrototypeService(_workerPrototypeService),
 		m_ShuttlePrototypeService(_shuttlePrototypeService),
+		m_BuildingPrototypeService(_buildingPrototypeService),
 		m_WorkerMovementService(_workerMovementService),
 		m_WorkerJobUpdateService(_workerJobUpdateService),
 		m_ShuttleScheduleService(_shuttleScheduleService),
@@ -61,7 +63,8 @@ namespace drl
 			m_GameData,
 			m_TextureManager,
 			m_WorkerPrototypeService,
-			m_ShuttlePrototypeService
+			m_ShuttlePrototypeService,
+			m_BuildingPrototypeService
 		);
 
 		started = true;

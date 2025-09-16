@@ -13,7 +13,7 @@ namespace drl
 	public:
 		ShuttleView(
 			const ShuttleData& _shuttleData,
-			const ShuttlePrototypeService& _shuttlePrototypeService,
+			const IShuttlePrototypeService& _shuttlePrototypeService,
 			const tokyo::TextureManager& _textureManager
 		);
 		~ShuttleView(void) override = default;
@@ -23,7 +23,7 @@ namespace drl
 
 	private:
 		const ShuttleData& m_ShuttleData;
-		const ShuttlePrototypeService& m_ShuttlePrototypeService;
+		const IShuttlePrototypeService& m_ShuttlePrototypeService;
 		const tokyo::TextureManager& m_TextureManager;
 	};
 

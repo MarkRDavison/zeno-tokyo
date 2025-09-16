@@ -5,7 +5,7 @@ namespace drl
 
 	WorkerView::WorkerView(
 		const WorkerData& _workerData,
-		const WorkerPrototypeService& _workerPrototypeService,
+		const IWorkerPrototypeService& _workerPrototypeService,
 		const tokyo::TextureManager& _textureManager
 	) :
 		m_WorkerData(_workerData),

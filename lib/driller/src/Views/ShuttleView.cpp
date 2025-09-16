@@ -5,7 +5,7 @@ namespace drl
 
 	ShuttleView::ShuttleView(
 		const ShuttleData& _shuttleData,
-		const ShuttlePrototypeService& _shuttlePrototypeService,
+		const IShuttlePrototypeService& _shuttlePrototypeService,
 		const tokyo::TextureManager& _textureManager
 	) :
 		m_ShuttleData(_shuttleData),

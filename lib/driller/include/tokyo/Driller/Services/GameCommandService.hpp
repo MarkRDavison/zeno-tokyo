@@ -4,6 +4,7 @@
 #include <tokyo/Driller/Services/TerrainAlterationService.hpp>
 #include <tokyo/Driller/Services/Worker/WorkerCreationService.hpp>
 #include <tokyo/Driller/Services/Shuttle/ShuttleCreationService.hpp>
+#include <tokyo/Driller/Services/Building/BuildingPlacementService.hpp>
 
 namespace drl
 {
@@ -26,12 +27,14 @@ namespace drl
 		GameCommandService(
 			ITerrainAlterationService& _terrainAlterationService,
 			IWorkerCreationService& _workerCreationService,
-			IShuttleCreationService& _shuttleCreationService
+			IShuttleCreationService& _shuttleCreationService,
+			IBuildingPlacementService& _buildingPlacementService
 		);
 		GameCommandService(
 			ITerrainAlterationService& _terrainAlterationService,
 			IWorkerCreationService& _workerCreationService,
 			IShuttleCreationService& _shuttleCreationService,
+			IBuildingPlacementService& _buildingPlacementService,
 			long long _tick
 		);
 		~GameCommandService(void) override = default;
@@ -47,6 +50,7 @@ namespace drl
 
 		bool handleDigShaft(GameCommand::CommandContext _context, GameCommand::DigShaftEvent _event);
 		bool handleDigTile(GameCommand::CommandContext _context, GameCommand::DigTileEvent _event);
+		bool handlePlaceBuilding(GameCommand::CommandContext _context, GameCommand::PlaceBuildingEvent _event);
 		bool handleCreateWorker(GameCommand::CommandContext _context, GameCommand::CreateWorkerEvent _event);
 		bool handleCreateShuttle(GameCommand::CommandContext _context, GameCommand::CreateShuttleEvent _event);
 	private:
@@ -56,5 +60,6 @@ namespace drl
 		ITerrainAlterationService& m_TerrainAlterationService;
 		IWorkerCreationService& m_WorkerCreationService;
 		IShuttleCreationService& m_ShuttleCreationService;
+		IBuildingPlacementService& m_BuildingPlacementService;
 	};
 }

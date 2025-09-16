@@ -8,15 +8,16 @@ namespace drl
 	GameRenderer::GameRenderer(
 		GameData& _gameData,
 		tokyo::TextureManager& _textureManager,
-		const WorkerPrototypeService& _workerPrototypeService,
-		const ShuttlePrototypeService& _shuttlePrototypeService
+		const IWorkerPrototypeService& _workerPrototypeService,
+		const IShuttlePrototypeService& _shuttlePrototypeService,
+		const IBuildingPrototypeService& _buildingPrototypeService
 	) :
 		m_TextureManager(_textureManager),
 		m_GameData(_gameData),
-		m_WorkerPrototypeService(_workerPrototypeService),
 		m_TerrainView(_gameData.terrain, _textureManager),
 		m_WorkerView(_gameData.worker, _workerPrototypeService, _textureManager),
-		m_ShuttleView(_gameData.shuttle, _shuttlePrototypeService, _textureManager)
+		m_ShuttleView(_gameData.shuttle, _shuttlePrototypeService, _textureManager),
+		m_BuildingView(_gameData.building, _buildingPrototypeService, _textureManager)
 	{
 
 	}
@@ -25,6 +26,7 @@ namespace drl
 	{
 		m_TerrainView.update(_delta);
 		m_WorkerView.update(_delta);
+		m_BuildingView.update(_delta);
 		m_ShuttleView.update(_delta);
 	}
 
@@ -61,6 +63,7 @@ namespace drl
 
 		target.draw(m_TerrainView, states);
 		target.draw(m_ShuttleView, states);
+		target.draw(m_BuildingView, states);
 		target.draw(m_WorkerView, states);
 	}
 

@@ -131,6 +131,7 @@ namespace drl
 			_services.gameCommandService,
 			_services.workerPrototypeService,
 			_services.shuttlePrototypeService,
+			_services.buildingPrototypeService,
 			_services.workerMovementService,
 			_services.workerJobUpdateService,
 			_services.shuttleScheduleService,

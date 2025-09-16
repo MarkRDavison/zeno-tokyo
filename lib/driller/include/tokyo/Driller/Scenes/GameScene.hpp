@@ -20,8 +20,9 @@ namespace drl
 			tokyo::ConfigurationManager& _configurationManager,
 			tokyo::TextureManager& _textureManager,
 			GameCommandService& _gameCommandService,
-			const WorkerPrototypeService& _workerPrototypeService,
-			const ShuttlePrototypeService& _shuttlePrototypeService,
+			const IWorkerPrototypeService& _workerPrototypeService,
+			const IShuttlePrototypeService& _shuttlePrototypeService,
+			const IBuildingPrototypeService& _buildingPrototypeService,
 			IWorkerMovementService& _workerMovementService,
 			IWorkerJobUpdateService& _workerJobUpdateService,
 			IShuttleScheduleService& _shuttleScheduleService,
@@ -41,8 +42,9 @@ namespace drl
 		tokyo::ConfigurationManager& m_ConfigurationManager;
 		tokyo::TextureManager& m_TextureManager;
 		GameCommandService& m_GameCommandService;
-		const WorkerPrototypeService& m_WorkerPrototypeService;
-		const ShuttlePrototypeService& m_ShuttlePrototypeService;
+		const IWorkerPrototypeService& m_WorkerPrototypeService;
+		const IShuttlePrototypeService& m_ShuttlePrototypeService;
+		const IBuildingPrototypeService& m_BuildingPrototypeService;
 		IWorkerMovementService& m_WorkerMovementService;
 		IWorkerJobUpdateService& m_WorkerJobUpdateService;
 		IShuttleScheduleService& m_ShuttleScheduleService;

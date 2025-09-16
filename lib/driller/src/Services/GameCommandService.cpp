@@ -7,11 +7,13 @@ namespace drl
 	GameCommandService::GameCommandService(
 		ITerrainAlterationService& _terrainAlterationService,
 		IWorkerCreationService& _workerCreationService,
-		IShuttleCreationService& _shuttleCreationService
+		IShuttleCreationService& _shuttleCreationService,
+		IBuildingPlacementService& _buildingPlacementService
 	) : GameCommandService(
 		_terrainAlterationService,
 		_workerCreationService,
 		_shuttleCreationService,
+		_buildingPlacementService,
 		0ll
 	)
 	{
@@ -21,13 +23,15 @@ namespace drl
 		ITerrainAlterationService& _terrainAlterationService,
 		IWorkerCreationService& _workerCreationService,
 		IShuttleCreationService& _shuttleCreationService,
+		IBuildingPlacementService& _buildingPlacementService,
 		long long _tick
 	) : 
 		m_CurrentTick(_tick),
 		m_IsRecordingCommands(false),
 		m_TerrainAlterationService(_terrainAlterationService),
 		m_WorkerCreationService(_workerCreationService),
-		m_ShuttleCreationService(_shuttleCreationService)
+		m_ShuttleCreationService(_shuttleCreationService),
+		m_BuildingPlacementService(_buildingPlacementService)
 	{
 
 	}
@@ -64,6 +68,8 @@ namespace drl
 			return handleDigShaft(_command.commandContext, _command.digShaft);
 		case GameCommand::EventType::DiggingTile:
 			return handleDigTile(_command.commandContext, _command.digTile);
+		case GameCommand::EventType::PlacingBuilding:
+			return handlePlaceBuilding(_command.commandContext, _command.placeBuilding);
 		case GameCommand::EventType::CreatingWorker:
 			return handleCreateWorker(_command.commandContext, _command.createWorker);
 		case GameCommand::EventType::CreateShuttle:
@@ -81,6 +87,10 @@ namespace drl
 	bool GameCommandService::handleDigTile(GameCommand::CommandContext _context, GameCommand::DigTileEvent _event)
 	{
 		return m_TerrainAlterationService.digTile(_event.level, _event.column);
+	}
+	bool GameCommandService::handlePlaceBuilding(GameCommand::CommandContext _context, GameCommand::PlaceBuildingEvent _event)
+	{
+		return m_BuildingPlacementService.placePrototype(_event.prototypeId, _event.level, _event.column);
 	}
 	bool GameCommandService::handleCreateWorker(GameCommand::CommandContext _context, GameCommand::CreateWorkerEvent _event)
 	{

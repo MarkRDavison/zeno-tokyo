@@ -13,7 +13,7 @@ namespace drl
 	public:
 		WorkerView(
 			const WorkerData& _workerData,
-			const WorkerPrototypeService& _workerPrototypeService,
+			const IWorkerPrototypeService& _workerPrototypeService,
 			const tokyo::TextureManager& _textureManager
 		);
 		~WorkerView(void) override = default;
@@ -23,7 +23,7 @@ namespace drl
 
 	private:
 		const WorkerData& m_WorkerData;
-		const WorkerPrototypeService& m_WorkerPrototypeService;
+		const IWorkerPrototypeService& m_WorkerPrototypeService;
 		const tokyo::TextureManager& m_TextureManager;
 	};
 

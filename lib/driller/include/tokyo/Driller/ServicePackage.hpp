@@ -28,7 +28,6 @@ namespace drl
 			resourceService(),
 			identificationService(),
 			terrainAlterationService(_gameData.terrain),
-			buildingPrototypeService(identificationService),
 			workerPrototypeService(identificationService),
 			workerCreationService(_gameData.worker, workerPrototypeService),
 			workerMovementService(_gameData.worker, _gameData.job, terrainAlterationService),
@@ -39,7 +38,10 @@ namespace drl
 			shuttleCreationService(_gameData.shuttle, shuttlePrototypeService),
 			jobPrototypeService(identificationService),
 			jobAllocationService(_gameData.job, _gameData.worker, terrainAlterationService, workerPrototypeService),
-			gameCommandService(terrainAlterationService, workerCreationService, shuttleCreationService)
+			jobCreationService(_gameData.job, jobPrototypeService, terrainAlterationService),
+			buildingPrototypeService(identificationService),
+			buildingPlacementService(_gameData.building, terrainAlterationService, workerRecruitmentService, jobCreationService, buildingPrototypeService),
+			gameCommandService(terrainAlterationService, workerCreationService, shuttleCreationService, buildingPlacementService)
 		{
 
 		}
@@ -48,8 +50,6 @@ namespace drl
 		tokyo::IdentificationService<IdType> identificationService;
 
 		TerrainAlterationService terrainAlterationService;
-
-		BuildingPrototypeService buildingPrototypeService;
 
 		WorkerPrototypeService workerPrototypeService;
 		WorkerMovementService workerMovementService;
@@ -63,6 +63,10 @@ namespace drl
 
 		JobPrototypeService jobPrototypeService;
 		JobAllocationService jobAllocationService;
+		JobCreationService jobCreationService;
+
+		BuildingPrototypeService buildingPrototypeService;
+		BuildingPlacementService buildingPlacementService;
 
 		GameCommandService gameCommandService;
 	};
