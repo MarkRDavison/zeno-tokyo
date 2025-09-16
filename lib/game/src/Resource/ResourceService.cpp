@@ -55,6 +55,21 @@ namespace tokyo
 		return getOrCreateResource(_resourceId).resource.amount;
 	}
 
+	LevelResource ResourceService::getExistingResource(const std::string& _resourceName) const
+	{
+		return getExistingResource((ResourceId)tokyo::String::fnv1a_32(_resourceName));
+	}
+	LevelResource ResourceService::getExistingResource(ResourceId _resourceId) const
+	{
+		const auto& iter = m_ResourceMap.find(_resourceId);
+		if (iter == m_ResourceMap.end())
+		{
+			throw std::runtime_error("getExistingResource called on non-existant resource");
+		}
+
+		return (*iter).second;
+	}
+
 	ResourceValue ResourceService::getResourceMax(const std::string& _resourceName)
 	{
 		return getResourceMax((ResourceId)tokyo::String::fnv1a_32(_resourceName));

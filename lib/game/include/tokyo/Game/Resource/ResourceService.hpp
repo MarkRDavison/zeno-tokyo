@@ -26,6 +26,9 @@ namespace tokyo
 		virtual ResourceValue getResource(const std::string& _resourceName) = 0;
 		virtual ResourceValue getResource(ResourceId _resourceId) = 0;
 
+		virtual LevelResource getExistingResource(const std::string& _resourceName) const = 0;
+		virtual LevelResource getExistingResource(ResourceId _resourceId) const = 0;
+
 		virtual ResourceValue getResourceMax(const std::string& _resourceName) = 0;
 		virtual ResourceValue getResourceMax(ResourceId _resourceId) = 0;
 
@@ -64,6 +67,9 @@ namespace tokyo
 
 		ResourceValue getResource(const std::string& _resourceName) override;
 		ResourceValue getResource(ResourceId _resourceId) override;
+
+		LevelResource getExistingResource(const std::string& _resourceName) const override;
+		LevelResource getExistingResource(ResourceId _resourceId) const override;
 
 		ResourceValue getResourceMax(const std::string& _resourceName) override;
 		ResourceValue getResourceMax(ResourceId _resourceId) override;

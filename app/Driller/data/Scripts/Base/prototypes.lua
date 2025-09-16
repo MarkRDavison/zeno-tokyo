@@ -81,7 +81,6 @@ prototypes = {
             work = 5.0 ,
             onComplete = 
                 function (jobInstance)
-                    print('Job_Build_Building has completed')
                     cmd(GameCommand.new(PlaceBuildingEvent.new(jobInstance.additionalPrototypeId, jobInstance.tile.y, jobInstance.tile.x)))
                 end
         },
@@ -91,7 +90,7 @@ prototypes = {
             work = 32.0,
             onComplete = 
                 function (jobInstance)
-                    print('Job_Refine complete')
+                    --print('Job_Refine complete')
                 end
         }
     },

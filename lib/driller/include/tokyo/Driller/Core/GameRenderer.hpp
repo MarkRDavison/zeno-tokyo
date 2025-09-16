@@ -1,12 +1,14 @@
 #pragma once
 
 #include <tokyo/Driller/Entities/Data/GameData.hpp>
+#include <tokyo/Driller/Services/GameCommandService.hpp>
 #include <tokyo/Driller/Services/Worker/WorkerPrototypeService.hpp>
 #include <tokyo/Driller/Services/Shuttle/ShuttlePrototypeService.hpp>
 #include <tokyo/Driller/Views/TerrainView.hpp>
 #include <tokyo/Driller/Views/WorkerView.hpp>
 #include <tokyo/Driller/Views/ShuttleView.hpp>
 #include <tokyo/Driller/Views/BuildingView.hpp>
+#include <tokyo/Driller/Views/UiView.hpp>
 #include <tokyo/Core/Utils/NonCopyable.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
@@ -18,7 +20,10 @@ namespace drl
 	public:
 		GameRenderer(
 			GameData& _gameData,
+			IGameCommandService& _gameCommandService,
 			tokyo::TextureManager& _textureManager,
+			const tokyo::IInputActionManager& _inputActionManager,
+			const tokyo::IResourceService& _resourceService,
 			const IWorkerPrototypeService& _workerPrototypeService,
 			const IShuttlePrototypeService& _shuttlePrototypeService,
 			const IBuildingPrototypeService& _buildingPrototypeService);
@@ -32,6 +37,7 @@ namespace drl
 		WorkerView m_WorkerView;
 		ShuttleView m_ShuttleView;
 		BuildingView m_BuildingView;
+		UiView m_UiView;
 	};
 
 }

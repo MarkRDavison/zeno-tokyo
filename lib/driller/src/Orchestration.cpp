@@ -128,6 +128,7 @@ namespace drl
 			_managers.inputActionManager,
 			_managers.configManager,
 			_managers.textureManager,
+			_services.resourceService,
 			_services.gameCommandService,
 			_services.workerPrototypeService,
 			_services.shuttlePrototypeService,

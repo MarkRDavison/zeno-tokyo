@@ -9,6 +9,7 @@ namespace drl
 		tokyo::IInputActionManager& _inputActionManager,
 		tokyo::ConfigurationManager& _configurationManager,
 		tokyo::TextureManager& _textureManager,
+		const tokyo::IResourceService& _resourceService,
 		GameCommandService& _gameCommandService,
 		const IWorkerPrototypeService& _workerPrototypeService,
 		const IShuttlePrototypeService& _shuttlePrototypeService,
@@ -23,6 +24,7 @@ namespace drl
 		m_InputActionManager(_inputActionManager),
 		m_ConfigurationManager(_configurationManager),
 		m_TextureManager(_textureManager),
+		m_ResourceService(_resourceService),
 		m_GameCommandService(_gameCommandService),
 		m_WorkerPrototypeService(_workerPrototypeService),
 		m_ShuttlePrototypeService(_shuttlePrototypeService),
@@ -61,7 +63,10 @@ namespace drl
 
 		m_GameRenderer = new GameRenderer(
 			m_GameData,
+			m_GameCommandService,
 			m_TextureManager,
+			m_InputActionManager,
+			m_ResourceService,
 			m_WorkerPrototypeService,
 			m_ShuttlePrototypeService,
 			m_BuildingPrototypeService

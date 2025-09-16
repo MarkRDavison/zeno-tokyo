@@ -19,6 +19,7 @@ namespace drl
 			tokyo::IInputActionManager& _inputActionManager,
 			tokyo::ConfigurationManager& _configurationManager,
 			tokyo::TextureManager& _textureManager,
+			const tokyo::IResourceService& _resourceService,
 			GameCommandService& _gameCommandService,
 			const IWorkerPrototypeService& _workerPrototypeService,
 			const IShuttlePrototypeService& _shuttlePrototypeService,
@@ -41,6 +42,7 @@ namespace drl
 		tokyo::IInputActionManager& m_InputActionManager;
 		tokyo::ConfigurationManager& m_ConfigurationManager;
 		tokyo::TextureManager& m_TextureManager;
+		const tokyo::IResourceService& m_ResourceService;
 		GameCommandService& m_GameCommandService;
 		const IWorkerPrototypeService& m_WorkerPrototypeService;
 		const IShuttlePrototypeService& m_ShuttlePrototypeService;
