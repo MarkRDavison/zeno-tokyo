@@ -1,5 +1,6 @@
 #pragma once
 
+#include <tokyo/Core/Infrastructure/FontManager.hpp>
 #include <tokyo/Core/Infrastructure/TextureManager.hpp>
 #include <tokyo/Game/InputActionManager.hpp>
 #include <tokyo/Driller/Entities/Data/GameData.hpp>
@@ -15,6 +16,7 @@ namespace drl
 		UiView(
 			const GameData& _gameData,
 			IGameCommandService& _gameCommandService,
+			const tokyo::FontManager& _fontManager,
 			const tokyo::TextureManager& _textureManager,
 			const tokyo::IInputActionManager& _inputActionManager,
 			const tokyo::IResourceService& _resourceService
@@ -27,6 +29,7 @@ namespace drl
 	private:
 		const GameData& m_GameData;
 		IGameCommandService& m_GameCommandService;
+		const tokyo::FontManager& m_FontManager;
 		const tokyo::TextureManager& m_TextureManager;
 		const tokyo::IInputActionManager& m_InputActionManager;
 		const tokyo::IResourceService& m_ResourceService;

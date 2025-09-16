@@ -14,14 +14,14 @@ namespace drl
 		auto& state = _managers.luaManager.getState(tokyo::LuaManager::DefaultStateScope);
 
 		state.set_function("exit", &tokyo::Application::stop, &_app);
-		state.set_function("cmd", &drl::GameCommandService::executeGameCommand, &_services.gameCommandService);
+		state.set_function("cmd", &GameCommandService::executeGameCommand, &_services.gameCommandService);
 
-		drl::CoreUserData::generateInfrastructureUserData(state);
-		drl::EntityUserData::generateEntitiesUserData(state);
+		CoreUserData::generateInfrastructureUserData(state);
+		EntityUserData::generateEntitiesUserData(state);
 
 		_managers.luaManager.runScriptFile("/data/Scripts/Base/prototypes.lua");
 		{
-			drl::PrototypeParser prototypeParser;
+			PrototypeParser prototypeParser;
 			const auto& parsedPrototypes = prototypeParser.parse(state);
 			for (const auto& jp : parsedPrototypes.jobPrototypes)
 			{
@@ -47,7 +47,7 @@ namespace drl
 
 		_managers.luaManager.runScriptFile("/data/Scripts/Base/resources.lua");
 		{
-			drl::ResourceParser resourceParser;
+			ResourceParser resourceParser;
 			const auto& parsedResources = resourceParser.parse(state);
 			for (const auto& r : parsedResources)
 			{
@@ -64,7 +64,7 @@ namespace drl
 			// TODO: Load from file system inspection/config
 			{
 				"/data/Textures/tile_sprite_sheet.png",
-				drl::Constants::TileSpriteSheetTextureName
+				Constants::TileSpriteSheetTextureName
 			}
 		};
 
@@ -108,25 +108,26 @@ namespace drl
 			tokyo::InputAction action;
 			action.primaryActivationType = tokyo::InputAction::InputActivationType::MouseButtonPress;
 			action.primaryButton = sf::Mouse::Button::Left;
-			_managers.inputActionManager.registerAction(drl::Constants::ClickActionName, action);
+			_managers.inputActionManager.registerAction(Constants::ClickActionName, action);
 		}
 		{
 			tokyo::InputAction action;
 			action.primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress;
 			action.primaryKey = sf::Keyboard::Key::Escape;
-			_managers.inputActionManager.registerAction(drl::Constants::CancelActionName, action);
+			_managers.inputActionManager.registerAction(Constants::CancelActionName, action);
 		}
 	}
 
-	void Orchestration::InitialiseGame(tokyo::Application& _app, drl::GameData& _gameData, ManagerPackage& _managers, ServicePackage& _services)
+	void Orchestration::InitialiseGame(tokyo::Application& _app, GameData& _gameData, ManagerPackage& _managers, ServicePackage& _services)
 	{
 		_managers.luaManager.runScriptFile("/data/Scripts/Base/initializeCommands.lua");
 
-		auto scene = new drl::GameScene(
+		auto scene = new GameScene(
 			_gameData,
 			_managers.inputManager,
 			_managers.inputActionManager,
 			_managers.configManager,
+			_managers.fontManager,
 			_managers.textureManager,
 			_services.resourceService,
 			_services.gameCommandService,

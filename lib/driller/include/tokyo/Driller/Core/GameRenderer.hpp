@@ -21,6 +21,7 @@ namespace drl
 		GameRenderer(
 			GameData& _gameData,
 			IGameCommandService& _gameCommandService,
+			tokyo::FontManager& _fontManager,
 			tokyo::TextureManager& _textureManager,
 			const tokyo::IInputActionManager& _inputActionManager,
 			const tokyo::IResourceService& _resourceService,
@@ -31,6 +32,7 @@ namespace drl
 		void update(float _delta);
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	private:
+		tokyo::FontManager& m_FontManager;
 		tokyo::TextureManager& m_TextureManager;
 		GameData& m_GameData;
 		TerrainView m_TerrainView;
