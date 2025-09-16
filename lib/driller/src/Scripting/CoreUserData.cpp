@@ -32,12 +32,12 @@ namespace drl
 		_state.new_enum<drl::GameCommand::CommandContext>(
 			"GameCommandContext",
 			{
-				{"DigShaft", drl::GameCommand::CommandContext::DigShaft},
-				{"DigTile", drl::GameCommand::CommandContext::DigTile},
-				{"CreateWorker", drl::GameCommand::CommandContext::CreateWorker},
+				{"DiggingShaft", drl::GameCommand::CommandContext::DiggingShaft},
+				{"DiggingTile", drl::GameCommand::CommandContext::DiggingTile},
 				{"CreatingShuttle", drl::GameCommand::CommandContext::CreatingShuttle},
 				{"CreatingWorker", drl::GameCommand::CommandContext::CreatingWorker},
 				{"CreatingJob", drl::GameCommand::CommandContext::CreatingJob},
+				{"PlacingBuilding", drl::GameCommand::CommandContext::PlacingBuilding},
 				{"Undefined", drl::GameCommand::CommandContext::Undefined},
 			});
 
@@ -69,8 +69,7 @@ namespace drl
 		_state.new_usertype<drl::GameCommand::PlaceBuildingEvent>(
 			"PlaceBuildingEvent",
 			sol::constructors<
-				drl::GameCommand::PlaceBuildingEvent(std::string, int, int),
-				drl::GameCommand::PlaceBuildingEvent(IdType, int, int)
+				drl::GameCommand::PlaceBuildingEvent(std::string, int, int)
 			>(),
 			"prototypeId", &drl::GameCommand::PlaceBuildingEvent::prototypeId,
 			"level", &drl::GameCommand::PlaceBuildingEvent::level,
@@ -107,12 +106,12 @@ namespace drl
 		_state.new_usertype<drl::GameCommand>(
 			"GameCommand",
 			sol::constructors<
-				drl::GameCommand(drl::GameCommand::DigShaftEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
-				drl::GameCommand(drl::GameCommand::DigTileEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
-				drl::GameCommand(drl::GameCommand::PlaceBuildingEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
-				drl::GameCommand(drl::GameCommand::CreateShuttleEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
-				drl::GameCommand(drl::GameCommand::CreateWorkerEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
-				drl::GameCommand(drl::GameCommand::CreateJobEvent, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
+				drl::GameCommand(const drl::GameCommand::DigShaftEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(const drl::GameCommand::DigTileEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(const drl::GameCommand::PlaceBuildingEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(const drl::GameCommand::CreateShuttleEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(const drl::GameCommand::CreateWorkerEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(const drl::GameCommand::CreateJobEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
 			>(),
 			"type", &drl::GameCommand::type
 		);

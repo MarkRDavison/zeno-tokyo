@@ -82,13 +82,12 @@ namespace drl
 
 		enum class CommandContext
 		{
-			DigShaft,
-			DigTile,
-			CreateWorker,
-			CreatingShuttle,
+			DiggingShaft,
+			DiggingTile,
 			CreatingWorker,
+			CreatingShuttle,
 			CreatingJob,
-			PlaceBuilding,
+			PlacingBuilding,
 
 			Undefined
 		} commandContext{ CommandContext::Undefined }; // TODO: Way to inherit context scope?
@@ -102,12 +101,12 @@ namespace drl
 
 		enum class EventType
 		{
-			DigShaft,
-			DigTile,
+			DiggingShaft,
+			DiggingTile,
 			CreateShuttle,
-			CreateWorker,
+			CreatingWorker,
 			CreateJob,
-			PlaceBuilding,
+			PlacingBuilding,
 
 			Count
 		} type;
@@ -122,25 +121,25 @@ namespace drl
 			PlaceBuildingEvent placeBuilding;
 		};
 
-		explicit GameCommand(const DigShaftEvent& _digShaft, CommandContext context, CommandSource source) :
+		GameCommand(const DigShaftEvent& _digShaft, CommandContext context, CommandSource source) :
 			commandContext(context),
 			commandSource(source),
-			type(EventType::DigShaft),
+			type(EventType::DiggingShaft),
 			digShaft(_digShaft)
 		{
 
 		}
 
-		explicit GameCommand(const DigTileEvent& _digTile, CommandContext context, CommandSource source) :
+		GameCommand(const DigTileEvent& _digTile, CommandContext context, CommandSource source) :
 			commandContext(context),
 			commandSource(source),
-			type(EventType::DigTile),
+			type(EventType::DiggingTile),
 			digTile(_digTile)
 		{
 
 		}
 
-		explicit GameCommand(const CreateShuttleEvent& _event, CommandContext context, CommandSource source) :
+		GameCommand(const CreateShuttleEvent& _event, CommandContext context, CommandSource source) :
 			commandContext(context),
 			commandSource(source),
 			type(EventType::CreateShuttle),
@@ -149,7 +148,7 @@ namespace drl
 
 		}
 
-		explicit GameCommand(const CreateJobEvent& _event, CommandContext context, CommandSource source) :
+		GameCommand(const CreateJobEvent& _event, CommandContext context, CommandSource source) :
 			commandContext(context),
 			commandSource(source),
 			type(EventType::CreateJob),
@@ -158,19 +157,19 @@ namespace drl
 
 		}
 
-		explicit GameCommand(const PlaceBuildingEvent& _event, CommandContext context, CommandSource source) :
+		GameCommand(const PlaceBuildingEvent& _event, CommandContext context, CommandSource source) :
 			commandContext(context),
 			commandSource(source),
-			type(EventType::PlaceBuilding),
+			type(EventType::PlacingBuilding),
 			placeBuilding(_event)
 		{
 
 		}
 
-		explicit GameCommand(const CreateWorkerEvent& _event, CommandContext context, CommandSource source) :
+		GameCommand(const CreateWorkerEvent& _event, CommandContext context, CommandSource source) :
 			commandContext(context),
 			commandSource(source),
-			type(EventType::CreateWorker),
+			type(EventType::CreatingWorker),
 			createWorker(_event)
 		{
 

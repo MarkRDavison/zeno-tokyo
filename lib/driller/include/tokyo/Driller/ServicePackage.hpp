@@ -36,9 +36,10 @@ namespace drl
 			workerRecruitmentService(_gameData.worker, workerPrototypeService),
 			shuttlePrototypeService(identificationService),
 			shuttleScheduleService(_gameData.shuttle, workerRecruitmentService, workerCreationService, shuttlePrototypeService),
+			shuttleCreationService(_gameData.shuttle, shuttlePrototypeService),
 			jobPrototypeService(identificationService),
 			jobAllocationService(_gameData.job, _gameData.worker, terrainAlterationService, workerPrototypeService),
-			gameCommandService(terrainAlterationService, workerCreationService)
+			gameCommandService(terrainAlterationService, workerCreationService, shuttleCreationService)
 		{
 
 		}
@@ -58,6 +59,7 @@ namespace drl
 
 		ShuttlePrototypeService shuttlePrototypeService;
 		ShuttleScheduleService shuttleScheduleService;
+		ShuttleCreationService shuttleCreationService;
 
 		JobPrototypeService jobPrototypeService;
 		JobAllocationService jobAllocationService;
