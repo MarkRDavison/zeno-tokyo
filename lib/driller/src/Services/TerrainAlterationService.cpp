@@ -308,4 +308,9 @@ namespace drl
 		return valid;
 	}
 
+	bool TerrainAlterationService::isLevelNextShaftLevel(int _level) const
+	{
+		return m_TerrainData.shaftLevel == _level - 1;
+	}
+
 }

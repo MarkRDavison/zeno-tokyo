@@ -329,5 +329,33 @@ namespace drl
 			REQUIRE(service.canTileBeReached(-1, +15));
 		}
 
+		TEST_CASE("isLevelNextShaftLevel returns false for invalid levels", "[Services][TerrainAlterationService]")
+		{
+			TerrainData terrainData{};
+			TerrainAlterationService service(terrainData);
+
+			service.digShaft(0);
+			service.digShaft(1);
+			service.digShaft(2);
+
+			REQUIRE_FALSE(service.isLevelNextShaftLevel(0));
+			REQUIRE_FALSE(service.isLevelNextShaftLevel(1));
+			REQUIRE_FALSE(service.isLevelNextShaftLevel(2));
+			REQUIRE_FALSE(service.isLevelNextShaftLevel(4));
+			REQUIRE_FALSE(service.isLevelNextShaftLevel(5));
+		}
+
+		TEST_CASE("isLevelNextShaftLevel returns true for valid level", "[Services][TerrainAlterationService]")
+		{
+			TerrainData terrainData{};
+			TerrainAlterationService service(terrainData);
+
+			service.digShaft(0);
+			service.digShaft(1);
+			service.digShaft(2);
+
+			REQUIRE(service.isLevelNextShaftLevel(3));
+		}
+
 	}
 }

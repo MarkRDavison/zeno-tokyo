@@ -20,6 +20,7 @@ namespace drl
 		virtual void initialiseTile(int _level, int _column) = 0;
 		virtual bool doesLevelExist(int _level) const = 0;
 		virtual bool canTileBeReached(int _level, int _column) const = 0;
+		virtual bool isLevelNextShaftLevel(int _level) const = 0;
 
 	};
 
@@ -43,6 +44,7 @@ namespace drl
 		void initialiseTile(int _level, int _column) override;
 		bool doesLevelExist(int _level) const override;
 		bool canTileBeReached(int _level, int _column) const override;
+		bool isLevelNextShaftLevel(int _level) const override;
 
 	private:
 		TerrainData& m_TerrainData;

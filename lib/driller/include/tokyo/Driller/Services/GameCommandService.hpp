@@ -51,12 +51,12 @@ namespace drl
 
 		bool executeGameCommand(const GameCommand& _command) override;
 
-		bool handleDigShaft(GameCommand::CommandContext _context, GameCommand::DigShaftEvent _event);
-		bool handleDigTile(GameCommand::CommandContext _context, GameCommand::DigTileEvent _event);
-		bool handlePlaceBuilding(GameCommand::CommandContext _context, GameCommand::PlaceBuildingEvent _event);
-		bool handleCreateWorker(GameCommand::CommandContext _context, GameCommand::CreateWorkerEvent _event);
-		bool handleCreateShuttle(GameCommand::CommandContext _context, GameCommand::CreateShuttleEvent _event);
-		bool handleAddResource(GameCommand::CommandContext _context, GameCommand::AddResourceEvent _event);
+		bool handleDigShaft(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::DigShaftEvent _event);
+		bool handleDigTile(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::DigTileEvent _event);
+		bool handlePlaceBuilding(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::PlaceBuildingEvent _event);
+		bool handleCreateWorker(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateWorkerEvent _event);
+		bool handleCreateShuttle(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateShuttleEvent _event);
+		bool handleAddResource(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::AddResourceEvent _event);
 	private:
 		long long m_CurrentTick;
 		bool m_IsRecordingCommands;
