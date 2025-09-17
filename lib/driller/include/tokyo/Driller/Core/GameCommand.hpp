@@ -13,7 +13,7 @@ namespace drl
 
 		struct DigShaftEvent
 		{
-			DigShaftEvent(int _level) : level(_level) {}
+			explicit DigShaftEvent(int _level) : level(_level) {}
 			int level{ 0 };
 		};
 
@@ -26,7 +26,7 @@ namespace drl
 
 		struct PlaceBuildingEvent
 		{
-			PlaceBuildingEvent(void) {}
+			PlaceBuildingEvent(void) = default;
 			PlaceBuildingEvent(const std::string& _prototypeName, int _level, int _column) :
 				prototypeId((IdType)tokyo::String::fnv1a_32(_prototypeName)),
 				level(_level),

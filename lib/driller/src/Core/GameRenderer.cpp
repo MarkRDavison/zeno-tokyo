@@ -73,7 +73,16 @@ namespace drl
 		target.draw(m_BuildingView, states);
 		target.draw(m_WorkerView, states);
 
-		target.setView(target.getDefaultView());
+		{
+			sf::View view = target.getDefaultView();
+
+			view.setSize(sf::Vector2f(target.getSize()));
+
+			view.setCenter(sf::Vector2f(target.getSize()) / 2.0f);
+
+			target.setView(view);
+		}
+
 		target.draw(m_UiView, states);
 	}
 

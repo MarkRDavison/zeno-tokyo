@@ -24,17 +24,31 @@ namespace drl
 
 	void UiView::update(float _delta)
 	{
+		const auto size = sf::Vector2i(m_InputActionManager.getWindowSize());
+
 		if (m_InputActionManager.isActionInvoked(drl::Constants::ClickActionName))
 		{
-			const auto& ore = m_ResourceService.getExistingResource("Resource_Ore");
-			const auto& money = m_ResourceService.getExistingResource("Resource_Money");
+			const auto mousePos = m_InputActionManager.getMousePosition();
+			const auto pos = sf::Vector2f(m_InputActionManager.getMousePosition() - size / 2) / 64.0f; // TODO: SCALE/CONFIG
 
-			std::cout << "================= Resources =================" << std::endl;
-			std::cout << "|" << std::endl;
-			std::cout << "| Ore: \t\t" << ore.resource.amount << std::endl;
-			std::cout << "| Money: \t" << money.resource.amount << std::endl;
-			std::cout << "|" << std::endl;
-			std::cout << "=============================================" << std::endl << std::endl;
+			const float tileY = std::floor(pos.y);
+			const float tileX = pos.x < 0.0f
+				? std::floor(pos.x + 0.5f)
+				: std::ceil(pos.x - 0.5f);
+
+			std::cout << "Tile " << tileX << ", " << tileY << std::endl;
+
+			// if (building building)
+			{
+
+			}
+			if (tileX == 0)
+			{
+				m_GameCommandService.executeGameCommand(
+					// TODO: Temp - immediatly digging, not creating an in progress job/animation
+					GameCommand(GameCommand::DigShaftEvent((int)tileY), GameCommand::CommandContext::DiggingShaft, GameCommand::CommandSource::Player)
+				);
+			}
 		}
 	}
 

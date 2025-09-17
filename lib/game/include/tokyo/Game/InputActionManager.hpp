@@ -10,7 +10,7 @@
 namespace tokyo
 {
 
-	class IInputActionManager : NonCopyable
+	class IInputActionManager : public IInputManager, NonCopyable
 	{
 	public:
 		virtual ~IInputActionManager() = 0;
@@ -38,6 +38,12 @@ namespace tokyo
 		std::unordered_map<std::string, InputAction> registeredActions;
 		std::unordered_map<sf::Mouse::Button, bool> cachedButtons;
 		std::unordered_map<sf::Keyboard::Key, bool> cachedKeys;
+
+		// Inherited via IInputActionManager
+		sf::Vector2i getMousePosition() const override;
+		sf::Vector2u getWindowSize() const override;
+		bool isKeyDown(sf::Keyboard::Key _key) override;
+		bool isButtonDown(sf::Mouse::Button _button) override;
 	};
 
 	inline IInputActionManager::~IInputActionManager() = default;
