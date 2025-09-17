@@ -132,11 +132,11 @@ namespace tokyo
 	{
 		return m_InputManager.getWindowSize();
 	}
-	bool InputActionManager::isKeyDown(sf::Keyboard::Key _key)
+	bool InputActionManager::isKeyDown(sf::Keyboard::Key _key) const
 	{
 		return m_InputManager.isKeyDown(_key);
 	}
-	bool InputActionManager::isButtonDown(sf::Mouse::Button _button)
+	bool InputActionManager::isButtonDown(sf::Mouse::Button _button) const
 	{
 		return m_InputManager.isButtonDown(_button);
 	}

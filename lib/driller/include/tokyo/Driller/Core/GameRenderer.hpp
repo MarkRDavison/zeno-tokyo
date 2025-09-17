@@ -8,6 +8,7 @@
 #include <tokyo/Driller/Views/WorkerView.hpp>
 #include <tokyo/Driller/Views/ShuttleView.hpp>
 #include <tokyo/Driller/Views/BuildingView.hpp>
+#include <tokyo/Driller/Views/JobView.hpp>
 #include <tokyo/Driller/Views/UiView.hpp>
 #include <tokyo/Core/Utils/NonCopyable.hpp>
 #include <SFML/Graphics/Drawable.hpp>
@@ -27,7 +28,9 @@ namespace drl
 			const tokyo::IResourceService& _resourceService,
 			const IWorkerPrototypeService& _workerPrototypeService,
 			const IShuttlePrototypeService& _shuttlePrototypeService,
-			const IBuildingPrototypeService& _buildingPrototypeService);
+			const IBuildingPrototypeService& _buildingPrototypeService,
+			const IJobPrototypeService& _jobPrototypeService,
+			const ITerrainAlterationService& _terrainAlterationService);
 
 		void update(float _delta);
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
@@ -39,6 +42,7 @@ namespace drl
 		WorkerView m_WorkerView;
 		ShuttleView m_ShuttleView;
 		BuildingView m_BuildingView;
+		JobView m_JobView;
 		UiView m_UiView;
 	};
 

@@ -42,8 +42,8 @@ namespace tokyo
 		// Inherited via IInputActionManager
 		sf::Vector2i getMousePosition() const override;
 		sf::Vector2u getWindowSize() const override;
-		bool isKeyDown(sf::Keyboard::Key _key) override;
-		bool isButtonDown(sf::Mouse::Button _button) override;
+		bool isKeyDown(sf::Keyboard::Key _key) const override;
+		bool isButtonDown(sf::Mouse::Button _button) const override;
 	};
 
 	inline IInputActionManager::~IInputActionManager() = default;

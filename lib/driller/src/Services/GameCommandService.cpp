@@ -9,12 +9,14 @@ namespace drl
 		IWorkerCreationService& _workerCreationService,
 		IShuttleCreationService& _shuttleCreationService,
 		IBuildingPlacementService& _buildingPlacementService,
+		IJobCreationService& _jobCreationService,
 		tokyo::IResourceService& _resourceService
 	) : GameCommandService(
 		_terrainAlterationService,
 		_workerCreationService,
 		_shuttleCreationService,
 		_buildingPlacementService,
+		_jobCreationService,
 		_resourceService,
 		0ll
 	)
@@ -26,6 +28,7 @@ namespace drl
 		IWorkerCreationService& _workerCreationService,
 		IShuttleCreationService& _shuttleCreationService,
 		IBuildingPlacementService& _buildingPlacementService,
+		IJobCreationService& _jobCreationService,
 		tokyo::IResourceService& _resourceService,
 		long long _tick
 	) : 
@@ -35,6 +38,7 @@ namespace drl
 		m_WorkerCreationService(_workerCreationService),
 		m_ShuttleCreationService(_shuttleCreationService),
 		m_BuildingPlacementService(_buildingPlacementService),
+		m_JobCreationService(_jobCreationService),
 		m_ResourceService(_resourceService)
 	{
 
@@ -80,6 +84,8 @@ namespace drl
 			return handleCreateShuttle(_command.commandContext, _command.commandSource, _command.createShuttle);
 		case GameCommand::EventType::AddResource:
 			return handleAddResource(_command.commandContext, _command.commandSource, _command.addResource);
+		case GameCommand::EventType::CreateJob:
+			return handleCreateJob(_command.commandContext, _command.commandSource, _command.createJob);
 		default:
 			std::cerr << "Unhandled command type " << (int)_command.type << std::endl;
 			return false;
@@ -88,6 +94,8 @@ namespace drl
 
 	bool GameCommandService::handleDigShaft(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::DigShaftEvent _event)
 	{
+		// TODO: Consolidate into terrainalterationservice?
+		// Should that service know about the command source????
 		if (_source == GameCommand::CommandSource::Player)
 		{
 			auto cost = tokyo::Resource("Resource_Money", 100 * _event.level);
@@ -124,5 +132,9 @@ namespace drl
 	{
 		m_ResourceService.updateResource(_event.resource.id, _event.resource.amount);
 		return true;
+	}
+	bool GameCommandService::handleCreateJob(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateJobEvent _event)
+	{
+		return m_JobCreationService.createJob(_event.prototypeId, _event.additionalPrototypeId, _event.coordinates);
 	}
 }

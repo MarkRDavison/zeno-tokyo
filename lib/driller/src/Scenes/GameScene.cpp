@@ -15,10 +15,12 @@ namespace drl
 		const IWorkerPrototypeService& _workerPrototypeService,
 		const IShuttlePrototypeService& _shuttlePrototypeService,
 		const IBuildingPrototypeService& _buildingPrototypeService,
+		const IJobPrototypeService& _jobPrototypeService,
 		IWorkerMovementService& _workerMovementService,
 		IWorkerJobUpdateService& _workerJobUpdateService,
 		IShuttleScheduleService& _shuttleScheduleService,
-		IJobAllocationService& _jobAllocationService
+		IJobAllocationService& _jobAllocationService,
+		ITerrainAlterationService& _terrainAlterationService
 	) :
 		m_GameData(_gameData),
 		m_InputManager(_inputManager),
@@ -31,10 +33,12 @@ namespace drl
 		m_WorkerPrototypeService(_workerPrototypeService),
 		m_ShuttlePrototypeService(_shuttlePrototypeService),
 		m_BuildingPrototypeService(_buildingPrototypeService),
+		m_JobPrototypeService(_jobPrototypeService),
 		m_WorkerMovementService(_workerMovementService),
 		m_WorkerJobUpdateService(_workerJobUpdateService),
 		m_ShuttleScheduleService(_shuttleScheduleService),
-		m_JobAllocationService(_jobAllocationService)
+		m_JobAllocationService(_jobAllocationService),
+		m_TerrainAlterationService(_terrainAlterationService)
 	{
 
 	}
@@ -72,7 +76,9 @@ namespace drl
 			m_ResourceService,
 			m_WorkerPrototypeService,
 			m_ShuttlePrototypeService,
-			m_BuildingPrototypeService
+			m_BuildingPrototypeService,
+			m_JobPrototypeService,
+			m_TerrainAlterationService
 		);
 
 		started = true;

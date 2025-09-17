@@ -19,7 +19,8 @@ namespace drl
 			const tokyo::FontManager& _fontManager,
 			const tokyo::TextureManager& _textureManager,
 			const tokyo::IInputActionManager& _inputActionManager,
-			const tokyo::IResourceService& _resourceService
+			const tokyo::IResourceService& _resourceService,
+			const ITerrainAlterationService& _terrainAlterationService
 		);
 		~UiView(void) override = default;
 
@@ -33,6 +34,7 @@ namespace drl
 		const tokyo::TextureManager& m_TextureManager;
 		const tokyo::IInputActionManager& m_InputActionManager;
 		const tokyo::IResourceService& m_ResourceService;
+		const ITerrainAlterationService& m_TerrainAlterationService;
 	};
 
 }

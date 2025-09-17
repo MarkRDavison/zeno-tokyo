@@ -53,7 +53,7 @@ prototypes = {
             work = 0.0,
             onComplete =
                 function (jobInstance)
-                    cmd(GameCommand.new(DigShaftEvent.new(jobInstance.tile.y)))
+                    cmd(GameCommand.new(DigShaftEvent.new(jobInstance.tile.y), GameCommandContext.DiggingShaft, GameCommandSource.System))
                 end
         },
         {
@@ -62,7 +62,7 @@ prototypes = {
             work = 2.0,
             onComplete =
                 function (jobInstance)
-                    cmd(GameCommand.new(DigTileEvent.new(jobInstance.tile.y, jobInstance.tile.x)))
+                    cmd(GameCommand.new(DigTileEvent.new(jobInstance.tile.y, jobInstance.tile.x), GameCommandContext.DiggingTile, GameCommandSource.System))
                 end,
             calculateOffset = basicCalculateOffset
         },
@@ -81,7 +81,7 @@ prototypes = {
             work = 5.0 ,
             onComplete = 
                 function (jobInstance)
-                    cmd(GameCommand.new(PlaceBuildingEvent.new(jobInstance.additionalPrototypeId, jobInstance.tile.y, jobInstance.tile.x)))
+                    cmd(GameCommand.new(PlaceBuildingEvent.new(jobInstance.additionalPrototypeId, jobInstance.tile.y, jobInstance.tile.x), GameCommandContext.PlacingBuilding, GameCommandSource.System))
                 end
         },
         {

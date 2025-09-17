@@ -30,6 +30,7 @@ namespace drl
 			IWorkerCreationService& _workerCreationService,
 			IShuttleCreationService& _shuttleCreationService,
 			IBuildingPlacementService& _buildingPlacementService,
+			IJobCreationService& _jobCreationService,
 			tokyo::IResourceService& _resourceService
 		);
 		GameCommandService(
@@ -37,6 +38,7 @@ namespace drl
 			IWorkerCreationService& _workerCreationService,
 			IShuttleCreationService& _shuttleCreationService,
 			IBuildingPlacementService& _buildingPlacementService,
+			IJobCreationService& _jobCreationService,
 			tokyo::IResourceService& _resourceService,
 			long long _tick
 		);
@@ -57,6 +59,7 @@ namespace drl
 		bool handleCreateWorker(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateWorkerEvent _event);
 		bool handleCreateShuttle(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateShuttleEvent _event);
 		bool handleAddResource(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::AddResourceEvent _event);
+		bool handleCreateJob(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateJobEvent _event);
 	private:
 		long long m_CurrentTick;
 		bool m_IsRecordingCommands;
@@ -65,6 +68,7 @@ namespace drl
 		IWorkerCreationService& m_WorkerCreationService;
 		IShuttleCreationService& m_ShuttleCreationService;
 		IBuildingPlacementService& m_BuildingPlacementService;
+		IJobCreationService& m_JobCreationService;
 		tokyo::IResourceService& m_ResourceService;
 	};
 }

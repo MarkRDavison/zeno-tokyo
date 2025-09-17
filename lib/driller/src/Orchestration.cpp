@@ -134,10 +134,12 @@ namespace drl
 			_services.workerPrototypeService,
 			_services.shuttlePrototypeService,
 			_services.buildingPrototypeService,
+			_services.jobPrototypeService,
 			_services.workerMovementService,
 			_services.workerJobUpdateService,
 			_services.shuttleScheduleService,
-			_services.jobAllocationService);
+			_services.jobAllocationService,
+			_services.terrainAlterationService);
 		
 		scene->start();
 		_app.setScene(scene);

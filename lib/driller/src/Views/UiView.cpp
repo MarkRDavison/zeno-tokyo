@@ -10,14 +10,16 @@ namespace drl
 		const tokyo::FontManager& _fontManager,
 		const tokyo::TextureManager& _textureManager,
 		const tokyo::IInputActionManager& _inputActionManager,
-		const tokyo::IResourceService& _resourceService
+		const tokyo::IResourceService& _resourceService,
+		const ITerrainAlterationService& _terrainAlterationService
 	) :
 		m_GameData(_gameData),
 		m_GameCommandService(_gameCommandService),
 		m_FontManager(_fontManager),
 		m_TextureManager(_textureManager),
 		m_InputActionManager(_inputActionManager),
-		m_ResourceService(_resourceService)
+		m_ResourceService(_resourceService),
+		m_TerrainAlterationService(_terrainAlterationService)
 	{
 
 	}
@@ -29,7 +31,7 @@ namespace drl
 		if (m_InputActionManager.isActionInvoked(drl::Constants::ClickActionName))
 		{
 			const auto mousePos = m_InputActionManager.getMousePosition();
-			const auto pos = sf::Vector2f(m_InputActionManager.getMousePosition() - size / 2) / 64.0f; // TODO: SCALE/CONFIG
+			const auto pos = sf::Vector2f(m_InputActionManager.getMousePosition() - size / 2) / 64.0f; // TODO: SCALE/CONFIG/ZOOM
 
 			const float tileY = std::floor(pos.y);
 			const float tileX = pos.x < 0.0f
@@ -44,10 +46,50 @@ namespace drl
 			}
 			if (tileX == 0)
 			{
+				// TODO: Temp - immediatly digging, not creating an in progress job/animation
 				m_GameCommandService.executeGameCommand(
-					// TODO: Temp - immediatly digging, not creating an in progress job/animation
-					GameCommand(GameCommand::DigShaftEvent((int)tileY), GameCommand::CommandContext::DiggingShaft, GameCommand::CommandSource::Player)
+					GameCommand(
+						GameCommand::DigShaftEvent((int)tileY), 
+						GameCommand::CommandContext::DiggingShaft, 
+						GameCommand::CommandSource::Player)
 				);
+			}
+			else if (tileY >= 0)
+			{
+				int startX = tileX;
+				if (m_InputActionManager.isKeyDown(sf::Keyboard::Key::LShift) || 
+					m_InputActionManager.isKeyDown(sf::Keyboard::Key::RShift))
+				{
+					startX = tileX > 0 ? +1 : -1;
+				}
+				if (tileX > 0)
+				{
+					for (int x = startX; x <= tileX; x++)
+					{
+						if (!m_TerrainAlterationService.isTileDugOut((int)tileY, (int)x))
+						{
+							m_GameCommandService.executeGameCommand(GameCommand(
+								GameCommand::CreateJobEvent("Job_Dig", {}, sf::Vector2i((int)x, (int)tileY)),
+								GameCommand::CommandContext::CreatingJob,
+								GameCommand::CommandSource::Player)
+							);
+						}
+					}
+				}
+				else
+				{
+					for (int x = startX; x >= tileX; x--)
+					{
+						if (!m_TerrainAlterationService.isTileDugOut((int)tileY, (int)x))
+						{
+							m_GameCommandService.executeGameCommand(GameCommand(
+								GameCommand::CreateJobEvent("Job_Dig", {}, sf::Vector2i((int)x, (int)tileY)),
+								GameCommand::CommandContext::CreatingJob,
+								GameCommand::CommandSource::Player)
+							);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -55,16 +97,21 @@ namespace drl
 	void UiView::draw(sf::RenderTarget& _target, sf::RenderStates _states) const
 	{
 		auto& font = m_FontManager.getFont("DEBUG");
+
 		const auto& ore = m_ResourceService.getExistingResource("Resource_Ore");
 		sf::Text oreText(font, "Ore: " + std::to_string(ore.resource.amount));
 		oreText.setFillColor(sf::Color::Black);
+
 		const auto& money = m_ResourceService.getExistingResource("Resource_Money");
 		sf::Text moneyText(font, "Money: " + std::to_string(money.resource.amount));
 		moneyText.setFillColor(sf::Color::Black);
 
 		_states.transform.translate({ 4.0f, 0.0f });
+
 		_target.draw(oreText, _states);
+
 		_states.transform.translate({ 0.0f, 32.0f });
+
 		_target.draw(moneyText, _states);
 	}
 

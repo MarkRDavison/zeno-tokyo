@@ -14,7 +14,9 @@ namespace drl
 		const tokyo::IResourceService& _resourceService,
 		const IWorkerPrototypeService& _workerPrototypeService,
 		const IShuttlePrototypeService& _shuttlePrototypeService,
-		const IBuildingPrototypeService& _buildingPrototypeService
+		const IBuildingPrototypeService& _buildingPrototypeService,
+		const IJobPrototypeService& _jobPrototypeService,
+		const ITerrainAlterationService& _terrainAlterationService
 	) :
 		m_FontManager(_fontManager),
 		m_TextureManager(_textureManager),
@@ -23,7 +25,8 @@ namespace drl
 		m_WorkerView(_gameData.worker, _workerPrototypeService, _textureManager),
 		m_ShuttleView(_gameData.shuttle, _shuttlePrototypeService, _textureManager),
 		m_BuildingView(_gameData.building, _buildingPrototypeService, _textureManager),
-		m_UiView(_gameData, _gameCommandService, _fontManager, _textureManager, _inputActionManager, _resourceService)
+		m_JobView(_gameData.job, _jobPrototypeService, _textureManager),
+		m_UiView(_gameData, _gameCommandService, _fontManager, _textureManager, _inputActionManager, _resourceService, _terrainAlterationService)
 	{
 
 	}
@@ -34,6 +37,7 @@ namespace drl
 		m_WorkerView.update(_delta);
 		m_BuildingView.update(_delta);
 		m_ShuttleView.update(_delta);
+		m_JobView.update(_delta);
 		m_UiView.update(_delta);
 	}
 
@@ -72,6 +76,7 @@ namespace drl
 		target.draw(m_ShuttleView, states);
 		target.draw(m_BuildingView, states);
 		target.draw(m_WorkerView, states);
+		target.draw(m_JobView, states);
 
 		{
 			sf::View view = target.getDefaultView();

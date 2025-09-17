@@ -16,7 +16,7 @@ namespace drl
 	}
 
 	bool JobCreationService::createJob(JobPrototypeId _id, JobPrototypeId _additionalPrototypeId, sf::Vector2i _coordinates)
-	{
+	{;
 		if (!m_JobPrototypeService.isPrototypeRegistered(_id))
 		{
 			return false;
