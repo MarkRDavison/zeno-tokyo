@@ -22,7 +22,10 @@ prototypes = {
                 y = 5
             },
             idleTime = 25.0,
-            speed = 25.0
+            speed = 25.0,
+            allowedCargo = {
+                "Resource_Ore"
+            }
         }
     },
 	workers = {

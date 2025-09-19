@@ -2,6 +2,7 @@
 #include <tokyo/Game/Application.hpp>
 #include <tokyo/Driller/Scenes/SplashScene.hpp>
 #include <tokyo/Driller/Constants.hpp>
+#include <tokyo/Driller/Constants.hpp>
 #include <tokyo/Driller/ManagerPackage.hpp>
 #include <tokyo/Driller/ServicePackage.hpp>
 #include <tokyo/Driller/Orchestration.hpp>
@@ -13,7 +14,7 @@ int main(int _argc, char** _argv)
 {
     std::cout << "TODO: Cancel action to remove job etc" << std::endl;
     std::cout << "TODO: Numkey to create build building job" << std::endl;
-    std::cout << "TODO: Shuttle picks up ore when landing and then sells drops off money next time it lands" << std::endl;
+    
     tokyo::Application app;
     app.setName(drl::Constants::Title);
 

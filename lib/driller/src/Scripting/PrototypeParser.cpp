@@ -47,6 +47,7 @@ namespace drl
 			sp.idleTime = table["idleTime"].get<float>();
 			sp.loadingTime = table["loadingTime"].get<float>();
 			sp.speed = table["speed"].get<float>();
+			sp.allowedCargo = table["allowedCargo"].get<std::unordered_set<std::string>>();
 		}
 
 		const sol::table& buildings = _state[ScriptingConstants::Prototypes_ScriptRoot][ScriptingConstants::Prototypes_Buildings_ScriptRoot];

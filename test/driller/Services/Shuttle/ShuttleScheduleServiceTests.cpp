@@ -16,7 +16,9 @@ namespace drl
 					shuttleData,
 					workerRecruitmentServiceMock.get(),
 					workerCreationServiceMock.get(),
-					shuttlePrototypeServiceMock.get()
+					shuttlePrototypeServiceMock.get(),
+					resourceServiceMock.get(),
+					economyServiceMock.get()
 				)
 			{
 
@@ -26,6 +28,8 @@ namespace drl
 			fakeit::Mock<IWorkerRecruitmentService> workerRecruitmentServiceMock;
 			fakeit::Mock<IWorkerCreationService> workerCreationServiceMock;
 			fakeit::Mock<IShuttlePrototypeService> shuttlePrototypeServiceMock;
+			fakeit::Mock<tokyo::IResourceService> resourceServiceMock;
+			fakeit::Mock<IEconomyService> economyServiceMock;
 
 			ShuttleScheduleService service;
 

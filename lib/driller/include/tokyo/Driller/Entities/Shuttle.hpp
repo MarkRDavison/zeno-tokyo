@@ -1,9 +1,11 @@
 #pragma once
 
+#include <tokyo/Game/Resource/Resource.hpp>
 #include <tokyo/Driller/Constants.hpp>
 #include <tokyo/Driller/Entities/Worker.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <unordered_map>
+#include <unordered_set>
 #include <string>
 
 namespace drl
@@ -32,6 +34,7 @@ namespace drl
 		sf::Vector2f surfacePosition;
 		sf::Vector2f leavingPosition;
 		std::unordered_map<WorkerPrototypeId, int> passengers;
+		std::unordered_map<tokyo::ResourceId, tokyo::ResourceValue> cargo;
 	};
 	struct ShuttlePrototype
 	{
@@ -41,6 +44,7 @@ namespace drl
 		float idleTime;
 		float loadingTime;
 		float speed;
+		std::unordered_set<std::string> allowedCargo;
 	};
 
 }
