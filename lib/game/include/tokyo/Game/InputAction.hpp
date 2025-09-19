@@ -20,11 +20,11 @@ namespace tokyo
 
 		InputActivationType primaryActivationType{ InputActivationType::None };
 		sf::Keyboard::Key primaryKey{ sf::Keyboard::Key::Unknown };
-		sf::Mouse::Button primaryButton{ -1 };
+		sf::Mouse::Button primaryButton{ (sf::Mouse::Button)-1};
 
 		InputActivationType secondaryActivationType{ InputActivationType::None };
 		sf::Keyboard::Key secondaryKey{ sf::Keyboard::Key::Unknown };
-		sf::Mouse::Button secondaryButton{ -1 };
+		sf::Mouse::Button secondaryButton{ (sf::Mouse::Button)-1 };
 
 		// If secondary required to activate requires both otherwise requires either
 		bool secondaryRequired{ false };

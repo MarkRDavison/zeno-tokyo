@@ -5,6 +5,7 @@
 #include <tokyo/Driller/ManagerPackage.hpp>
 #include <tokyo/Driller/ServicePackage.hpp>
 #include <tokyo/Driller/Orchestration.hpp>
+#include "DrillerConfig.hpp"
 
 #include <thread>
 
@@ -25,8 +26,7 @@ int main(int _argc, char** _argv)
 
     drl::ManagerPackage managers(app.getWindow());
 
-    // TODO: way to set this from cmake based on build type and source directory...
-    managers.fileManager.registerDirectory("F:/Workspace/Github/zeno-tokyo/app/Driller");
+    managers.fileManager.registerDirectory(drl::DrillerConfig::RootPath);
 
     drl::GameData gameData;
 
