@@ -10,6 +10,9 @@
 
 int main(int _argc, char** _argv)
 {
+    std::cout << "TODO: Cancel action to remove job etc" << std::endl;
+    std::cout << "TODO: Numkey to create build building job" << std::endl;
+    std::cout << "TODO: Shuttle picks up ore when landing and then sells drops off money next time it lands" << std::endl;
     tokyo::Application app;
     app.setName(drl::Constants::Title);
 
@@ -93,8 +96,6 @@ int main(int _argc, char** _argv)
     drl::Orchestration::InitialiseGame(app, gameData, managers, services);
 
     app.start();
-
-    // TODO: Scene lifecycle
 
     return EXIT_SUCCESS;
 }
