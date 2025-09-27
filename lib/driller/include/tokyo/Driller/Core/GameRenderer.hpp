@@ -30,7 +30,8 @@ namespace drl
 			const IShuttlePrototypeService& _shuttlePrototypeService,
 			const IBuildingPrototypeService& _buildingPrototypeService,
 			const IJobPrototypeService& _jobPrototypeService,
-			const ITerrainAlterationService& _terrainAlterationService);
+			const ITerrainAlterationService& _terrainAlterationService,
+			IUiService& _uiService);
 
 		void update(float _delta);
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;

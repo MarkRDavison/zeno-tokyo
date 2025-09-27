@@ -22,8 +22,10 @@ namespace drl
 	void JobView::draw(sf::RenderTarget& _target, sf::RenderStates _states) const
 	{
 		sf::CircleShape c(0.1f, 8);
+		c.setOrigin({ c.getRadius(), c.getRadius() });
 		sf::CircleShape o(0.05f, 8);
 		o.setFillColor(sf::Color::Blue);
+		o.setOrigin({ o.getRadius(), o.getRadius() });
 
 		for (const auto& j : m_JobData.jobs)
 		{

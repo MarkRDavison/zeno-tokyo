@@ -15,6 +15,7 @@
 #include <tokyo/Driller/Services/Worker/WorkerJobUpdateService.hpp>
 #include <tokyo/Driller/Services/Worker/WorkerRecruitmentService.hpp>
 #include <tokyo/Driller/Services/TerrainAlterationService.hpp>
+#include <tokyo/Driller/Services/UiService.hpp>
 
 namespace drl
 {
@@ -42,7 +43,8 @@ namespace drl
 			jobCreationService(_gameData.job, jobPrototypeService, terrainAlterationService),
 			buildingPrototypeService(identificationService),
 			buildingPlacementService(_gameData.building, terrainAlterationService, workerRecruitmentService, jobCreationService, buildingPrototypeService),
-			gameCommandService(terrainAlterationService, workerCreationService, shuttleCreationService, buildingPlacementService, jobCreationService, resourceService)
+			gameCommandService(terrainAlterationService, workerCreationService, shuttleCreationService, buildingPlacementService, jobCreationService, resourceService),
+			uiService(_managers.inputActionManager, buildingPrototypeService)
 		{
 
 		}
@@ -70,6 +72,8 @@ namespace drl
 
 		BuildingPrototypeService buildingPrototypeService;
 		BuildingPlacementService buildingPlacementService;
+
+		UiService uiService;
 
 		GameCommandService gameCommandService;
 	};

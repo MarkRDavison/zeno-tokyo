@@ -20,7 +20,8 @@ namespace drl
 		IWorkerJobUpdateService& _workerJobUpdateService,
 		IShuttleScheduleService& _shuttleScheduleService,
 		IJobAllocationService& _jobAllocationService,
-		ITerrainAlterationService& _terrainAlterationService
+		ITerrainAlterationService& _terrainAlterationService,
+		IUiService& _uiService
 	) :
 		m_GameData(_gameData),
 		m_InputManager(_inputManager),
@@ -38,7 +39,8 @@ namespace drl
 		m_WorkerJobUpdateService(_workerJobUpdateService),
 		m_ShuttleScheduleService(_shuttleScheduleService),
 		m_JobAllocationService(_jobAllocationService),
-		m_TerrainAlterationService(_terrainAlterationService)
+		m_TerrainAlterationService(_terrainAlterationService),
+		m_UiService(_uiService)
 	{
 
 	}
@@ -78,7 +80,8 @@ namespace drl
 			m_ShuttlePrototypeService,
 			m_BuildingPrototypeService,
 			m_JobPrototypeService,
-			m_TerrainAlterationService
+			m_TerrainAlterationService,
+			m_UiService
 		);
 
 		started = true;

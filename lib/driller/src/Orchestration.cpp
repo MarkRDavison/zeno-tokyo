@@ -139,7 +139,8 @@ namespace drl
 			_services.workerJobUpdateService,
 			_services.shuttleScheduleService,
 			_services.jobAllocationService,
-			_services.terrainAlterationService);
+			_services.terrainAlterationService,
+			_services.uiService);
 		
 		scene->start();
 		_app.setScene(scene);

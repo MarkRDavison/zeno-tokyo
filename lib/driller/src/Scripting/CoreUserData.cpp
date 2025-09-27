@@ -70,7 +70,8 @@ namespace drl
 		_state.new_usertype<drl::GameCommand::PlaceBuildingEvent>(
 			"PlaceBuildingEvent",
 			sol::constructors<
-				drl::GameCommand::PlaceBuildingEvent(std::string, int, int)
+				drl::GameCommand::PlaceBuildingEvent(std::string, int, int),
+				drl::GameCommand::PlaceBuildingEvent(IdType, int, int)
 			>(),
 			"prototypeId", &drl::GameCommand::PlaceBuildingEvent::prototypeId,
 			"level", &drl::GameCommand::PlaceBuildingEvent::level,

@@ -42,10 +42,7 @@ namespace drl
         if (_job.work <= 0.0f)
         {
             const auto& prototype = m_JobPrototypeService.getPrototype(_job.prototypeId);
-            if (prototype.onComplete)
-            {
-                prototype.onComplete(_job);
-            }
+
             if (prototype.repeats)
             {
                 _job.work += prototype.work;
@@ -59,6 +56,11 @@ namespace drl
                 _worker.idleTime = 0.0f;
                 auto& tile = m_TerrainAlterationService.getTile(_job.tile.y, _job.tile.x);
                 tile.jobReserved = false;
+            }
+
+            if (prototype.onComplete)
+            {
+                prototype.onComplete(_job);
             }
         }
     }

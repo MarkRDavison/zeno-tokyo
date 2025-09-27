@@ -11,7 +11,8 @@ namespace drl
 		const tokyo::TextureManager& _textureManager,
 		const tokyo::IInputActionManager& _inputActionManager,
 		const tokyo::IResourceService& _resourceService,
-		const ITerrainAlterationService& _terrainAlterationService
+		const ITerrainAlterationService& _terrainAlterationService,
+		IUiService& _uiService
 	) :
 		m_GameData(_gameData),
 		m_GameCommandService(_gameCommandService),
@@ -19,7 +20,8 @@ namespace drl
 		m_TextureManager(_textureManager),
 		m_InputActionManager(_inputActionManager),
 		m_ResourceService(_resourceService),
-		m_TerrainAlterationService(_terrainAlterationService)
+		m_TerrainAlterationService(_terrainAlterationService),
+		m_UiService(_uiService)
 	{
 
 	}
@@ -27,6 +29,8 @@ namespace drl
 	void UiView::update(float _delta)
 	{
 		const auto size = sf::Vector2i(m_InputActionManager.getWindowSize());
+
+		m_UiService.update(_delta);
 
 		if (m_InputActionManager.isActionInvoked(drl::Constants::ClickActionName))
 		{
@@ -40,53 +44,74 @@ namespace drl
 
 			std::cout << "Tile " << tileX << ", " << tileY << std::endl;
 
-			// if (building building)
-			{
+			const auto uiState = m_UiService.getCurrentState();
 
-			}
-			if (tileX == 0)
+			if (uiState == UiState::PLACING_BUILDING)
 			{
-				// TODO: Temp - immediatly digging, not creating an in progress job/animation
-				m_GameCommandService.executeGameCommand(
-					GameCommand(
-						GameCommand::DigShaftEvent((int)tileY), 
-						GameCommand::CommandContext::DiggingShaft, 
-						GameCommand::CommandSource::Player)
-				);
-			}
-			else if (tileY >= 0)
-			{
-				int startX = tileX;
-				if (m_InputActionManager.isKeyDown(sf::Keyboard::Key::LShift) || 
-					m_InputActionManager.isKeyDown(sf::Keyboard::Key::RShift))
+				if (tileX != 0)
 				{
-					startX = tileX > 0 ? +1 : -1;
-				}
-				if (tileX > 0)
-				{
-					for (int x = startX; x <= tileX; x++)
+					m_GameCommandService.executeGameCommand(
+						GameCommand(
+							GameCommand::CreateJobEvent(
+								"Job_Build_Building", 
+								m_UiService.getActiveBuildingType(), 
+								sf::Vector2i((int)tileX, (int)tileY)),
+							GameCommand::CommandContext::PlacingBuilding,
+							GameCommand::CommandSource::Player));
+
+					if (!m_InputActionManager.isKeyDown(sf::Keyboard::Key::LShift) && 
+						!m_InputActionManager.isKeyDown(sf::Keyboard::Key::RShift))
 					{
-						if (!m_TerrainAlterationService.isTileDugOut((int)tileY, (int)x))
-						{
-							m_GameCommandService.executeGameCommand(GameCommand(
-								GameCommand::CreateJobEvent("Job_Dig", {}, sf::Vector2i((int)x, (int)tileY)),
-								GameCommand::CommandContext::CreatingJob,
-								GameCommand::CommandSource::Player)
-							);
-						}
+						m_UiService.clearActiveBuilding();
 					}
 				}
-				else
+			}
+			else
+			{
+				if (tileX == 0)
 				{
-					for (int x = startX; x >= tileX; x--)
+					// TODO: Temp - immediatly digging, not creating an in progress job/animation
+					m_GameCommandService.executeGameCommand(
+						GameCommand(
+							GameCommand::DigShaftEvent((int)tileY),
+							GameCommand::CommandContext::DiggingShaft,
+							GameCommand::CommandSource::Player)
+					);
+				}
+				else if (tileY >= 0)
+				{
+					int startX = tileX;
+					if (m_InputActionManager.isKeyDown(sf::Keyboard::Key::LShift) ||
+						m_InputActionManager.isKeyDown(sf::Keyboard::Key::RShift))
 					{
-						if (!m_TerrainAlterationService.isTileDugOut((int)tileY, (int)x))
+						startX = tileX > 0 ? +1 : -1;
+					}
+					if (tileX > 0)
+					{
+						for (int x = startX; x <= tileX; x++)
 						{
-							m_GameCommandService.executeGameCommand(GameCommand(
-								GameCommand::CreateJobEvent("Job_Dig", {}, sf::Vector2i((int)x, (int)tileY)),
-								GameCommand::CommandContext::CreatingJob,
-								GameCommand::CommandSource::Player)
-							);
+							if (!m_TerrainAlterationService.isTileDugOut((int)tileY, (int)x))
+							{
+								m_GameCommandService.executeGameCommand(GameCommand(
+									GameCommand::CreateJobEvent("Job_Dig", {}, sf::Vector2i((int)x, (int)tileY)),
+									GameCommand::CommandContext::CreatingJob,
+									GameCommand::CommandSource::Player)
+								);
+							}
+						}
+					}
+					else
+					{
+						for (int x = startX; x >= tileX; x--)
+						{
+							if (!m_TerrainAlterationService.isTileDugOut((int)tileY, (int)x))
+							{
+								m_GameCommandService.executeGameCommand(GameCommand(
+									GameCommand::CreateJobEvent("Job_Dig", {}, sf::Vector2i((int)x, (int)tileY)),
+									GameCommand::CommandContext::CreatingJob,
+									GameCommand::CommandSource::Player)
+								);
+							}
 						}
 					}
 				}

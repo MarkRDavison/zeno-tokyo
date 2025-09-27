@@ -30,7 +30,8 @@ namespace drl
 			IWorkerJobUpdateService& _workerJobUpdateService,
 			IShuttleScheduleService& _shuttleScheduleService,
 			IJobAllocationService& _jobAllocationService,
-			ITerrainAlterationService& _terrainAlterationService);
+			ITerrainAlterationService& _terrainAlterationService,
+			IUiService& _uiService);
 		~GameScene();
 
 		void start() override;
@@ -57,6 +58,7 @@ namespace drl
 		IShuttleScheduleService& m_ShuttleScheduleService;
 		IJobAllocationService& m_JobAllocationService;
 		ITerrainAlterationService& m_TerrainAlterationService;
+		IUiService& m_UiService;
 
 		Game* m_Game{ nullptr };
 		GameRenderer* m_GameRenderer{ nullptr };
