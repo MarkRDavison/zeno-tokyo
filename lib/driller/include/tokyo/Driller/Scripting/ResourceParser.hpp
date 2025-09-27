@@ -16,6 +16,6 @@ namespace drl
 	public:
 		~ResourceParser() override = default;
 
-		std::vector<tokyo::LevelResource> parse(sol::state& _state) const;
+		std::vector<tokyo::LevelResource> parse(sol::state& _state) const override;
 	};
 }

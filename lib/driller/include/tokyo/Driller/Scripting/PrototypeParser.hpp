@@ -11,7 +11,7 @@ namespace drl
 	public:
 		~PrototypeParser() override = default;
 
-		ParsedPrototypes parse(sol::state& _state) const;
+		ParsedPrototypes parse(sol::state& _state) const override;
 	};
 
 }
