@@ -14,7 +14,8 @@ int main(int _argc, char** _argv)
 {
     std::cout << "TODO: Display fps on window not console, also option on app to do so? Maybe debug overlay/performance" << std::endl;
     std::cout << "TODO: Cancel action to remove job etc" << std::endl;
-    std::cout << "TODO: Numkey to create build building job" << std::endl;
+    std::cout << "TODO: Consume upgrade data to give bonus to resource increases???" << std::endl;
+    std::cout << "TODO: Dependency injection/container using: https://github.com/gracicot/kangaru" << std::endl;
     
     tokyo::Application app;
     app.setName(drl::Constants::Title);

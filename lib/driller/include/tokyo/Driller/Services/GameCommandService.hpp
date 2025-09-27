@@ -5,6 +5,7 @@
 #include <tokyo/Driller/Services/Worker/WorkerCreationService.hpp>
 #include <tokyo/Driller/Services/Shuttle/ShuttleCreationService.hpp>
 #include <tokyo/Driller/Services/Building/BuildingPlacementService.hpp>
+#include <tokyo/Driller/Services/Economy/UpgradeService.hpp>
 #include <tokyo/Game/Resource/ResourceService.hpp>
 
 namespace drl
@@ -31,7 +32,8 @@ namespace drl
 			IShuttleCreationService& _shuttleCreationService,
 			IBuildingPlacementService& _buildingPlacementService,
 			IJobCreationService& _jobCreationService,
-			tokyo::IResourceService& _resourceService
+			tokyo::IResourceService& _resourceService,
+			IUpgradeService& _upgradeService
 		);
 		GameCommandService(
 			ITerrainAlterationService& _terrainAlterationService,
@@ -40,6 +42,7 @@ namespace drl
 			IBuildingPlacementService& _buildingPlacementService,
 			IJobCreationService& _jobCreationService,
 			tokyo::IResourceService& _resourceService,
+			IUpgradeService& _upgradeService,
 			long long _tick
 		);
 		~GameCommandService(void) override = default;
@@ -60,6 +63,7 @@ namespace drl
 		bool handleCreateShuttle(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateShuttleEvent _event);
 		bool handleAddResource(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::AddResourceEvent _event);
 		bool handleCreateJob(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateJobEvent _event);
+		bool handleAddingUpgrade(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::AddUpgradeEvent _event);
 	private:
 		long long m_CurrentTick;
 		bool m_IsRecordingCommands;
@@ -70,5 +74,6 @@ namespace drl
 		IBuildingPlacementService& m_BuildingPlacementService;
 		IJobCreationService& m_JobCreationService;
 		tokyo::IResourceService& m_ResourceService;
+		IUpgradeService& m_UpgradeService;
 	};
 }

@@ -190,6 +190,11 @@ namespace drl
 
 	Tile& TerrainAlterationService::getTile(int _level, int _column)
 	{
+		if (_level < 0)
+		{
+			throw std::runtime_error("Cannot retrieve above ground TerrainTile");
+		}
+
 		if (_column != 0)
 		{
 			if (!doesTileExist(_level, _column))
@@ -207,11 +212,17 @@ namespace drl
 				return m_TerrainData.rows[static_cast<unsigned>(_level)].rightTiles[xCoord];
 			}
 		}
+
 		throw std::runtime_error("Cannot retrieve shaft TerrainTile");
 	}
 
 	const Tile& TerrainAlterationService::getTile(int _level, int _column) const
 	{
+		if (_level < 0)
+		{
+			throw std::runtime_error("Cannot retrieve above ground TerrainTile");
+		}
+
 		const unsigned xCoord = static_cast<unsigned>(std::abs(_column)) - (_column == 0 ? 0 : 1);
 		if (_column < 0)
 		{
@@ -221,6 +232,7 @@ namespace drl
 		{
 			return m_TerrainData.rows[static_cast<unsigned>(_level)].rightTiles[xCoord];
 		}
+
 		throw std::runtime_error("Cannot retrieve shaft TerrainTile");
 	}
 

@@ -10,7 +10,8 @@ namespace drl
 		IShuttleCreationService& _shuttleCreationService,
 		IBuildingPlacementService& _buildingPlacementService,
 		IJobCreationService& _jobCreationService,
-		tokyo::IResourceService& _resourceService
+		tokyo::IResourceService& _resourceService,
+		IUpgradeService& _upgradeService
 	) : GameCommandService(
 		_terrainAlterationService,
 		_workerCreationService,
@@ -18,6 +19,7 @@ namespace drl
 		_buildingPlacementService,
 		_jobCreationService,
 		_resourceService,
+		_upgradeService,
 		0ll
 	)
 	{
@@ -30,6 +32,7 @@ namespace drl
 		IBuildingPlacementService& _buildingPlacementService,
 		IJobCreationService& _jobCreationService,
 		tokyo::IResourceService& _resourceService,
+		IUpgradeService& _upgradeService,
 		long long _tick
 	) : 
 		m_CurrentTick(_tick),
@@ -39,7 +42,8 @@ namespace drl
 		m_ShuttleCreationService(_shuttleCreationService),
 		m_BuildingPlacementService(_buildingPlacementService),
 		m_JobCreationService(_jobCreationService),
-		m_ResourceService(_resourceService)
+		m_ResourceService(_resourceService),
+		m_UpgradeService(_upgradeService)
 	{
 
 	}
@@ -86,6 +90,8 @@ namespace drl
 			return handleAddResource(_command.commandContext, _command.commandSource, _command.addResource);
 		case GameCommand::EventType::CreateJob:
 			return handleCreateJob(_command.commandContext, _command.commandSource, _command.createJob);
+		case GameCommand::EventType::AddingUpgrade:
+			return handleAddingUpgrade(_command.commandContext, _command.commandSource, _command.addUpgrade);
 		default:
 			std::cerr << "Unhandled command type " << (int)_command.type << std::endl;
 			return false;
@@ -136,5 +142,11 @@ namespace drl
 	bool GameCommandService::handleCreateJob(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateJobEvent _event)
 	{
 		return m_JobCreationService.createJob(_event.prototypeId, _event.additionalPrototypeId, _event.coordinates);
+	}
+
+	bool GameCommandService::handleAddingUpgrade(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::AddUpgradeEvent _event)
+	{
+		m_UpgradeService.addUpgrade(_event.upgradeId, _event.value);
+		return true;
 	}
 }

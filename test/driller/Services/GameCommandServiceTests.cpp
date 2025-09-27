@@ -20,6 +20,7 @@ namespace drl
 					buildingPlacementServiceMock.get(),
 					jobCreationServiceMock.get(),
 					resourceServiceMock.get(),
+					upgradeServiceMock.get(),
 					_startTick
 				)
 			{
@@ -32,6 +33,7 @@ namespace drl
 			fakeit::Mock<IBuildingPlacementService> buildingPlacementServiceMock;
 			fakeit::Mock<IJobCreationService> jobCreationServiceMock;
 			fakeit::Mock<tokyo::IResourceService> resourceServiceMock;
+			fakeit::Mock<IUpgradeService> upgradeServiceMock;
 
 			drl::GameCommandService service;
 

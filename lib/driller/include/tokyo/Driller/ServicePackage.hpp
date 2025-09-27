@@ -43,8 +43,9 @@ namespace drl
 			jobCreationService(_gameData.job, jobPrototypeService, terrainAlterationService),
 			buildingPrototypeService(identificationService),
 			buildingPlacementService(_gameData.building, terrainAlterationService, workerRecruitmentService, jobCreationService, buildingPrototypeService),
-			gameCommandService(terrainAlterationService, workerCreationService, shuttleCreationService, buildingPlacementService, jobCreationService, resourceService),
-			uiService(_managers.inputActionManager, buildingPrototypeService)
+			upgradeService(_gameData.upgrade),
+			uiService(_managers.inputActionManager, buildingPrototypeService),
+			gameCommandService(terrainAlterationService, workerCreationService, shuttleCreationService, buildingPlacementService, jobCreationService, resourceService, upgradeService)
 		{
 
 		}
@@ -72,6 +73,8 @@ namespace drl
 
 		BuildingPrototypeService buildingPrototypeService;
 		BuildingPlacementService buildingPlacementService;
+
+		UpgradeService upgradeService;
 
 		UiService uiService;
 

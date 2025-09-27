@@ -39,6 +39,7 @@ namespace drl
 				{"CreatingJob", drl::GameCommand::CommandContext::CreatingJob},
 				{"PlacingBuilding", drl::GameCommand::CommandContext::PlacingBuilding},
 				{"AddResource", drl::GameCommand::CommandContext::AddResource},
+				{"AddingUpgrade", drl::GameCommand::CommandContext::AddingUpgrade},
 				{"Undefined", drl::GameCommand::CommandContext::Undefined},
 			});
 
@@ -98,7 +99,7 @@ namespace drl
 		_state.new_usertype<drl::GameCommand::CreateJobEvent>(
 			"CreateJobEvent",
 			sol::constructors<
-				drl::GameCommand::CreateJobEvent(std::string,std::string, sf::Vector2i)
+				drl::GameCommand::CreateJobEvent(std::string, std::string, sf::Vector2i)
 			>(),
 			"prototypeId", &drl::GameCommand::CreateJobEvent::prototypeId,
 			"additionalPrototypeId", &drl::GameCommand::CreateJobEvent::additionalPrototypeId,
@@ -108,9 +109,19 @@ namespace drl
 		_state.new_usertype<drl::GameCommand::AddResourceEvent>(
 			"AddResourceEvent",
 			sol::constructors<
-				drl::GameCommand::AddResourceEvent(tokyo::Resource)
+			drl::GameCommand::AddResourceEvent(tokyo::Resource)
 			>(),
 			"resource", &drl::GameCommand::AddResourceEvent::resource
+		);
+
+		_state.new_usertype<drl::GameCommand::AddUpgradeEvent>(
+			"AddUpgradeEvent",
+			sol::constructors<
+				drl::GameCommand::AddUpgradeEvent(const std::string&, float),
+				drl::GameCommand::AddUpgradeEvent(IdType, float)
+			>(),
+			"upgradeId", &drl::GameCommand::AddUpgradeEvent::upgradeId,
+			"value", &drl::GameCommand::AddUpgradeEvent::value
 		);
 
 		_state.new_usertype<drl::GameCommand>(
@@ -122,7 +133,8 @@ namespace drl
 				drl::GameCommand(const drl::GameCommand::CreateShuttleEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
 				drl::GameCommand(const drl::GameCommand::CreateWorkerEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
 				drl::GameCommand(const drl::GameCommand::CreateJobEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
-				drl::GameCommand(const drl::GameCommand::AddResourceEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
+				drl::GameCommand(const drl::GameCommand::AddResourceEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
+				drl::GameCommand(const drl::GameCommand::AddUpgradeEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
 			>(),
 			"type", &drl::GameCommand::type
 		);

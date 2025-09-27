@@ -93,7 +93,7 @@ prototypes = {
             work = 32.0,
             onComplete = 
                 function (jobInstance)
-                    --print('Job_Refine complete')
+                    cmd(GameCommand.new(AddUpgradeEvent.new("Upgrade_Refine", 0.001), GameCommandContext.AddingUpgrade, GameCommandSource.System))
                 end
         }
     },

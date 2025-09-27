@@ -91,6 +91,24 @@ namespace drl
 			tokyo::Resource resource;
 		};
 
+		struct AddUpgradeEvent
+		{
+			AddUpgradeEvent(const std::string& _upgradeName, float _value) :
+				upgradeId((IdType)tokyo::String::fnv1a_32(_upgradeName)),
+				value(_value)
+			{
+			}
+
+			AddUpgradeEvent(IdType _upgradeId, float _value) :
+				upgradeId(_upgradeId),
+				value(_value)
+			{
+			}
+
+			IdType upgradeId;
+			float value;
+		};
+
 		enum class CommandContext
 		{
 			DiggingShaft,
@@ -100,6 +118,7 @@ namespace drl
 			CreatingJob,
 			PlacingBuilding,
 			AddResource,
+			AddingUpgrade,
 
 			Undefined
 		} commandContext{ CommandContext::Undefined }; // TODO: Way to inherit context scope?
@@ -120,6 +139,7 @@ namespace drl
 			CreateJob,
 			PlacingBuilding,
 			AddResource,
+			AddingUpgrade,
 
 			Count
 		} type;
@@ -133,6 +153,7 @@ namespace drl
 			CreateJobEvent createJob;
 			PlaceBuildingEvent placeBuilding;
 			AddResourceEvent addResource;
+			AddUpgradeEvent addUpgrade;
 		};
 
 		GameCommand(const DigShaftEvent& _digShaft, CommandContext context, CommandSource source) :
@@ -194,6 +215,15 @@ namespace drl
 			commandSource(source),
 			type(EventType::AddResource),
 			addResource(_event)
+		{
+
+		}
+
+		GameCommand(const AddUpgradeEvent& _event, CommandContext context, CommandSource source) :
+			commandContext(context),
+			commandSource(source),
+			type(EventType::AddingUpgrade),
+			addUpgrade(_event)
 		{
 
 		}
