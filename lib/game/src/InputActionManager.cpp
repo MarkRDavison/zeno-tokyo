@@ -124,4 +124,20 @@ namespace tokyo
 
 		return false;
 	}
+	sf::Vector2i InputActionManager::getMousePosition() const
+	{
+		return m_InputManager.getMousePosition();
+	}
+	sf::Vector2u InputActionManager::getWindowSize() const
+	{
+		return m_InputManager.getWindowSize();
+	}
+	bool InputActionManager::isKeyDown(sf::Keyboard::Key _key) const
+	{
+		return m_InputManager.isKeyDown(_key);
+	}
+	bool InputActionManager::isButtonDown(sf::Mouse::Button _button) const
+	{
+		return m_InputManager.isButtonDown(_button);
+	}
 }

@@ -45,3 +45,5 @@ build/
 out
 *.spv
 *.meshbin
+/.idea
+/app/Driller/DrillerConfig.hpp

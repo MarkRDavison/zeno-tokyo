@@ -1,5 +1,7 @@
 SET(MODULE_LIBS
-
+	lua_library
+	sol2::sol2
+	SFML::Graphics
 )
 
 SET(INCLUDE_DIRS

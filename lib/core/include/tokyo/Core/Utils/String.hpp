@@ -4,6 +4,7 @@
 #include <vector>
 #include <optional>
 #include <sstream>
+#include <cstdint>
 
 #include <tokyo/Core/Utils/ConstExpr.hpp>
 

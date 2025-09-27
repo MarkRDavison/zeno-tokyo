@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <tokyo/Core/Log.hpp>
 #include <tokyo/Game/InputActionManager.hpp>
-#include <tokyo/Game/Resource/TextureService.hpp>
 
 int main()
 {
@@ -14,7 +13,6 @@ int main()
 
     tokyo::InputManager inputManager(window);
     tokyo::InputActionManager inputActionManager(inputManager);
-    tokyo::TextureService textureService;
     
     inputActionManager.registerAction("LCLICK",
     {
@@ -29,8 +27,6 @@ int main()
     });
 
     const std::string resourceRoot = "F:/Workspace/Github/zeno-tokyo/app/Sokoban/data";
-
-    textureService.loadTexture("spritesheet", resourceRoot + "/spritesheets/sokoban_spritesheet@2.png");
 
     auto running = true;
 

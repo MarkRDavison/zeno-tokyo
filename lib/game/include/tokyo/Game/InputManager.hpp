@@ -17,8 +17,8 @@ namespace tokyo
 		virtual ~IInputManager() = 0;
 		virtual sf::Vector2i getMousePosition() const = 0;
 		virtual sf::Vector2u getWindowSize() const = 0;
-		virtual bool isKeyDown(sf::Keyboard::Key _key) = 0;
-		virtual bool isButtonDown(sf::Mouse::Button _button) = 0;
+		virtual bool isKeyDown(sf::Keyboard::Key _key) const = 0;
+		virtual bool isButtonDown(sf::Mouse::Button _button) const = 0;
 
 	};
 
@@ -30,8 +30,8 @@ namespace tokyo
 
 		sf::Vector2i getMousePosition() const override;
 		sf::Vector2u getWindowSize() const override;
-		bool isKeyDown(sf::Keyboard::Key _key) override;
-		bool isButtonDown(sf::Mouse::Button _button) override;
+		bool isKeyDown(sf::Keyboard::Key _key) const override;
+		bool isButtonDown(sf::Mouse::Button _button) const override;
 
 
 	private:
