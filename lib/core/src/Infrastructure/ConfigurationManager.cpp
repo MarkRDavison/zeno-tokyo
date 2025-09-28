@@ -23,7 +23,7 @@ namespace tokyo
 		{
 			m_LuaManager.runScriptFile(_configFilePath, ConfigStateScope);
 		}
-		catch (std::exception e)
+		catch (std::exception& e)
 		{
 			std::cerr << "Failed to load config file " << _configFilePath << ": " << e.what() << std::endl;
 			return;
