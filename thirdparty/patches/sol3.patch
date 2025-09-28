@@ -1,0 +1,38 @@
+﻿diff --git a/include/sol/function_types_stateful.hpp b/include/sol/function_types_stateful.hpp
+index 9a5ca300..5dc074cd 100644
+--- a/include/sol/function_types_stateful.hpp
++++ b/include/sol/function_types_stateful.hpp
+@@ -120,7 +120,13 @@ namespace sol { namespace function_detail {
+ 		: var(std::move(v)), member(std::forward<Args>(args)...) {
+ 		}
+ 
+-		static int call(lua_State* L, member_variable& self) noexcept(std::is_nothrow_copy_assignable_v<T>) {
++		static int call(lua_State* L, member_variable& self)
++#if SOL_IS_ON(SOL_COMPILER_CLANG)
++			// apparent regression in clang 18 - llvm/llvm-project#91362
++#else
++			noexcept(std::is_nothrow_copy_assignable_v<T>)
++#endif
++		{
+ 			int nr;
+ 			{
+ 				M mem = detail::unwrap(detail::deref(self.member));
+diff --git a/include/sol/function_types_stateless.hpp b/include/sol/function_types_stateless.hpp
+index a2f66ba0..a67ac0e7 100644
+--- a/include/sol/function_types_stateless.hpp
++++ b/include/sol/function_types_stateless.hpp
+@@ -320,7 +320,13 @@ namespace sol { namespace function_detail {
+ 		}
+ 
+ 		template <bool is_yielding, bool no_trampoline>
+-		static int call(lua_State* L) noexcept(std::is_nothrow_copy_assignable_v<T>) {
++		static int call(lua_State* L)
++#if SOL_IS_ON(SOL_COMPILER_CLANG)
++			// apparent regression in clang 18 - llvm/llvm-project#91362
++#else
++			noexcept(std::is_nothrow_copy_assignable_v<T>)
++#endif
++		{
+ 			int nr;
+ 			if constexpr (no_trampoline) {
+ 				nr = real_call(L);
