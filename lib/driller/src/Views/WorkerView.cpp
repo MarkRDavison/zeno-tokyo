@@ -30,15 +30,16 @@ namespace drl
 		{
 			for (const auto& w : m_WorkerData.workers)
 			{
-				// const auto& prototype = m_WorkerPrototypeService.getPrototype(w.prototypeId);
+				if (m_WorkerPrototypeService.isPrototypeRegistered(w.prototypeId))
+				{
+					workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(-size.x / 2.0f, 0.0f), sf::Color::Green));
+					workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(+size.x / 2.0f, 0.0f), sf::Color::Green));
+					workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(+size.x / 2.0f, size.y), sf::Color::Red));
 
-				workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(-size.x / 2.0f, 0.0f), sf::Color::Green));
-				workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(+size.x / 2.0f, 0.0f), sf::Color::Green));
-				workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(+size.x / 2.0f, size.y), sf::Color::Red));
-										  
-				workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(-size.x / 2.0f, 0.0f), sf::Color::Green));
-				workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(+size.x / 2.0f, size.y), sf::Color::Red));
-				workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(-size.x / 2.0f, size.y), sf::Color::Red));
+					workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(-size.x / 2.0f, 0.0f), sf::Color::Green));
+					workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(+size.x / 2.0f, size.y), sf::Color::Red));
+					workers.append(sf::Vertex(sf::Vector2f{ w.position.x, -w.position.y } + sf::Vector2f(-size.x / 2.0f, size.y), sf::Color::Red));
+				}
 			}
 
 			_target.draw(workers, _states);
