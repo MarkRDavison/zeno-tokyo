@@ -21,6 +21,7 @@ namespace drl
 	}
 	void JobView::draw(sf::RenderTarget& _target, sf::RenderStates _states) const
 	{
+		_states.texture = &m_TextureManager.getTexture(Constants::TileSpriteSheetTextureName);
 		sf::CircleShape c(0.1f, 8);
 		c.setOrigin({ c.getRadius(), c.getRadius() });
 		sf::CircleShape o(0.05f, 8);

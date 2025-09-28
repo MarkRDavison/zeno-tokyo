@@ -21,6 +21,8 @@ namespace drl
 	}
 	void WorkerView::draw(sf::RenderTarget& _target, sf::RenderStates _states) const
 	{
+		_states.texture = &m_TextureManager.getTexture(Constants::TileSpriteSheetTextureName);
+
 		const sf::Vector2f size{ 0.4f, 0.8f };
 		sf::VertexArray workers(sf::PrimitiveType::Triangles);
 
