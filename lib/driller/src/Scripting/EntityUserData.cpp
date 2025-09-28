@@ -31,7 +31,7 @@ namespace drl
 
         _state.new_usertype<drl::JobInstance>(
             "JobInstance",
-            "Id", sol::readonly(&drl::JobInstance::Id),
+            "Id", &drl::JobInstance::Id,
             "prototypeId", &drl::JobInstance::prototypeId,
             "additionalPrototypeId", &drl::JobInstance::additionalPrototypeId,
             "allocatedWorkerId", &drl::JobInstance::allocatedWorkerId,

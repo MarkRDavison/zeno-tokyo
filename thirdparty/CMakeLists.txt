@@ -30,9 +30,9 @@ set(sol2_patch git apply ${CMAKE_SOURCE_DIR}/thirdparty/patches/sol3.patch)
 FetchContent_Declare(
   Sol2
   GIT_REPOSITORY https://github.com/ThePhD/sol2.git
-  GIT_TAG        v3.5.0
-  PATCH_COMMAND ${sol2_patch}
-  UPDATE_DISCONNECTED 1)
+  GIT_TAG        v3.5.0)
+  #PATCH_COMMAND ${sol2_patch}
+  #UPDATE_DISCONNECTED 1)
 
 FetchContent_MakeAvailable(Sol2)
 
