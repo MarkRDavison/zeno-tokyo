@@ -135,8 +135,7 @@ namespace drl
 				drl::GameCommand(const drl::GameCommand::CreateJobEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
 				drl::GameCommand(const drl::GameCommand::AddResourceEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource),
 				drl::GameCommand(const drl::GameCommand::AddUpgradeEvent&, drl::GameCommand::CommandContext, drl::GameCommand::CommandSource)
-			>(),
-			"type", &drl::GameCommand::type
+			>()
 		);
 	}
 }

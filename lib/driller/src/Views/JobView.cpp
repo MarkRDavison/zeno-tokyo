@@ -8,9 +8,9 @@ namespace drl
 		const IJobPrototypeService& _jobPrototypeService,
 		const tokyo::TextureManager& _textureManager
 	) :
-		m_TextureManager(_textureManager),
 		m_JobData(_jobData),
-		m_JobPrototypeService(_jobPrototypeService)
+		m_JobPrototypeService(_jobPrototypeService),
+		m_TextureManager(_textureManager)
 	{
 
 	}
