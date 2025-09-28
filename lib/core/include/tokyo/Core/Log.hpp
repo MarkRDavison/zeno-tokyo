@@ -59,13 +59,19 @@ namespace tokyo
 			Write(style, colour, args..., Styles::Default);
 		}
 
+#ifdef TOKYO_DEBUG
 		template<typename ... Args>
 		static void Debug(Args ... args)
 		{
-#ifdef zae_DEBUG
 			Out(Styles::Default, Colours::LightBlue, args...);
-#endif
 		}
+#else
+		template<typename ... Args>
+		static void Debug(Args ...)
+		{
+
+		}
+#endif
 
 		template<typename ... Args>
 		static void Info(Args ... args)
