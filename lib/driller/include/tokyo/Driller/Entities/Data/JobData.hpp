@@ -1,6 +1,7 @@
 #pragma once
 
 #include <tokyo/Driller/Entities/Job.hpp>
+#include <algorithm>
 #include <stdexcept>
 #include <vector>
 
