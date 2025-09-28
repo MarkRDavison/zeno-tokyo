@@ -35,7 +35,7 @@ namespace drl
 		if (m_InputActionManager.isActionInvoked(drl::Constants::ClickActionName))
 		{
 			const auto mousePos = m_InputActionManager.getMousePosition();
-			const auto pos = sf::Vector2f(m_InputActionManager.getMousePosition() - size / 2) / 64.0f; // TODO: SCALE/CONFIG/ZOOM
+			const auto pos = sf::Vector2f(mousePos - size / 2) / 64.0f; // TODO: SCALE/CONFIG/ZOOM
 
 			const float tileY = std::floor(pos.y);
 			const float tileX = pos.x < 0.0f
@@ -48,7 +48,7 @@ namespace drl
 
 			if (uiState == UiState::PLACING_BUILDING)
 			{
-				if (tileX != 0)
+				if (tileX != 0 && tileY >= 0)
 				{
 					m_GameCommandService.executeGameCommand(
 						GameCommand(
