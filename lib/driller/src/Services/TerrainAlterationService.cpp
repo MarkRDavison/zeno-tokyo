@@ -14,7 +14,7 @@ namespace drl
 		if (m_TerrainData.shaftLevel == _level - 1)
 		{
 			m_TerrainData.shaftLevel = _level;
-			if (m_TerrainData.shaftLevel >= m_TerrainData.rows.size())
+			if (m_TerrainData.shaftLevel >= (int)m_TerrainData.rows.size())
 			{
 				m_TerrainData.rows.emplace_back();
 			}
@@ -172,14 +172,14 @@ namespace drl
 
 		if (_column > 0)
 		{
-			if (static_cast<int>(row.rightTiles.size()) > xCoord)
+			if (static_cast<unsigned>(row.rightTiles.size()) > xCoord)
 			{
 				return true;
 			}
 		}
 		else
 		{
-			if (static_cast<int>(row.leftTiles.size()) > xCoord)
+			if (static_cast<unsigned>(row.leftTiles.size()) > xCoord)
 			{
 				return true;
 			}

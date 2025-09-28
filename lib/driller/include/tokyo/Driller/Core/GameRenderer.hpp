@@ -36,9 +36,6 @@ namespace drl
 		void update(float _delta);
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	private:
-		tokyo::FontManager& m_FontManager;
-		tokyo::TextureManager& m_TextureManager;
-		GameData& m_GameData;
 		TerrainView m_TerrainView;
 		WorkerView m_WorkerView;
 		ShuttleView m_ShuttleView;

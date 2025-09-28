@@ -19,9 +19,6 @@ namespace drl
 		const ITerrainAlterationService& _terrainAlterationService,
 		IUiService& _uiService
 	) :
-		m_FontManager(_fontManager),
-		m_TextureManager(_textureManager),
-		m_GameData(_gameData),
 		m_TerrainView(_gameData.terrain, _textureManager),
 		m_WorkerView(_gameData.worker, _workerPrototypeService, _textureManager),
 		m_ShuttleView(_gameData.shuttle, _shuttlePrototypeService, _textureManager),
