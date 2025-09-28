@@ -5,7 +5,6 @@ namespace drl
 {
 
 	UiView::UiView(
-		const GameData& _gameData,
 		IGameCommandService& _gameCommandService,
 		const tokyo::FontManager& _fontManager,
 		const tokyo::TextureManager& _textureManager,
@@ -14,7 +13,6 @@ namespace drl
 		const ITerrainAlterationService& _terrainAlterationService,
 		IUiService& _uiService
 	) :
-		m_GameData(_gameData),
 		m_GameCommandService(_gameCommandService),
 		m_FontManager(_fontManager),
 		m_TextureManager(_textureManager),
@@ -136,6 +134,7 @@ namespace drl
 		_target.draw(oreText, _states);
 
 		_states.transform.translate({ 0.0f, 32.0f });
+		_states.texture = &m_TextureManager.getTexture(Constants::TileSpriteSheetTextureName);
 
 		_target.draw(moneyText, _states);
 	}

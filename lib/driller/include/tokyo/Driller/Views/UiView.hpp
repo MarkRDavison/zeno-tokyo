@@ -15,7 +15,6 @@ namespace drl
 	{
 	public:
 		UiView(
-			const GameData& _gameData,
 			IGameCommandService& _gameCommandService,
 			const tokyo::FontManager& _fontManager,
 			const tokyo::TextureManager& _textureManager,
@@ -30,7 +29,6 @@ namespace drl
 		void draw(sf::RenderTarget& _target, sf::RenderStates _states) const override;
 
 	private:
-		const GameData& m_GameData;
 		IGameCommandService& m_GameCommandService;
 		const tokyo::FontManager& m_FontManager;
 		const tokyo::TextureManager& m_TextureManager;

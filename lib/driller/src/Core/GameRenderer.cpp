@@ -24,7 +24,7 @@ namespace drl
 		m_ShuttleView(_gameData.shuttle, _shuttlePrototypeService, _textureManager),
 		m_BuildingView(_gameData.building, _buildingPrototypeService, _textureManager),
 		m_JobView(_gameData.job, _jobPrototypeService, _textureManager),
-		m_UiView(_gameData, _gameCommandService, _fontManager, _textureManager, _inputActionManager, _resourceService, _terrainAlterationService, _uiService)
+		m_UiView(_gameCommandService, _fontManager, _textureManager, _inputActionManager, _resourceService, _terrainAlterationService, _uiService)
 	{
 
 	}
