@@ -85,7 +85,7 @@ namespace tokyo
 		bool hasAttribute(const XmlNode* _node, const std::string& _name);
 
 		template <typename T>
-		static T getAttribute(const XmlNode* _node, const std::string& _name)
+		static T getAttribute(const XmlNode*, const std::string&)
 		{
 			throw std::exception();
 		}
