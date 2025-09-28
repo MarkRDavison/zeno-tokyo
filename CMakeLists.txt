@@ -21,17 +21,6 @@ if (CMAKE_VERSION VERSION_GREATER_EQUAL 3.19)
 endif()
 
 ADD_SUBDIRECTORY(thirdparty)
-
-if (TOKYO_STRICT)
-    if (MSVC)
-        # warning level 4
-        add_compile_options(/W4)
-    else()
-        # additional warnings
-        add_compile_options(-Wall -Wextra -Wpedantic)
-    endif()
-endif()
-
 ADD_SUBDIRECTORY(lib)
 ADD_SUBDIRECTORY(app)
 ENABLE_TESTING()

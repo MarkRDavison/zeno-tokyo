@@ -16,6 +16,16 @@ FUNCTION(submodule MODULE_NAME MODULE_LIBS INCLUDE_DIRS)
 	SET_PROPERTY(TARGET ${LIB_NAME} PROPERTY CXX_STANDARD ${TOKYO_CXX_STANDARD})
 	SET_PROPERTY(TARGET ${LIB_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 	TARGET_INCLUDE_DIRECTORIES(${LIB_NAME} PUBLIC ${LIBRARY_INCLUDE_PATH})
+		
+	if (TOKYO_STRICT)
+		if (MSVC)
+			# warning level 4
+			target_compile_options(${LIB_NAME} PRIVATE /W4)
+		else()
+			# additional warnings
+			target_compile_options(${LIB_NAME} PRIVATE -Wall -Wextra -Wpedantic)
+		endif()
+	endif()
 
 	foreach(liblib IN LISTS MODULE_LIBS)
 		TARGET_LINK_LIBRARIES(${LIB_NAME} PUBLIC ${liblib})
