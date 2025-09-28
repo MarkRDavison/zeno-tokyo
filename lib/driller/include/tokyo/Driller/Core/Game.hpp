@@ -15,9 +15,6 @@ namespace drl
 	{
 	public:
 		Game(
-			GameData& _gameData,
-			tokyo::IInputManager& _inputManager,
-			tokyo::IInputActionManager& _inputActionManager,
 			IShuttleScheduleService& _shuttleScheduleService,
 			IJobAllocationService& _jobAllocationService,
 			IWorkerMovementService& _workerMovementService,
@@ -27,11 +24,6 @@ namespace drl
 		void update(float _delta);
 
 	private:
-		GameData& _gameData;
-
-		tokyo::IInputManager& _inputManager;
-		tokyo::IInputActionManager& _inputActionManager;
-
 		IShuttleScheduleService& m_ShuttleScheduleService;
 		IJobAllocationService& m_JobAllocationService;
 		IWorkerMovementService& m_WorkerMovementService;

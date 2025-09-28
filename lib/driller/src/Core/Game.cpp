@@ -4,17 +4,11 @@ namespace drl
 {
 
 	Game::Game(
-		GameData& _gameData,
-		tokyo::IInputManager& _inputManager,
-		tokyo::IInputActionManager& _inputActionManager,
 		IShuttleScheduleService& _shuttleScheduleService,
 		IJobAllocationService& _jobAllocationService,
 		IWorkerMovementService& _workerMovementService,
 		IWorkerJobUpdateService& _workerJobUpdateService
 	) :
-		_gameData(_gameData),
-		_inputManager(_inputManager),
-		_inputActionManager(_inputActionManager),
 		m_ShuttleScheduleService(_shuttleScheduleService),
 		m_JobAllocationService(_jobAllocationService),
 		m_WorkerMovementService(_workerMovementService),

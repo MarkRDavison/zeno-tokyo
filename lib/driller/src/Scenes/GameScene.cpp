@@ -60,9 +60,6 @@ namespace drl
 	void GameScene::start() 
 	{
 		m_Game = new Game(
-			m_GameData,
-			m_InputManager,
-			m_InputActionManager,
 			m_ShuttleScheduleService,
 			m_JobAllocationService,
 			m_WorkerMovementService,
