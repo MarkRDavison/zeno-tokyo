@@ -5,9 +5,7 @@ namespace drl
 {
 	GameScene::GameScene(
 		GameData& _gameData,
-		tokyo::IInputManager& _inputManager,
 		tokyo::IInputActionManager& _inputActionManager,
-		tokyo::ConfigurationManager& _configurationManager,
 		tokyo::FontManager& _fontManager,
 		tokyo::TextureManager& _textureManager,
 		const tokyo::IResourceService& _resourceService,
@@ -24,9 +22,7 @@ namespace drl
 		IUiService& _uiService
 	) :
 		m_GameData(_gameData),
-		m_InputManager(_inputManager),
 		m_InputActionManager(_inputActionManager),
-		m_ConfigurationManager(_configurationManager),
 		m_FontManager(_fontManager),
 		m_TextureManager(_textureManager),
 		m_ResourceService(_resourceService),

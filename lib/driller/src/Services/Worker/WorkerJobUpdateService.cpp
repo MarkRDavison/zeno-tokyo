@@ -15,8 +15,8 @@ namespace drl
     ) :
         m_WorkerData(_workerData),
         m_JobData(_jobData),
-        m_JobPrototypeService(_jobPrototypeService),
-        m_TerrainAlterationService(_terrainAlterationService)
+        m_TerrainAlterationService(_terrainAlterationService),
+        m_JobPrototypeService(_jobPrototypeService)
     {
 
     }

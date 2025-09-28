@@ -124,9 +124,7 @@ namespace drl
 
 		auto scene = new GameScene(
 			_gameData,
-			_managers.inputManager,
 			_managers.inputActionManager,
-			_managers.configManager,
 			_managers.fontManager,
 			_managers.textureManager,
 			_services.resourceService,
