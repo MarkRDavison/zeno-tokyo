@@ -82,6 +82,10 @@ namespace drl
 					const BuildingPrototype & (BuildingPrototypeId))
 			).Return({});
 
+			fakeit::When(
+				Method(package.terrainAlterationServiceMock, doesTileExist)
+			).Return(false);
+
 			REQUIRE_NOTHROW(package.service.canPlacePrototype(placeBuilding.prototypeId, placeBuilding.level, placeBuilding.column));
 
 			fakeit::Verify(

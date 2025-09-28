@@ -39,6 +39,7 @@ namespace drl
 				{
 					return false;
 				}
+
 				const auto& tile = m_TerrainAlterationService.getTile(level, col);
 				if (!tile.dugOut)
 				{
