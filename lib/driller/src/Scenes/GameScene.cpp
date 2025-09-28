@@ -89,7 +89,7 @@ namespace drl
 
 	void GameScene::update(float _delta) 
 	{
-		const auto tick = m_GameCommandService.getCurrentTick();
+		// const auto tick = m_GameCommandService.getCurrentTick();
 
 		if (m_Game != nullptr)
 		{

@@ -16,7 +16,7 @@ namespace drl
 
 	}
 
-	void BuildingView::update(float _delta)
+	void BuildingView::update(float)
 	{
 
 	}

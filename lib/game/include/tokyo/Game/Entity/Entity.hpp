@@ -18,14 +18,14 @@ namespace tokyo
 		void Update();
 
 		const std::string& GetName() const { return name; }
-		void SetName(const std::string& name) { this->name = name; }
+		void SetName(const std::string& _name) { name = _name; }
 
 		void AddTag(const std::string& tag);
 		void ClearTag(const std::string& tag);
 		bool HasTag(const std::string& tag) const;
 
 		bool IsRemoved() const { return removed; }
-		void SetRemoved(bool removed) { this->removed = removed; }
+		void SetRemoved(bool _removed) { removed = _removed; }
 
 		void RemoveComponent(Component* component);
 

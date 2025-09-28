@@ -80,7 +80,7 @@ namespace drl
 				}
 				else if (tileY >= 0)
 				{
-					int startX = tileX;
+					int startX = (int)tileX;
 					if (m_InputActionManager.isKeyDown(sf::Keyboard::Key::LShift) ||
 						m_InputActionManager.isKeyDown(sf::Keyboard::Key::RShift))
 					{

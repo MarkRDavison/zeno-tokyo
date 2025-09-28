@@ -50,7 +50,6 @@ namespace drl
 		{
 			return false;
 		}
-		const auto& prototype = m_JobPrototypeService.getPrototype(id);
 
 		auto& job = m_JobData.jobs.emplace_back(m_JobPrototypeService.createInstanceById(id));
 		job.additionalPrototypeId = 0;

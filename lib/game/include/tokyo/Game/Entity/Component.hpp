@@ -14,14 +14,14 @@ namespace tokyo
 		virtual void Update() {}
 
 		bool IsEnabled() const { return enabled; }
-		void SetEnabled(bool enable) { this->enabled = enable; }
+		void SetEnabled(bool _enable) { enabled = _enable; }
 
 		bool IsRemoved() const { return removed; }
-		void SetRemoved(bool removed) { this->removed = removed; }
+		void SetRemoved(bool _removed) { removed = _removed; }
 
 		Entity* GetEntity() const { return entity; }
 
-		void SetEntity(Entity* entity) { this->entity = entity; }
+		void SetEntity(Entity* _entity) { entity = _entity; }
 
 	private:
 		bool started = false;

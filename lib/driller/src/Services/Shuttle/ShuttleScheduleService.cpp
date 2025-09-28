@@ -111,7 +111,7 @@ namespace drl
 		}
 	}
 
-	void ShuttleScheduleService::updateShuttleOnArrivalAtDepartureDestination(ShuttleInstance& _shuttle, const ShuttlePrototype& _prototype) const
+	void ShuttleScheduleService::updateShuttleOnArrivalAtDepartureDestination(ShuttleInstance& _shuttle, const ShuttlePrototype&) const
 	{
 		_shuttle.state = ShuttleState::Idle;
 		_shuttle.position = _shuttle.startingPosition;

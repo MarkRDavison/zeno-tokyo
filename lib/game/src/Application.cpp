@@ -28,8 +28,8 @@ namespace tokyo
         {
             m_Window.create(_videoMode, m_Name, sf::Style::Default, sf::State::Windowed);
             m_Window.setPosition(sf::Vector2i(
-                sf::VideoMode::getDesktopMode().size.x * 0.5 - m_Window.getSize().x * 0.5,
-                sf::VideoMode::getDesktopMode().size.y * 0.5 - m_Window.getSize().y * 0.5)
+                (int)(sf::VideoMode::getDesktopMode().size.x * 0.5 - m_Window.getSize().x * 0.5),
+                (int)(sf::VideoMode::getDesktopMode().size.y * 0.5 - m_Window.getSize().y * 0.5))
             );
         }
 
@@ -98,7 +98,7 @@ namespace tokyo
             }
 
             // Render
-            render(m_Window, accumulator / delta);
+            render(m_Window);
             fps++;
         }
 
@@ -126,7 +126,7 @@ namespace tokyo
     }
     void Application::renderSplash()
     {
-        render(m_Window, 0.0f);
+        render(m_Window);
     }
     bool Application::splashFinished()
     {
@@ -147,8 +147,8 @@ namespace tokyo
         {
             m_Window.create(_videoMode, m_Name, sf::Style::Default, sf::State::Windowed);
             m_Window.setPosition(sf::Vector2i(
-                sf::VideoMode::getDesktopMode().size.x * 0.5 - m_Window.getSize().x * 0.5,
-                sf::VideoMode::getDesktopMode().size.y * 0.5 - m_Window.getSize().y * 0.5)
+                (int)(sf::VideoMode::getDesktopMode().size.x * 0.5 - m_Window.getSize().x * 0.5),
+                    (int)(sf::VideoMode::getDesktopMode().size.y * 0.5 - m_Window.getSize().y * 0.5))
             );
         }
 
@@ -186,7 +186,7 @@ namespace tokyo
             m_Scene->update(_delta);
         }
     }
-    void Application::render(sf::RenderTarget& _target, float _alpha)
+    void Application::render(sf::RenderTarget& _target)
     {
         m_Window.clear();
 

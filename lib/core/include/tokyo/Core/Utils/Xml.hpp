@@ -91,7 +91,7 @@ namespace tokyo
 		}
 
 		template <>
-		std::string getAttribute(const XmlNode* _node, const std::string& _name)
+		inline std::string getAttribute(const XmlNode* _node, const std::string& _name)
 		{
 			if (_node->attributes.count(_name) > 0)
 			{
@@ -101,7 +101,7 @@ namespace tokyo
 		}
 
 		template <>
-		bool getAttribute(const XmlNode* _node, const std::string& _name)
+		inline bool getAttribute(const XmlNode* _node, const std::string& _name)
 		{
 			if (_node->attributes.count(_name) > 0)
 			{
@@ -111,7 +111,7 @@ namespace tokyo
 		}
 
 		template <>
-		unsigned getAttribute(const XmlNode* _node, const std::string& _name)
+		inline unsigned getAttribute(const XmlNode* _node, const std::string& _name)
 		{
 			if (_node->attributes.count(_name) > 0)
 			{
@@ -121,7 +121,7 @@ namespace tokyo
 		}
 
 		template <>
-		int getAttribute(const XmlNode* _node, const std::string& _name)
+		inline int getAttribute(const XmlNode* _node, const std::string& _name)
 		{
 			if (_node->attributes.count(_name) > 0)
 			{
@@ -131,7 +131,7 @@ namespace tokyo
 		}
 
 		template <>
-		float getAttribute(const XmlNode* _node, const std::string& _name)
+		inline float getAttribute(const XmlNode* _node, const std::string& _name)
 		{
 			if (_node->attributes.count(_name) > 0)
 			{

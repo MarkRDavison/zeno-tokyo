@@ -18,15 +18,15 @@ namespace drl
 		IdType allocatedWorkerId;
 		sf::Vector2i tile;
 		sf::Vector2f offset;
-		bool requiresRemoval;
-		float work;
+		bool requiresRemoval{ false };
+		float work{ 0.0f };
 	};
 
 	struct JobPrototype
 	{
 		std::string name;
-		bool repeats;
-		float work;
+		bool repeats{ false };
+		float work{ 0.0f };
 		std::function<void(JobInstance)> onComplete;
 		std::function<sf::Vector2f(JobInstance, JobPrototype)> calculateOffset;
 	};

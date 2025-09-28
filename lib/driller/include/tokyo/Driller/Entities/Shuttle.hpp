@@ -41,9 +41,9 @@ namespace drl
 		std::string name;
 		sf::Vector2i size;
 		sf::Vector2i texture; // Top Left corner
-		float idleTime;
-		float loadingTime;
-		float speed;
+		float idleTime{ 0.0f };
+		float loadingTime{ 0.0f };
+		float speed{ 0.0f };
 		std::unordered_set<std::string> allowedCargo;
 	};
 

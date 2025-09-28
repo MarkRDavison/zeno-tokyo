@@ -15,7 +15,7 @@ namespace drl
 
 	}
 
-	void JobView::update(float _delta)
+	void JobView::update(float)
 	{
 
 	}

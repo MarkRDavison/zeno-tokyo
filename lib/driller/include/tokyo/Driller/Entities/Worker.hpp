@@ -28,8 +28,8 @@ namespace drl
 
 		// TODO: Wander state struct???
 		sf::Vector2f wanderTarget;
-		float idleTime;
-		float wanderBackoff;
+		float idleTime{ 0.0f };
+		float wanderBackoff{ 0.0f };
 	};
 
 	struct WorkerPrototype

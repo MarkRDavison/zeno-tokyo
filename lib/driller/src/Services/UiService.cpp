@@ -13,7 +13,7 @@ namespace drl
 	{
 
 	}
-	void UiService::update(float _delta)
+	void UiService::update(float)
 	{
 		if (m_InputActionManager.isActionInvoked(drl::Constants::CancelActionName))
 		{

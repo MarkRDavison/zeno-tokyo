@@ -202,7 +202,7 @@ namespace drl
 			JobPrototype p;
 			Tile t;
 			sf::Vector2f offset = { 1.0f, 2.0f };
-			p.calculateOffset = [&](JobInstance _job, JobPrototype _prototype) -> sf::Vector2f
+			p.calculateOffset = [&](JobInstance, JobPrototype) -> sf::Vector2f
 				{
 					return offset;
 				};

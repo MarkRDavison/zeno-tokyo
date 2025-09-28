@@ -6,7 +6,7 @@ namespace drl
 		sf::VertexArray& _vertex,
 		sf::Vector2u _textureTileCoordinates,
 		sf::Vector2i _tileCoordinates,
-		sf::Vector2f _textureSize,
+		sf::Vector2f,
 		sf::Vector2f _offset
 	) const
 	{
@@ -20,8 +20,8 @@ namespace drl
 			_offset,
 			sf::Color::White,
 			sf::Vector2f(
-				_textureTileCoordinates.x + 0,
-				_textureTileCoordinates.y + 0
+				(float)(_textureTileCoordinates.x + 0),
+				(float)(_textureTileCoordinates.y + 0)
 			) * TEXTURE_CELL_SIZE +
 			sf::Vector2f(+EPSILON, -EPSILON))
 		);
@@ -32,8 +32,8 @@ namespace drl
 			_offset,
 			sf::Color::White,
 			sf::Vector2f(
-				_textureTileCoordinates.x + 1,
-				_textureTileCoordinates.y + 0
+				(float)(_textureTileCoordinates.x + 1),
+				(float)(_textureTileCoordinates.y + 0)
 			) * TEXTURE_CELL_SIZE +
 			sf::Vector2f(-EPSILON, -EPSILON))
 		);
@@ -44,8 +44,8 @@ namespace drl
 			_offset,
 			sf::Color::White,
 			sf::Vector2f(
-				_textureTileCoordinates.x + 1,
-				_textureTileCoordinates.y + 1
+				(float)(_textureTileCoordinates.x + 1),
+				(float)(_textureTileCoordinates.y + 1)
 			) * TEXTURE_CELL_SIZE +
 			sf::Vector2f(-EPSILON, +EPSILON))
 		);
@@ -57,8 +57,8 @@ namespace drl
 			_offset,
 			sf::Color::White,
 			sf::Vector2f(
-				_textureTileCoordinates.x + 0,
-				_textureTileCoordinates.y + 0
+				(float)(_textureTileCoordinates.x + 0),
+				(float)(_textureTileCoordinates.y + 0)
 			) * TEXTURE_CELL_SIZE +
 			sf::Vector2f(+EPSILON, -EPSILON))
 		);
@@ -69,8 +69,8 @@ namespace drl
 			_offset,
 			sf::Color::White,
 			sf::Vector2f(
-				_textureTileCoordinates.x + 1,
-				_textureTileCoordinates.y + 1
+				(float)(_textureTileCoordinates.x + 1),
+				(float)(_textureTileCoordinates.y + 1)
 			) * TEXTURE_CELL_SIZE +
 			sf::Vector2f(-EPSILON, +EPSILON))
 		);
@@ -81,8 +81,8 @@ namespace drl
 			_offset,
 			sf::Color::White,
 			sf::Vector2f(
-				_textureTileCoordinates.x + 0,
-				_textureTileCoordinates.y + 1
+				(float)(_textureTileCoordinates.x + 0),
+				(float)(_textureTileCoordinates.y + 1)
 			) * TEXTURE_CELL_SIZE +
 			sf::Vector2f(+EPSILON, +EPSILON))
 		);

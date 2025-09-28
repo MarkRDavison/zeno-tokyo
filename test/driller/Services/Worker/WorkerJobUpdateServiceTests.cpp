@@ -210,8 +210,6 @@ namespace drl
 				const JobPrototype & (JobPrototypeId)
 			)).Return(jp);
 
-			const float delta = 1.0f;
-
 			package.service.updateWorkerJob(jp.work / 2.0f, w, j);
 			REQUIRE(j.work == jp.work / 2.0f);
 			package.service.updateWorkerJob(jp.work / 2.0f, w, j);
@@ -238,7 +236,7 @@ namespace drl
 			jp.work = 3.0f;
 			jp.repeats = false;
 			jp.onComplete =
-				[&callbackInvoked](const JobInstance& _j) -> void
+				[&callbackInvoked](const JobInstance&) -> void
 				{
 					callbackInvoked = true;
 				};
@@ -280,7 +278,7 @@ namespace drl
 			jp.work = 3.0f;
 			jp.repeats = true;
 			jp.onComplete =
-				[&callbackInvokedCount](const JobInstance& _j) -> void
+				[&callbackInvokedCount](const JobInstance&) -> void
 				{
 					callbackInvokedCount++;
 				};

@@ -54,12 +54,12 @@ WorkerMovementService::WorkerMovementService(
 				if (offset != 0)
 				{
 					auto pos = _worker.position.x + (float)offset;
-					const float tileX = static_cast<int>(pos < 0.0f
+					const float tileX = (float)static_cast<int>(pos < 0.0f
 						? std::floor(pos + 0.5f)
 						: std::ceil(pos - 0.5f));
-					const float tileY = static_cast<int>(_worker.position.y - 1);
+					const float tileY = (float)static_cast<int>(_worker.position.y - 1);
 
-					if (m_TerrainAlterationService.canTileBeReached(tileY, tileX))
+					if (m_TerrainAlterationService.canTileBeReached((int)tileY, (int)tileX))
 					{
 						_worker.wanderTarget = { tileX, _worker.position.y };
 						_worker.wanderBackoff = 1.0f;

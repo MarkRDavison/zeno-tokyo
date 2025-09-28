@@ -6,10 +6,15 @@
 #include <sstream>
 #include <cstdint>
 
-#include <tokyo/Core/Utils/ConstExpr.hpp>
 
 namespace tokyo
 {
+	template <typename T, typename Enable = void>
+	struct is_optional : std::false_type {};
+
+	template <typename T>
+	struct is_optional<std::optional<T>> : std::true_type {};
+
 	class String
 	{
 	public:
@@ -66,7 +71,7 @@ namespace tokyo
 			{
 				return "null";
 			}
-			else if constexpr (is_optional_v<T>)
+			else if constexpr (tokyo::is_optional<T>::value)
 			{
 				if (!val.has_value())
 					return "null";
@@ -98,7 +103,7 @@ namespace tokyo
 			{
 				return str == "true" || From<std::optional<int32_t>>(str) == 1;
 			}
-			else if constexpr (is_optional_v<T>)
+			else if constexpr (tokyo::is_optional<T>::value)
 			{
 				typedef typename T::value_type base_type;
 				base_type temp;

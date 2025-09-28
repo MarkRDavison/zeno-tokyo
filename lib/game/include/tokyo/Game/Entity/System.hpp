@@ -20,9 +20,9 @@ namespace tokyo
 		virtual void Update(std::vector<Entity*> entities) = 0;
 
 		bool IsEnabled() const { return enabled; }
-		void SetEnabled(bool enable) { this->enabled = enable; }
+		void SetEnabled(bool _enable) { enabled = _enable; }
 
-		void SetQueryTag(const std::string& tag) { this->tag = tag; }
+		void SetQueryTag(const std::string& _tag) { tag = _tag; }
 		void ClearQueryTag() { this->tag = {}; }
 
 	protected:

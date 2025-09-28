@@ -10,7 +10,7 @@
 
 #include <thread>
 
-int main(int _argc, char** _argv)
+int main(int, char**)
 {
     std::cout << "TODO: Display fps on window not console, also option on app to do so? Maybe debug overlay/performance" << std::endl;
     std::cout << "TODO: Cancel action to remove job etc" << std::endl;

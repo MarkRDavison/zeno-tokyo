@@ -98,7 +98,7 @@ namespace drl
 		}
 	}
 
-	bool GameCommandService::handleDigShaft(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::DigShaftEvent _event)
+	bool GameCommandService::handleDigShaft(GameCommand::CommandContext, GameCommand::CommandSource _source, GameCommand::DigShaftEvent _event)
 	{
 		// TODO: Consolidate into terrainalterationservice?
 		// Should that service know about the command source????
@@ -118,33 +118,33 @@ namespace drl
 
 		return m_TerrainAlterationService.digShaft(_event.level);
 	}
-	bool GameCommandService::handleDigTile(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::DigTileEvent _event)
+	bool GameCommandService::handleDigTile(GameCommand::CommandContext, GameCommand::CommandSource, GameCommand::DigTileEvent _event)
 	{
 		return m_TerrainAlterationService.digTile(_event.level, _event.column);
 	}
-	bool GameCommandService::handlePlaceBuilding(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::PlaceBuildingEvent _event)
+	bool GameCommandService::handlePlaceBuilding(GameCommand::CommandContext, GameCommand::CommandSource, GameCommand::PlaceBuildingEvent _event)
 	{
 		return m_BuildingPlacementService.placePrototype(_event.prototypeId, _event.level, _event.column);
 	}
-	bool GameCommandService::handleCreateWorker(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateWorkerEvent _event)
+	bool GameCommandService::handleCreateWorker(GameCommand::CommandContext, GameCommand::CommandSource, GameCommand::CreateWorkerEvent _event)
 	{
 		return m_WorkerCreationService.createWorker(_event.prototypeId, _event.coordinates);
 	}
-	bool GameCommandService::handleCreateShuttle(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateShuttleEvent _event)
+	bool GameCommandService::handleCreateShuttle(GameCommand::CommandContext, GameCommand::CommandSource, GameCommand::CreateShuttleEvent _event)
 	{
 		return m_ShuttleCreationService.createShuttle(_event.prototypeId);
 	}
-	bool GameCommandService::handleAddResource(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::AddResourceEvent _event)
+	bool GameCommandService::handleAddResource(GameCommand::CommandContext, GameCommand::CommandSource, GameCommand::AddResourceEvent _event)
 	{
 		m_ResourceService.updateResource(_event.resource.id, _event.resource.amount);
 		return true;
 	}
-	bool GameCommandService::handleCreateJob(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::CreateJobEvent _event)
+	bool GameCommandService::handleCreateJob(GameCommand::CommandContext, GameCommand::CommandSource, GameCommand::CreateJobEvent _event)
 	{
 		return m_JobCreationService.createJob(_event.prototypeId, _event.additionalPrototypeId, _event.coordinates);
 	}
 
-	bool GameCommandService::handleAddingUpgrade(GameCommand::CommandContext _context, GameCommand::CommandSource _source, GameCommand::AddUpgradeEvent _event)
+	bool GameCommandService::handleAddingUpgrade(GameCommand::CommandContext, GameCommand::CommandSource, GameCommand::AddUpgradeEvent _event)
 	{
 		m_UpgradeService.addUpgrade(_event.upgradeId, _event.value);
 		return true;

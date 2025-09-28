@@ -19,9 +19,15 @@ namespace drl
 		{
 			return false;
 		}
+
 		const auto& prototype = m_ShuttlePrototypeService.getPrototype(_id);
 
 		m_ShuttleData.shuttles.emplace_back(m_ShuttlePrototypeService.createInstanceById(_id));
+
+		if (prototype.speed > 1.0f)
+		{
+			// TODO: TEMP
+		}
 
 		return true;
 	}

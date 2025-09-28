@@ -15,7 +15,7 @@ namespace drl
 
 	}
 
-	void ShuttleView::update(float _delta)
+	void ShuttleView::update(float)
 	{
 
 	}

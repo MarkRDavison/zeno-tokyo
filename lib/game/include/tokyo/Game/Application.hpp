@@ -35,7 +35,7 @@ namespace tokyo
 
     private:
         void update(float _delta);
-        void render(sf::RenderTarget& _target, float _alpha);
+        void render(sf::RenderTarget& _target);
 
     private:
         bool m_Running{ false };

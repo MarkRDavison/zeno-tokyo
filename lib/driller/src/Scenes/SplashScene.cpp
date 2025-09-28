@@ -4,7 +4,7 @@
 namespace drl
 {
 
-	void SplashScene::update(float delta)
+	void SplashScene::update(float)
 	{
 
 	}

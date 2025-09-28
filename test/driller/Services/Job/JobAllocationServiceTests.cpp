@@ -42,7 +42,6 @@ namespace drl
 
 			WorkerPrototype wp{};
 			package.terrainData.shaftLevel = 0;
-			auto& row = package.terrainData.rows.emplace_back();
 
 			auto& j = package.jobData.jobs.emplace_back();
 			j.Id = 22;

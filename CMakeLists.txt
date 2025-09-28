@@ -5,8 +5,11 @@ SET(TOKYO_CXX_STANDARD 23)
 
 SET(CMAKE_CXX_STANDARD ${TOKYO_CXX_STANDARD})
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+OPTION(CMAKE_COMPILE_WARNING_AS_ERROR "Compile warnings as errors" ON)
+OPTION(TOKYO_STRICT "Enable strict compile options" ON)
 
 LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 
 SET(CMAKE_DEBUG_POSTFIX "-d")
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -18,6 +21,17 @@ if (CMAKE_VERSION VERSION_GREATER_EQUAL 3.19)
 endif()
 
 ADD_SUBDIRECTORY(thirdparty)
+
+if (TOKYO_STRICT)
+    if (MSVC)
+        # warning level 4
+        add_compile_options(/W4)
+    else()
+        # additional warnings
+        add_compile_options(-Wall -Wextra -Wpedantic)
+    endif()
+endif()
+
 ADD_SUBDIRECTORY(lib)
 ADD_SUBDIRECTORY(app)
 ENABLE_TESTING()

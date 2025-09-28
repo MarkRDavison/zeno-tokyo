@@ -14,13 +14,12 @@ namespace drl
 
 	}
 
-	void TerrainView::update(float _delta)
+	void TerrainView::update(float)
 	{
 
 	}
 	void TerrainView::draw(sf::RenderTarget& _target, sf::RenderStates _states) const
 	{
-		const float TSize{ 64.0f };
 		const sf::Vector2u DefaultTerrain{ 0, 0 };
 		const sf::Vector2u DugOutTerrain{ 1, 0 };
 		const sf::Vector2u LadderTerrain{ 0, 1 };
