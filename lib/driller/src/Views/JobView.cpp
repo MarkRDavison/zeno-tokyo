@@ -30,15 +30,18 @@ namespace drl
 
 		for (const auto& j : m_JobData.jobs)
 		{
-			const sf::Vector2f tile(j.tile);
-			sf::RenderStates states(_states);
-			states.transform.translate(sf::Vector2f{ tile.x, -tile.y - 0.5f });
-			c.setFillColor(j.allocatedWorkerId != 0
-				? sf::Color::Green
-				: sf::Color::Red);
-			_target.draw(c, states);
-			states.transform.translate({ j.offset.x, -j.offset.y });
-			_target.draw(o, states);
+			if (m_JobPrototypeService.isPrototypeRegistered(j.prototypeId))
+			{
+				const sf::Vector2f tile(j.tile);
+				sf::RenderStates states(_states);
+				states.transform.translate(sf::Vector2f{ tile.x, -tile.y - 0.5f });
+				c.setFillColor(j.allocatedWorkerId != 0
+					? sf::Color::Green
+					: sf::Color::Red);
+				_target.draw(c, states);
+				states.transform.translate({ j.offset.x, -j.offset.y });
+				_target.draw(o, states);
+			}
 		}
 	}
 }
