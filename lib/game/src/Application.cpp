@@ -128,10 +128,12 @@ namespace tokyo
     {
         render(m_Window);
     }
+
     bool Application::splashFinished()
     {
         return splashFinished(m_StartingMode);
     }
+
     bool Application::splashFinished(const sf::VideoMode& _videoMode)
     {
         m_Window.clear();

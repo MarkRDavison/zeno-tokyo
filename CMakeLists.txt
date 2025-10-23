@@ -10,7 +10,6 @@ OPTION(TOKYO_STRICT "Enable strict compile options" ON)
 
 LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-
 SET(CMAKE_DEBUG_POSTFIX "-d")
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 	add_definitions(-DTOKYO_DEBUG)
@@ -22,6 +21,17 @@ endif()
 
 ADD_SUBDIRECTORY(thirdparty)
 ADD_SUBDIRECTORY(lib)
-ADD_SUBDIRECTORY(app)
-ENABLE_TESTING()
-ADD_SUBDIRECTORY(test)
+
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+    # We're in the root, define additional targets for developers.
+    option(TOKYO_BUILD_APPS     "whether or not apps should be built" ON)
+    option(TOKYO_BUILD_TESTS    "whether or not tests should be built" ON)
+
+    if(TOKYO_BUILD_APPS)
+        ADD_SUBDIRECTORY(app)
+    endif()
+    if(TOKYO_BUILD_TESTS)
+        ENABLE_TESTING()
+        ADD_SUBDIRECTORY(test)
+    endif()
+endif()

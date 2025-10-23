@@ -1,0 +1,12 @@
+#pragma once
+
+namespace plt 
+{
+
+	class PlatformerConfig
+	{
+	public:
+		static constexpr const char RootPath[] = "${CMAKE_CURRENT_SOURCE_DIR}";		
+	};
+
+}

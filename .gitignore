@@ -47,3 +47,4 @@ out
 *.meshbin
 /.idea
 /app/Driller/DrillerConfig.hpp
+/app/platformer/PlatformerConfig.hpp

@@ -2,7 +2,6 @@
 #include <tokyo/Game/Application.hpp>
 #include <tokyo/Driller/Scenes/SplashScene.hpp>
 #include <tokyo/Driller/Constants.hpp>
-#include <tokyo/Driller/Constants.hpp>
 #include <tokyo/Driller/ManagerPackage.hpp>
 #include <tokyo/Driller/ServicePackage.hpp>
 #include <tokyo/Driller/Orchestration.hpp>
