@@ -1,64 +1,91 @@
 #include <SFML/Graphics.hpp>
-#include <tokyo/Core/Log.hpp>
-#include <tokyo/Game/InputActionManager.hpp>
+#include <SFML/Window/VideoMode.hpp>
+#include <tokyo/Bees/Constants.hpp>
+#include "BeesConfig.hpp"
+#include <tokyo/Bees/Scenes/SplashScene.hpp>
+#include <tokyo/Bees/Scenes/GameScene.hpp>
+#include <tokyo/Bees/BeeInstance.hpp>
+#include <thread>
 
 int main()
 {
-    auto window = sf::RenderWindow(sf::VideoMode({ 1280, 720 }), "Tokyo Bees");
-    window.setVerticalSyncEnabled(true);
 
-    tokyo::InputManager inputManager(window);
-    tokyo::InputActionManager inputActionManager(inputManager);
+    tokyo::Application app;
+    app.setName(bee::Constants::Title);
 
-    inputActionManager.registerAction("LCLICK",
-        {
-            .primaryActivationType = tokyo::InputAction::InputActivationType::MouseButtonPress,
-            .primaryButton = sf::Mouse::Button::Left
-        });
+    bee::SplashScene splashScene;
 
-    inputActionManager.registerAction("SPACE",
-        {
-            .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
-            .primaryKey = sf::Keyboard::Key::Space
-        });
-
-    const std::string resourceRoot = "F:/Workspace/Github/zeno-tokyo/app/bees/data";
-
-    auto running = true;
-
-    while (running)
+    if (!app.startSplash(sf::VideoMode(), &splashScene))
     {
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-            {
-                running = false;
-            }
-        }
-
-        // update
-        {
-            if (inputActionManager.isActionInvoked("SPACE"))
-            {
-                tokyo::Log::Info("SPACE!!!\n");
-            }
-            if (inputActionManager.isActionInvoked("LCLICK"))
-            {
-                tokyo::Log::Info("LCLICK!!!\n");
-            }
-        }
-
-        inputActionManager.updateCachedInputs();
-
-        window.clear(sf::Color::Cyan);
-
-        // render
-        {
-
-        }
-
-        window.display();
+        return EXIT_FAILURE;
     }
 
-    window.close();
+    bee::BeeInstance::Initialise(app);
+
+    {
+        bee::BeeInstance::Get().FileManager.registerDirectory(bee::BeesConfig::RootPath);
+    }
+
+    const auto sleepTime = std::chrono::milliseconds(100);
+
+    {
+        std::this_thread::sleep_for(sleepTime);
+
+        {
+            bee::BeeInstance::Get().InputActionManager.registerAction("LCLICK",
+                {
+                    .primaryActivationType = tokyo::InputAction::InputActivationType::MouseButtonPress,
+                    .primaryButton = sf::Mouse::Button::Left
+                });
+
+            bee::BeeInstance::Get().InputActionManager.registerAction("SPACE",
+                {
+                    .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
+                    .primaryKey = sf::Keyboard::Key::Space
+                });
+        }
+    }
+    splashScene.m_Percentage += 20.0f;
+    app.renderSplash();
+
+    {
+        std::this_thread::sleep_for(sleepTime);
+    }
+    splashScene.m_Percentage += 20.0f;
+    app.renderSplash();
+
+    {
+        std::this_thread::sleep_for(sleepTime);
+    }
+    splashScene.m_Percentage += 20.0f;
+    app.renderSplash();
+
+    {
+        std::this_thread::sleep_for(sleepTime);
+    }
+    splashScene.m_Percentage += 20.0f;
+    app.renderSplash();
+
+    {
+        std::this_thread::sleep_for(sleepTime);
+    }
+    splashScene.m_Percentage += 20.0f;
+    app.renderSplash();
+    
+    {
+        if (!app.splashFinished(sf::VideoMode({ 1280, 720 })))
+        {
+            return EXIT_FAILURE;
+        }
+
+        auto scene = new bee::GameScene();
+
+        scene->start();
+        app.setScene(scene);
+        app.setAppSpeedMultiplier(4.0f);
+    }
+
+    app.start();
+
+    return EXIT_SUCCESS;
 }

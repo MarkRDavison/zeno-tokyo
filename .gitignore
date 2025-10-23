@@ -48,3 +48,4 @@ out
 /.idea
 /app/Driller/DrillerConfig.hpp
 /app/platformer/PlatformerConfig.hpp
+/app/Bees/BeesConfig.hpp
