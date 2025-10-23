@@ -4,6 +4,7 @@
 #include <tokyo/Game/Application.hpp>
 #include <tokyo/Game/InputActionManager.hpp>
 #include <tokyo/Core/Infrastructure/FileManager.hpp>
+#include <tokyo/Bees/World/Level.hpp>
 
 namespace bee
 {
@@ -39,6 +40,7 @@ namespace bee
 		tokyo::InputManager InputManager;
 		tokyo::InputActionManager InputActionManager;
 		tokyo::FileManager FileManager;
+		Level* ActiveLevel{ nullptr };
 
 	private:
 		static BeeInstance* _instance;

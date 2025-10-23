@@ -82,7 +82,7 @@ int main()
 
         scene->start();
         app.setScene(scene);
-        app.setAppSpeedMultiplier(4.0f);
+        app.setAppSpeedMultiplier(1.0f);
     }
 
     app.start();
