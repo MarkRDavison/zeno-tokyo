@@ -17,4 +17,4 @@
 - risk of diseases etc
 	- need preventative maintenance etc
 - maybe have villager interaction/romance/friendships etc
-- 
+- Tile/grid based layout, but free movement for entities within it

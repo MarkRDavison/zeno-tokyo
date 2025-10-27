@@ -2,8 +2,7 @@
 
 namespace bee
 {
-	BeeInstance* BeeInstance::_instance{ nullptr };
-
+	thread_local BeeInstance* BeeInstance::_instance{ nullptr };
 
 	BeeInstance::BeeInstance(
 		tokyo::Application& application

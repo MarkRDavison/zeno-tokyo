@@ -1,6 +1,7 @@
 #pragma once
 
 #include <tokyo/Core/Log.hpp>
+#include <tokyo/Core/Utils/NonCopyable.hpp>
 #include <tokyo/Game/Application.hpp>
 #include <tokyo/Game/InputActionManager.hpp>
 #include <tokyo/Core/Infrastructure/FileManager.hpp>
@@ -8,7 +9,7 @@
 
 namespace bee
 {
-	class BeeInstance
+	class BeeInstance : tokyo::NonCopyable
 	{
 	public:
 		static BeeInstance& Get()
@@ -43,7 +44,7 @@ namespace bee
 		Level* ActiveLevel{ nullptr };
 
 	private:
-		static BeeInstance* _instance;
+		static thread_local BeeInstance* _instance;
 		tokyo::Application& _application;
 	};
 }

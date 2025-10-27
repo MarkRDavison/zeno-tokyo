@@ -38,11 +38,39 @@ int main()
                     .primaryButton = sf::Mouse::Button::Left
                 });
 
+            bee::BeeInstance::Get().InputActionManager.registerAction(bee::Constants::Action_Left,
+                {
+                    .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
+                    .primaryKey = sf::Keyboard::Key::A
+                });
+            bee::BeeInstance::Get().InputActionManager.registerAction(bee::Constants::Action_Right,
+                {
+                    .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
+                    .primaryKey = sf::Keyboard::Key::D
+                });
+            bee::BeeInstance::Get().InputActionManager.registerAction(bee::Constants::Action_Up,
+                {
+                    .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
+                    .primaryKey = sf::Keyboard::Key::W
+                });
+            bee::BeeInstance::Get().InputActionManager.registerAction(bee::Constants::Action_Down,
+                {
+                    .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
+                    .primaryKey = sf::Keyboard::Key::S
+                });
+            bee::BeeInstance::Get().InputActionManager.registerAction(bee::Constants::Action_TEMP_PlaceHive,
+                {
+                    .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
+                    .primaryKey = sf::Keyboard::Key::H
+                });
+
             bee::BeeInstance::Get().InputActionManager.registerAction("SPACE",
                 {
                     .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
                     .primaryKey = sf::Keyboard::Key::Space
                 });
+
+            
         }
     }
     splashScene.m_Percentage += 20.0f;

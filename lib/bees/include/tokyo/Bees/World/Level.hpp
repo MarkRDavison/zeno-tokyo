@@ -1,8 +1,6 @@
 #pragma once
 
-#include <tokyo/Bees/World/Tile.hpp>
-#include <tokyo/Bees/World/Entities/Entity.hpp>
-#include <vector>
+#include <tokyo/Bees/World/Region.hpp>
 
 namespace bee
 {
@@ -12,19 +10,24 @@ namespace bee
 	public:
 		Level();
 
-		const int Width = 20;
-		const int Height = 10;
-
-		const Tile& getTile(int x, int y) const;
+		const int RegionWidth = 4;
+		const int RegionHeight = 2;
 
 		const std::vector<Entity*>& getEntities() const;
+		const std::vector<Region*>& getRegions() const;
 
 		void addEntity(Entity* entity);
+		void addRegion(Region* region);
+
+		void update(float delta);
+
+		const Tile& getTile(int x, int y) const;
+		Tile& getTile(int x, int y);
 
 	private:
-		std::vector<std::vector<Tile>> _tiles;
+		std::vector<Region*> _regions;
 		std::vector<Entity*> _entities;
-
+		std::vector<Entity*> _entitiesToAdd;
 	};
 
 }
