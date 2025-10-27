@@ -29,21 +29,12 @@ namespace bee
 
 	void GameScene::update(float delta)
 	{
-		if (BeeInstance::Get().InputActionManager.isActionInvoked("LCLICK"))
-		{
-			tokyo::Log::Debug("LCLICK Invoked!\n");
-		}
-
-		if (BeeInstance::Get().InputActionManager.isActionInvoked("SPACE"))
-		{
-			tokyo::Log::Debug("SPACE Invoked!\n");
-		}
-
 		if (auto level = BeeInstance::Get().ActiveLevel; level != nullptr)
 		{
 			level->update(delta);
 		}
 
+		BeeInstance::Get().GameTime.update(delta);
 		BeeInstance::Get().InputActionManager.updateCachedInputs();
 	}
 

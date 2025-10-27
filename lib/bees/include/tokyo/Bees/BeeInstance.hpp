@@ -6,6 +6,7 @@
 #include <tokyo/Game/InputActionManager.hpp>
 #include <tokyo/Core/Infrastructure/FileManager.hpp>
 #include <tokyo/Bees/World/Level.hpp>
+#include <tokyo/Bees/World/BeeGameTime.hpp>
 
 namespace bee
 {
@@ -38,6 +39,7 @@ namespace bee
 		BeeInstance(
 			tokyo::Application& application);
 
+		BeeGameTime GameTime;
 		tokyo::InputManager InputManager;
 		tokyo::InputActionManager InputActionManager;
 		tokyo::FileManager FileManager;

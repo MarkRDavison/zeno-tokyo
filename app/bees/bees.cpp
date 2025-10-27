@@ -32,12 +32,6 @@ int main()
         std::this_thread::sleep_for(sleepTime);
 
         {
-            bee::BeeInstance::Get().InputActionManager.registerAction("LCLICK",
-                {
-                    .primaryActivationType = tokyo::InputAction::InputActivationType::MouseButtonPress,
-                    .primaryButton = sf::Mouse::Button::Left
-                });
-
             bee::BeeInstance::Get().InputActionManager.registerAction(bee::Constants::Action_Left,
                 {
                     .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
@@ -62,12 +56,6 @@ int main()
                 {
                     .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
                     .primaryKey = sf::Keyboard::Key::H
-                });
-
-            bee::BeeInstance::Get().InputActionManager.registerAction("SPACE",
-                {
-                    .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
-                    .primaryKey = sf::Keyboard::Key::Space
                 });
 
             

@@ -7,6 +7,7 @@ namespace bee
 	BeeInstance::BeeInstance(
 		tokyo::Application& application
 	) : 
+		GameTime(60.0f),
 		_application(application),
 		InputManager(_application.getWindow()),
 		InputActionManager(InputManager),
