@@ -84,6 +84,13 @@ namespace tokyo
                         stop();
                     }
 
+                    if (auto resizedEvent = event->getIf<sf::Event::Resized>())
+                    {
+                        // update the view to the new size of the window
+                        sf::FloatRect visibleArea({}, sf::Vector2f(resizedEvent->size));
+                        m_Window.setView(sf::View(visibleArea));
+                    }
+
                     if (event.has_value() && m_Scene != nullptr)
                     {
                         //m_Scene->handleEvent(event);
