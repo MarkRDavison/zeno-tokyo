@@ -11,6 +11,7 @@ namespace bee
 		void update(float delta);
 
 		float getNormalisedTime() const;
+		float getNightThreshold() const;
 
 		bool isDay() const;
 		bool isNight() const;

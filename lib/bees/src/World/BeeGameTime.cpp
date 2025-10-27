@@ -45,6 +45,11 @@ namespace bee
 		return _timeOfDay / _daySecondLength;
 	}
 
+	float BeeGameTime::getNightThreshold() const
+	{
+		return _nightThreshold;
+	}
+
 	bool BeeGameTime::isDay() const
 	{
 		return getNormalisedTime() < _nightThreshold;

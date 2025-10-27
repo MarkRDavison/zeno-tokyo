@@ -2,6 +2,7 @@
 #include <tokyo/Bees/BeeInstance.hpp>
 #include <tokyo/Bees/World/Entities/Player.hpp>
 #include <tokyo/Bees/World/Entities/Hive.hpp>
+#include <tokyo/Bees/Graphics/TimeOfDayCircle.hpp>
 #include <tokyo/Core/Log.hpp>
 
 namespace bee
@@ -22,8 +23,8 @@ namespace bee
 		}
 
 		auto player = new Player();
-		player->TileX = 1;
-		player->TileY = 1;
+		player->TileX = 3;
+		player->TileY = 3;
 		BeeInstance::Get().ActiveLevel->addEntity(player);
 	}
 
@@ -142,5 +143,11 @@ namespace bee
 				}
 			}
 		}
+
+		TimeOfDayCircle todc(48.0f, BeeInstance::Get().GameTime);
+
+		states.transform.translate({ 64.0f, 64.0f });
+
+		target.draw(todc, states);
 	}
 }
