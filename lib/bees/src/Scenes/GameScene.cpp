@@ -129,7 +129,7 @@ namespace bee
 					{
 						sf::CircleShape c(SIZE / 2.0f);
 						c.setFillColor(sf::Color::White);
-						c.setPosition(sf::Vector2f((float)e->TileX, (float)e->TileY) * SIZE);
+						c.setPosition(sf::Vector2f((float)hive->TileX, (float)hive->TileY) * SIZE);
 						target.draw(c, states);
 					}
 					else

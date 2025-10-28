@@ -15,6 +15,20 @@ namespace tokyo
 {
     class ServiceProvider
     {
+    private:
+        template<typename Impl, typename... DepPtrs>
+        struct ImplHolder
+        {
+            std::tuple<std::shared_ptr<std::remove_reference_t<DepPtrs>>...> deps;
+            Impl impl;
+
+            template<std::size_t... I>
+            ImplHolder(std::tuple<std::shared_ptr<std::remove_reference_t<DepPtrs>>...> d, std::index_sequence<I...>)
+                : deps(std::move(d)),
+                impl(*std::get<I>(deps)...)
+            {
+            }
+        };
     public:
         explicit ServiceProvider(ServiceProvider* parent = nullptr)
             : parent(parent), root(parent ? parent->root : this)
@@ -29,7 +43,21 @@ namespace tokyo
             registerFactory<Interface>(
                 [lifetime](ServiceProvider& sp) -> std::shared_ptr<Interface>
                 {
-                    return std::make_shared<Impl>(*getDependency<Deps>(sp)...);
+                    // 1) gather dependencies as shared_ptr<Dep> (transient -> owning shared_ptr,
+                    //    scoped/singleton -> aliasing shared_ptr to existing instance)
+                    auto depsTuple = std::make_tuple(getDependency<Deps>(sp)...); // each element is std::shared_ptr<Deps>
+
+                    // 2) create holder that owns the dependency shared_ptrs and contains Impl
+                    using HolderT = ImplHolder<Impl, Deps...>;
+                    constexpr std::size_t N = sizeof...(Deps);
+
+                    // make_shared for Holder
+                    auto holder = std::make_shared<HolderT>(std::move(depsTuple), std::make_index_sequence<N>{});
+
+                    // 3) return an aliasing shared_ptr<Interface> that keeps holder alive,
+                    //    but points to the Impl object inside it
+                    Interface* implPtr = &holder->impl;
+                    return std::shared_ptr<Interface>(holder, implPtr);
                 },
                 lifetime
             );
