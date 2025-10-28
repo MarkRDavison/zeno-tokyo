@@ -18,16 +18,22 @@ namespace bee
 				auto targetTileX = this->TileX + offset.x;
 				auto targetTileY = this->TileY + offset.y;
 
-				auto& targetTile = activeLevel->getTile(targetTileX, targetTileY);
-				if (targetTile.Validity == TileValidity::CLEAR)
+				// TODO: Replace with try get tile?
+				if (activeLevel->tileExists(targetTileX, targetTileY))
 				{
-					targetTile.Validity = TileValidity::OCCUPIED;
+					auto& targetTile = activeLevel->getTile(targetTileX, targetTileY);
 
-					auto h = new Hive();
-					h->TileX = targetTileX;
-					h->TileY = targetTileY;
-					activeLevel->addEntity(h);
+					if (targetTile.Validity == TileValidity::CLEAR)
+					{
+						targetTile.Validity = TileValidity::OCCUPIED;
+
+						auto h = new Hive(HiveType::Common);
+						h->TileX = targetTileX;
+						h->TileY = targetTileY;
+						activeLevel->addEntity(h);
+					}
 				}
+
 			}
 		}
 
@@ -59,12 +65,16 @@ namespace bee
 			auto targetTileX = this->TileX + (int)offset.x;
 			auto targetTileY = this->TileY + (int)offset.y;
 
-			const auto& targetTile = activeLevel->getTile(targetTileX, targetTileY);
 
-			if (targetTile.Validity == TileValidity::CLEAR)
+			if (activeLevel->tileExists(targetTileX, targetTileY))
 			{
-				this->TileX = targetTileX;
-				this->TileY = targetTileY;
+				const auto& targetTile = activeLevel->getTile(targetTileX, targetTileY);
+
+				if (targetTile.Validity == TileValidity::CLEAR)
+				{
+					this->TileX = targetTileX;
+					this->TileY = targetTileY;
+				}
 			}
 		}
 	}

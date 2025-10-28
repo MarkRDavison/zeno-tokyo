@@ -70,4 +70,18 @@ namespace bee
 
 		throw std::runtime_error("Invalid tile coordinates");
 	}
+
+	bool Level::tileExists(int x, int y) const
+	{
+		for (const auto& region : _regions)
+		{
+			if (region->StartX <= x && x < region->StartX + region->Width &&
+				region->StartY <= y && y < region->StartY + region->Height)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }

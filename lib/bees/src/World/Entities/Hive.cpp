@@ -4,6 +4,13 @@
 
 namespace bee
 {
+	Hive::Hive(
+		HiveType type
+	) :
+		_type(type)
+	{
+
+	}
 
 	void Hive::update(float)
 	{
