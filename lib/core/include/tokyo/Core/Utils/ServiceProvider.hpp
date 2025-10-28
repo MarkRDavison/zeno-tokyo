@@ -1,4 +1,5 @@
 ﻿#pragma once
+
 #include <tokyo/Core/Utils/ServiceLifetime.hpp>
 
 #include <iostream>
@@ -43,19 +44,13 @@ namespace tokyo
             registerFactory<Interface>(
                 [lifetime](ServiceProvider& sp) -> std::shared_ptr<Interface>
                 {
-                    // 1) gather dependencies as shared_ptr<Dep> (transient -> owning shared_ptr,
-                    //    scoped/singleton -> aliasing shared_ptr to existing instance)
-                    auto depsTuple = std::make_tuple(getDependency<Deps>(sp)...); // each element is std::shared_ptr<Deps>
+                    auto depsTuple = std::make_tuple(getDependency<Deps>(sp)...);
 
-                    // 2) create holder that owns the dependency shared_ptrs and contains Impl
                     using HolderT = ImplHolder<Impl, Deps...>;
                     constexpr std::size_t N = sizeof...(Deps);
 
-                    // make_shared for Holder
                     auto holder = std::make_shared<HolderT>(std::move(depsTuple), std::make_index_sequence<N>{});
 
-                    // 3) return an aliasing shared_ptr<Interface> that keeps holder alive,
-                    //    but points to the Impl object inside it
                     Interface* implPtr = &holder->impl;
                     return std::shared_ptr<Interface>(holder, implPtr);
                 },
