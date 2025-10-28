@@ -18,8 +18,7 @@ namespace tokyo
             virtual IServiceB& getB() = 0;
         };
 
-        struct IServiceH { virtual void hello() = 0; virtual ~IServiceH() = default; virtual IServiceC& getC() = 0; virtual IServiceB& getB() = 0;
-        };
+        struct IServiceH { virtual void hello() = 0; virtual ~IServiceH() = default; virtual IServiceC& getC() = 0; virtual IServiceB& getB() = 0; };
         struct IServiceI { virtual void hello() = 0; virtual ~IServiceI() = default; virtual IServiceC& getC() = 0; };
 
 
@@ -155,7 +154,6 @@ namespace tokyo
             {
                 auto scope1 = root.createScope();
                 IServiceA& a1 = scope1.get<IServiceA>();
-                REQUIRE(&a1 != nullptr);
                 REQUIRE_NOTHROW(a1.hello());
             }
 

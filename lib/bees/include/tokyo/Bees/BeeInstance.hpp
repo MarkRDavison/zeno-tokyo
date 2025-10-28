@@ -40,6 +40,7 @@ namespace bee
 			tokyo::Application& application);
 
 		BeeGameTime GameTime;
+		tokyo::Application& _application;
 		tokyo::InputManager InputManager;
 		tokyo::InputActionManager InputActionManager;
 		tokyo::FileManager FileManager;
@@ -47,6 +48,5 @@ namespace bee
 
 	private:
 		static thread_local BeeInstance* _instance;
-		tokyo::Application& _application;
 	};
 }

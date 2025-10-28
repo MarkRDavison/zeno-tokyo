@@ -1,5 +1,6 @@
 #include <tokyo/Bees/Graphics/TimeOfDayCircle.hpp>
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 namespace bee
 {

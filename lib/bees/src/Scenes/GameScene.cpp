@@ -41,7 +41,6 @@ namespace bee
 
 	void GameScene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		const sf::Vector2f size(target.getSize());
 		const float SIZE = 64.0f;
 
 		auto activeLevel = BeeInstance::Get().ActiveLevel;
