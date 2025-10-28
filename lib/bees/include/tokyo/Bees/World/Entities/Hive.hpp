@@ -7,7 +7,10 @@ namespace bee
 
 	enum class HiveType
 	{
-		Common
+		Common,
+		Agricultural,
+		Metal,
+		Gem
 	};
 
 	class Hive : public Entity
