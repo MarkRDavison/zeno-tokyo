@@ -84,4 +84,17 @@ namespace bee
 
 		return false;
 	}
+
+	Entity* Level::getEntityAtTile(int x, int y) const
+	{
+		for (auto e : _entities)
+		{
+			if (e->TileX == x && e->TileY == y)
+			{
+				return e;
+			}
+		}
+
+		return nullptr;
+	}
 }

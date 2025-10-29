@@ -26,6 +26,8 @@ namespace bee
 
 		bool tileExists(int x, int y) const;
 
+		Entity* getEntityAtTile(int x, int y) const;
+
 	private:
 		std::vector<Region*> _regions;
 		std::vector<Entity*> _entities;

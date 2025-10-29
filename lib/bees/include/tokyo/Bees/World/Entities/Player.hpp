@@ -11,5 +11,8 @@ namespace bee
 		void update(float delta) override;
 
 		tokyo::Orientation _orientation{ tokyo::Orientation::RIGHT };
+
+	private:
+		sf::Vector2i getFacedTile() const;
 	};
 }

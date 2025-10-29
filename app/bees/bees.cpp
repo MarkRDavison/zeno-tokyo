@@ -57,6 +57,11 @@ int main()
                     .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
                     .primaryKey = sf::Keyboard::Key::H
                 });
+            bee::BeeInstance::Get().InputActionManager.registerAction(bee::Constants::Action_TEMP_Interact,
+                {
+                    .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
+                    .primaryKey = sf::Keyboard::Key::Space
+                });
 
             
         }
