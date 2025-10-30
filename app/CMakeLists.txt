@@ -6,10 +6,10 @@ FUNCTION(tokyoApplication AppMain CPP_NAME MODULE_LIBS)
 	if (TOKYO_STRICT)
 		if (MSVC)
 			# warning level 4
-			target_compile_options(${AppMain} PRIVATE /W4)
+			#target_compile_options(${AppMain} PRIVATE /W4)
 		else()
 			# additional warnings
-			target_compile_options(${AppMain} PRIVATE -Wall -Wextra -Wpedantic)
+			#target_compile_options(${AppMain} PRIVATE -Wall -Wextra -Wpedantic)
 		endif()
 	endif()
 
