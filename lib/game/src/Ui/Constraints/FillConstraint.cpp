@@ -1,5 +1,6 @@
 #include <tokyo/Game/Ui/Constraints/FillConstraint.hpp>
 #include <tokyo/Game/Ui/UiConstraints.hpp>
+#include <cassert>
 #include <cmath>
 
 namespace tokyo
