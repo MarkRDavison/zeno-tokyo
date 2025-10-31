@@ -11,7 +11,9 @@ namespace bee
 		_application(application),
 		InputManager(_application.getWindow()),
 		InputActionManager(InputManager),
-		FileManager()
+		FileManager(),
+		FontManager(FileManager),
+		TextureManager(FileManager)
 	{
 
 	}

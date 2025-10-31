@@ -52,11 +52,6 @@ int main()
                     .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
                     .primaryKey = sf::Keyboard::Key::S
                 });
-            bee::BeeInstance::Get().InputActionManager.registerAction(bee::Constants::Action_TEMP_PlaceHive,
-                {
-                    .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
-                    .primaryKey = sf::Keyboard::Key::H
-                });
             bee::BeeInstance::Get().InputActionManager.registerAction(bee::Constants::Action_TEMP_Interact,
                 {
                     .primaryActivationType = tokyo::InputAction::InputActivationType::KeyPress,
@@ -70,6 +65,11 @@ int main()
     app.renderSplash();
 
     {
+        if (!bee::BeeInstance::Get().TextureManager.loadTexture("/data/textures/hive.png", "hive") ||
+            !bee::BeeInstance::Get().TextureManager.loadTexture("/data/textures/bee.png", "bee"))
+        {
+            return EXIT_FAILURE;
+        }
         std::this_thread::sleep_for(sleepTime);
     }
     splashScene.m_Percentage += 20.0f;

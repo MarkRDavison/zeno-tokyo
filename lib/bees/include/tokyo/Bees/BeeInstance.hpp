@@ -4,6 +4,8 @@
 #include <tokyo/Core/Utils/NonCopyable.hpp>
 #include <tokyo/Game/Application.hpp>
 #include <tokyo/Game/InputActionManager.hpp>
+#include <tokyo/Core/Infrastructure/FontManager.hpp>
+#include <tokyo/Core/Infrastructure/TextureManager.hpp>
 #include <tokyo/Core/Infrastructure/FileManager.hpp>
 #include <tokyo/Bees/World/Level.hpp>
 #include <tokyo/Bees/World/BeeGameTime.hpp>
@@ -44,6 +46,8 @@ namespace bee
 		tokyo::InputManager InputManager;
 		tokyo::InputActionManager InputActionManager;
 		tokyo::FileManager FileManager;
+		tokyo::FontManager FontManager;
+		tokyo::TextureManager TextureManager;
 		Level* ActiveLevel{ nullptr };
 
 	private:

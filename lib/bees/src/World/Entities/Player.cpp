@@ -2,6 +2,7 @@
 #include <tokyo/Bees/World/Entities/Hive.hpp>
 #include <tokyo/Bees/BeeInstance.hpp>
 #include <tokyo/Bees/Constants.hpp>
+#include <algorithm>
 
 namespace bee
 {
@@ -15,21 +16,61 @@ namespace bee
 			{
 				auto targetTileCoord = getFacedTile();
 
-				// TODO: Replace with try get tile?
+				const auto& slot = getInventoryAtSlot(getActiveInventorySlot());
+
 				if (activeLevel->tileExists(targetTileCoord.x, targetTileCoord.y))
 				{
+					// TODO: Replace with try get tile?
 					auto& targetTile = activeLevel->getTile(targetTileCoord.x, targetTileCoord.y);
-
-					if (targetTile.Validity == TileValidity::OCCUPIED)
+					if (slot.texture.empty())
 					{
-						auto e = activeLevel->getEntityAtTile(targetTileCoord.x, targetTileCoord.y);
-
-						if (const Hive* hive = dynamic_cast<const Hive*>(e))
+						if (targetTile.Validity == TileValidity::OCCUPIED)
 						{
-							std::cout << "Hive at " << targetTileCoord.x << "," << targetTileCoord.y << std::endl;
-							for (const auto& [k, v] : hive->getInventory())
+							auto e = activeLevel->getEntityAtTile(targetTileCoord.x, targetTileCoord.y);
+
+							if (const Hive* hive = dynamic_cast<const Hive*>(e))
 							{
-								std::cout << " - " << k << ": " << v << std::endl;
+								const auto& hiveInventory = hive->getInventory();
+
+								std::cout << "TODO: Steal inventory" << std::endl;
+							}
+						}
+					}
+					else
+					{
+						if (slot.texture == "hive")
+						{
+							if (targetTile.Validity == TileValidity::CLEAR)
+							{
+								targetTile.Validity = TileValidity::OCCUPIED;
+
+								auto h = new Hive(HiveType::Common, 3, 5);
+								h->TileX = targetTileCoord.x;
+								h->TileY = targetTileCoord.y;
+								activeLevel->addEntity(h);
+							}
+						}
+						else if (slot.texture == "bee")
+						{
+							if (targetTile.Validity == TileValidity::OCCUPIED)
+							{
+								auto e = activeLevel->getEntityAtTile(targetTileCoord.x, targetTileCoord.y);
+
+								if (auto hive = dynamic_cast<Hive*>(e))
+								{
+									if (hive->addBee(BeeData
+										{
+											.species = "Honey",
+											.productivity = 1.0f
+										}))
+									{
+										tokyo::Log::Info("Added bee to hive!\n");
+									}
+									else
+									{
+										tokyo::Log::Warning("Failed to add bee to hive\n");
+									}
+								}
 							}
 						}
 					}
@@ -37,41 +78,15 @@ namespace bee
 			}
 		}
 
-		if (instance.InputActionManager.isActionInvoked(Constants::Action_TEMP_PlaceHive))
-		{
-
-			if (auto activeLevel = BeeInstance::Get().ActiveLevel; activeLevel != nullptr)
-			{
-				auto targetTileCoord = getFacedTile();
-
-				// TODO: Replace with try get tile?
-				if (activeLevel->tileExists(targetTileCoord.x, targetTileCoord.y))
-				{
-					auto& targetTile = activeLevel->getTile(targetTileCoord.x, targetTileCoord.y);
-
-					if (targetTile.Validity == TileValidity::CLEAR)
-					{
-						targetTile.Validity = TileValidity::OCCUPIED;
-
-						auto h = new Hive(HiveType::Common, 3, 5);
-						h->TileX = targetTileCoord.x;
-						h->TileY = targetTileCoord.y;
-						h->addBee(BeeData
-							{
-								.species = "Honey",
-								.productivity = 1.0f
-							});
-						h->addBee(BeeData
-							{
-								.species = "Wax",
-								.productivity = 0.25f
-							});
-						activeLevel->addEntity(h);
-					}
-				}
-
-			}
-		}
+		if (instance.InputActionManager.isKeyDown(sf::Keyboard::Key::Num1)) this->setActiveInventorySlot(0);
+		if (instance.InputActionManager.isKeyDown(sf::Keyboard::Key::Num2)) this->setActiveInventorySlot(1);
+		if (instance.InputActionManager.isKeyDown(sf::Keyboard::Key::Num3)) this->setActiveInventorySlot(2);
+		if (instance.InputActionManager.isKeyDown(sf::Keyboard::Key::Num4)) this->setActiveInventorySlot(3);
+		if (instance.InputActionManager.isKeyDown(sf::Keyboard::Key::Num5)) this->setActiveInventorySlot(4);
+		if (instance.InputActionManager.isKeyDown(sf::Keyboard::Key::Num6)) this->setActiveInventorySlot(5);
+		if (instance.InputActionManager.isKeyDown(sf::Keyboard::Key::Num7)) this->setActiveInventorySlot(6);
+		if (instance.InputActionManager.isKeyDown(sf::Keyboard::Key::Num8)) this->setActiveInventorySlot(7);
+		if (instance.InputActionManager.isKeyDown(sf::Keyboard::Key::Num9)) this->setActiveInventorySlot(8);
 
 		sf::Vector2f offset = {};
 
@@ -121,5 +136,22 @@ namespace bee
 		auto targetTileY = this->TileY + offset.y;
 
 		return { targetTileX, targetTileY };
+	}
+
+	int Player::getActiveInventorySlot() const
+	{
+		return _slotIndex;
+	}
+	void Player::setActiveInventorySlot(int slotIndex)
+	{
+		_slotIndex = std::max(0, std::min(slotIndex, 8));
+	}
+	InventorySlot& Player::getInventoryAtSlot(int slotIndex)
+	{
+		return _inventory[slotIndex];
+	}
+	const InventorySlot& Player::getInventoryAtSlot(int slotIndex) const
+	{
+		return _inventory[slotIndex];
 	}
 }

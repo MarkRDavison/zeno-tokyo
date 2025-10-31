@@ -33,17 +33,16 @@ namespace tokyo
 		bool isActionInvoked(const std::string& _key) const override;
 		bool isActionInvoked(const InputAction& _action) const;
 
+		sf::Vector2i getMousePosition() const override;
+		sf::Vector2u getWindowSize() const override;
+		bool isKeyDown(sf::Keyboard::Key _key) const override;
+		bool isButtonDown(sf::Mouse::Button _button) const override;
+
 	private:
 		IInputManager& m_InputManager;
 		std::unordered_map<std::string, InputAction> registeredActions;
 		std::unordered_map<sf::Mouse::Button, bool> cachedButtons;
 		std::unordered_map<sf::Keyboard::Key, bool> cachedKeys;
-
-		// Inherited via IInputActionManager
-		sf::Vector2i getMousePosition() const override;
-		sf::Vector2u getWindowSize() const override;
-		bool isKeyDown(sf::Keyboard::Key _key) const override;
-		bool isButtonDown(sf::Mouse::Button _button) const override;
 	};
 
 	inline IInputActionManager::~IInputActionManager() = default;

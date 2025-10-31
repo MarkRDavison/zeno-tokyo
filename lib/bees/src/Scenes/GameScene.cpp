@@ -23,6 +23,8 @@ namespace bee
 		}
 
 		auto player = new Player();
+		player->getInventoryAtSlot(0).texture = "hive";
+		player->getInventoryAtSlot(1).texture = "bee";
 		player->TileX = 3;
 		player->TileY = 3;
 		BeeInstance::Get().ActiveLevel->addEntity(player);
@@ -46,6 +48,8 @@ namespace bee
 		auto activeLevel = BeeInstance::Get().ActiveLevel;
 		if (activeLevel != nullptr)
 		{
+			Player* p = nullptr;
+
 			for (const auto& region : activeLevel->getRegions())
 			{
 				sf::VertexArray tiles(sf::PrimitiveType::Triangles);
@@ -103,13 +107,13 @@ namespace bee
 				target.draw(tiles, states);
 			}
 
-
 			for (const auto& e : activeLevel->getEntities())
 			{
 				if (e != nullptr)
 				{
-					if (const Player* player = dynamic_cast<const Player*>(e))
+					if (Player* player = dynamic_cast<Player*>(e))
 					{
+						p = player;
 						sf::CircleShape c(SIZE / 2.0f);
 						c.setFillColor(sf::Color::Blue);
 						c.setPosition(sf::Vector2f((float)e->TileX, (float)e->TileY) * SIZE);
@@ -141,12 +145,15 @@ namespace bee
 					}
 				}
 			}
+
+			TimeOfDayCircle todc(48.0f, BeeInstance::Get().GameTime);
+
+			auto s(states);
+			s.transform.translate({ 64.0f, 64.0f });
+
+			target.draw(todc, s);
+
+			_inventory.draw(p, target, states);
 		}
-
-		TimeOfDayCircle todc(48.0f, BeeInstance::Get().GameTime);
-
-		states.transform.translate({ 64.0f, 64.0f });
-
-		target.draw(todc, states);
 	}
 }
