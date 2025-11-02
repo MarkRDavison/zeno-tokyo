@@ -23,8 +23,12 @@ namespace bee
 		}
 
 		auto player = new Player();
+		player->getInventoryAtSlot(0).name = "Hive";
 		player->getInventoryAtSlot(0).texture = "hive";
+		player->getInventoryAtSlot(0).count = 2;
+		player->getInventoryAtSlot(1).name = "Bee";
 		player->getInventoryAtSlot(1).texture = "bee";
+		player->getInventoryAtSlot(1).count = 6;
 		player->TileX = 3;
 		player->TileY = 3;
 		BeeInstance::Get().ActiveLevel->addEntity(player);

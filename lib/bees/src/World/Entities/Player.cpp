@@ -16,7 +16,7 @@ namespace bee
 			{
 				auto targetTileCoord = getFacedTile();
 
-				const auto& slot = getInventoryAtSlot(getActiveInventorySlot());
+				auto& slot = getInventoryAtSlot(getActiveInventorySlot());
 
 				if (activeLevel->tileExists(targetTileCoord.x, targetTileCoord.y))
 				{
@@ -32,7 +32,7 @@ namespace bee
 							{
 								const auto& hiveInventory = hive->getInventory();
 
-								std::cout << "TODO: Steal inventory" << std::endl;
+								std::cout << "TODO: Steal inventory, it has " << hiveInventory.size() << " different things." << std::endl;
 							}
 						}
 					}
@@ -48,6 +48,13 @@ namespace bee
 								h->TileX = targetTileCoord.x;
 								h->TileY = targetTileCoord.y;
 								activeLevel->addEntity(h);
+								slot.count--;
+								if (slot.count <= 0)
+								{
+									slot.name = "";
+									slot.texture = "";
+									slot.count = 0;
+								}
 							}
 						}
 						else if (slot.texture == "bee")
@@ -65,6 +72,13 @@ namespace bee
 										}))
 									{
 										tokyo::Log::Info("Added bee to hive!\n");
+										slot.count--;
+										if (slot.count <= 0)
+										{
+											slot.name = "";
+											slot.texture = "";
+											slot.count = 0;
+										}
 									}
 									else
 									{

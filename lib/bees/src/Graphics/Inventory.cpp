@@ -12,6 +12,7 @@ namespace bee
 		if (player != nullptr)
 		{
 			auto& textureManager = BeeInstance::Get().TextureManager;
+			auto& font = BeeInstance::Get().FontManager.getFont("arial");
 
 			sf::RectangleShape r({ 64.0f, 64.0f });
 			r.setFillColor(sf::Color::White);
@@ -35,6 +36,16 @@ namespace bee
 				{
 					sf::Sprite icon(textureManager.getTexture(slot.texture));
 					target.draw(icon, states);
+				}
+				if (slot.count > 0)
+				{
+					auto tstates(states);
+					sf::Text text(font, std::to_string(slot.count), 20);
+					text.setFillColor(sf::Color::White);
+					text.setOutlineColor(sf::Color::Black);
+					text.setOutlineThickness(2.0f);
+					tstates.transform.translate({ 0.0f, squareSize - 24.0f - 6.0f  });
+					target.draw(text, tstates);
 				}
 
 				states.transform.translate({ squareSize, 0.0f });

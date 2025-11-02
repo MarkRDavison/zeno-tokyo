@@ -76,6 +76,10 @@ int main()
     app.renderSplash();
 
     {
+        if (!bee::BeeInstance::Get().FontManager.loadFont("/data/fonts/arial.ttf", "arial"))
+        {
+            return EXIT_FAILURE;
+        }
         std::this_thread::sleep_for(sleepTime);
     }
     splashScene.m_Percentage += 20.0f;
